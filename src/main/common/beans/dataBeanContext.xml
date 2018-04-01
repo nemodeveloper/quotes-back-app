@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Сервисы по получению Авторов цитат  -->
+    <bean class="ru.nemodev.project.quotes.dao.author.jdbc.AuthorRowMapper"/>
+    <bean class="ru.nemodev.project.quotes.dao.author.jdbc.AuthorSpringJdbc"/>
+    <bean class="ru.nemodev.project.quotes.service.author.AuthorServiceImpl"/>
+
+    <!-- Сервисы по получению Категорий цитат -->
+    <bean class="ru.nemodev.project.quotes.dao.category.jdbc.CategoryRowMapper"/>
+    <bean class="ru.nemodev.project.quotes.dao.category.jdbc.CategorySpringJdbc"/>
+    <bean class="ru.nemodev.project.quotes.service.category.CategoryServiceImpl"/>
+
+    <!-- Сервисы по получению Цитат  -->
+    <bean class="ru.nemodev.project.quotes.dao.quote.jdbc.PrepareQuoteRowMapper" scope="prototype"/>
+    <bean id="simpleQuoteRowMapper" class="ru.nemodev.project.quotes.dao.quote.jdbc.SimpleQuoteRowMapper"/>
+    <bean class="ru.nemodev.project.quotes.dao.quote.jdbc.QuoteSpringJdbc"/>
+    <bean class="ru.nemodev.project.quotes.service.quote.QuoteServiceImpl"/>
+
+</beans>

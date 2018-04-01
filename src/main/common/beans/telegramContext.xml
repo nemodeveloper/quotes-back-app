@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.telegram.telegrambots.ApiContextInitializer" />
+        <property name="targetMethod" value="init" />
+    </bean>
+
+    <bean id="telegramBotsApi" class="org.telegram.telegrambots.TelegramBotsApi"/>
+
+    <bean class="ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser"/>
+    <bean class="ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler" scope="prototype"/>
+
+    <bean id="quoteTelegramBot" class="ru.nemodev.project.quotes.bots.telegram.QuoteTelegramBot"/>
+    <util:list id="longPollingBots" value-type="org.telegram.telegrambots.bots.TelegramLongPollingBot">
+        <ref bean="quoteTelegramBot"/>
+    </util:list>
+
+    <bean class="ru.nemodev.project.quotes.bots.telegram.TelegramBotLoader"
+          init-method="start" destroy-method="stop">
+    </bean>
+
+</beans>

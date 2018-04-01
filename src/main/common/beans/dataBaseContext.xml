@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Доступ к БД -->
+
+    <bean id="quoteDataSource" destroy-method="close"
+          class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="initialSize" value="3"/>
+        <property name="maxIdle" value="${db.socket.timeout}"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+    </bean>
+
+    <!-- Обращения к БД идут через Spring-JDBC -->
+    <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="quoteDataSource"/>
+    </bean>
+
+</beans>
