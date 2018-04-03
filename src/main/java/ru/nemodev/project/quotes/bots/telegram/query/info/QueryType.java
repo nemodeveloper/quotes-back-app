@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  */
 public enum QueryType
 {
+    START("start"),             // информация о боте
     RANDOM("q"),                // случайные цитаты
     WITH_AUTHOR("a"),           // цитаты с автором
     WITH_CATEGORY("c");         // цитаты с категорий

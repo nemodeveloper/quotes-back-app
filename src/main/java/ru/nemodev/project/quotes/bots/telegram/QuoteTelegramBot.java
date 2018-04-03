@@ -4,17 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import ru.nemodev.project.quotes.bots.telegram.query.handler.AbstractQueryHandler;
-import ru.nemodev.project.quotes.bots.telegram.query.info.MessageType;
-import ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser;
-import ru.nemodev.project.quotes.bots.telegram.query.info.QueryInfo;
 import ru.nemodev.project.quotes.bots.telegram.query.handler.QueryHandler;
 import ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler;
+import ru.nemodev.project.quotes.bots.telegram.query.info.MessageType;
+import ru.nemodev.project.quotes.bots.telegram.query.info.QueryInfo;
+import ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser;
 
 /**
  * created by NemoDev on 04.03.2018 - 19:05
@@ -23,11 +22,8 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(QuoteTelegramBot.class);
 
-    @Value("${bot.quote.token}")
-    private String botToken;
-
-    @Value("${bot.quote.username}")
-    private String botUsername;
+    private final String botToken;
+    private final String botUsername;
 
     private final QueryParser queryParser;
 
@@ -35,9 +31,12 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 
     @Autowired
     public QuoteTelegramBot(
+            String botToken, String botUsername,
             QueryParser queryParser,
             ObjectFactory<TextMessageHandler> textMessageProcessor)
     {
+        this.botToken = botToken;
+        this.botUsername = botUsername;
         this.queryParser = queryParser;
         this.textMessageProcessor = textMessageProcessor;
     }

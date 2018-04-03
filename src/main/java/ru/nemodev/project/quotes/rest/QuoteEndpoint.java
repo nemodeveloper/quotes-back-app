@@ -11,22 +11,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-
-@Path("/test")
+@Path("/v1")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-public class Test
+public class QuoteEndpoint
 {
     private final QuoteService quoteService;
 
     @Autowired
-    public Test(QuoteService quoteService)
+    public QuoteEndpoint(QuoteService quoteService)
     {
         this.quoteService = quoteService;
     }
 
     @GET
-    public Response get()
+    public Response random()
     {
         return Response.ok(quoteService.getRandom(1L)).build();
     }

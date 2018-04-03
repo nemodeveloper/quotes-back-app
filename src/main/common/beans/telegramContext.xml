@@ -12,10 +12,13 @@
 
     <bean id="telegramBotsApi" class="org.telegram.telegrambots.TelegramBotsApi"/>
 
-    <bean class="ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser"/>
-    <bean class="ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler" scope="prototype"/>
+    <bean id="queryParser" class="ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser"/>
+    <bean id="textMessageHandler" class="ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler" scope="prototype"/>
 
-    <bean id="quoteTelegramBot" class="ru.nemodev.project.quotes.bots.telegram.QuoteTelegramBot"/>
+    <bean id="quoteTelegramBot" class="ru.nemodev.project.quotes.bots.telegram.QuoteTelegramBot">
+        <constructor-arg name="botToken" value="${bot.quote.token}"/>
+        <constructor-arg name="botUsername" value="${bot.quote.username}"/>
+    </bean>
     <util:list id="longPollingBots" value-type="org.telegram.telegrambots.bots.TelegramLongPollingBot">
         <ref bean="quoteTelegramBot"/>
     </util:list>

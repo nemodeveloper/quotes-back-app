@@ -1,12 +1,11 @@
 package ru.nemodev.project.quotes.bots.telegram.query.handler;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
-import ru.nemodev.project.quotes.service.author.AuthorService;
-import ru.nemodev.project.quotes.service.quote.QuoteService;
 import ru.nemodev.project.quotes.bots.telegram.query.info.QueryInfo;
+import ru.nemodev.project.quotes.service.author.AuthorService;
 import ru.nemodev.project.quotes.service.category.CategoryService;
+import ru.nemodev.project.quotes.service.quote.QuoteService;
 
 /**
  * created by NemoDev on 14.03.2018 - 23:25
@@ -19,7 +18,6 @@ public abstract class AbstractQueryHandler<T extends BotApiMethod> implements Qu
 
     protected QueryInfo queryInfo;
 
-    @Autowired
     protected AbstractQueryHandler(QuoteService quoteService,
                                    CategoryService categoryService,
                                    AuthorService authorService)
