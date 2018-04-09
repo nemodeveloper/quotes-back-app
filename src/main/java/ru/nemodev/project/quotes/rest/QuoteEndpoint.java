@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class QuoteEndpoint
 {
+    private static final Long singleLong = 1L;
+
     private final QuoteService quoteService;
 
     @Autowired
@@ -27,7 +29,7 @@ public class QuoteEndpoint
     @GET
     public Response random()
     {
-        return Response.ok(quoteService.getRandom(1L)).build();
+        return Response.ok(quoteService.getRandom(singleLong)).build();
     }
 
 }

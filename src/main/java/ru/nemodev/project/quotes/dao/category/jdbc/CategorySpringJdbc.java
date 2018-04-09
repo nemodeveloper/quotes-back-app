@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import ru.nemodev.project.quotes.dao.AbstractSpringJdbc;
 import ru.nemodev.project.quotes.dao.category.CategoryDAO;
 import ru.nemodev.project.quotes.entity.Category;
@@ -33,8 +34,10 @@ public class CategorySpringJdbc extends AbstractSpringJdbc implements CategoryDA
     private final CategoryRowMapper rowMapper;
 
     @Autowired
-    public CategorySpringJdbc(CategoryRowMapper rowMapper)
+    public CategorySpringJdbc(NamedParameterJdbcOperations jdbcOperations,
+            CategoryRowMapper rowMapper)
     {
+        super(jdbcOperations);
         this.rowMapper = rowMapper;
     }
 

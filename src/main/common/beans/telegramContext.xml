@@ -10,8 +10,6 @@
         <property name="targetMethod" value="init" />
     </bean>
 
-    <bean id="telegramBotsApi" class="org.telegram.telegrambots.TelegramBotsApi"/>
-
     <bean id="queryParser" class="ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser"/>
     <bean id="textMessageHandler" class="ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler" scope="prototype"/>
     <bean id="callbackQueryHandler" class="ru.nemodev.project.quotes.bots.telegram.query.handler.CallbackQueryHandler"/>

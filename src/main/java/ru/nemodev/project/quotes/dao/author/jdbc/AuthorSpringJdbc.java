@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import ru.nemodev.project.quotes.dao.AbstractSpringJdbc;
 import ru.nemodev.project.quotes.dao.author.AuthorDAO;
 import ru.nemodev.project.quotes.entity.Author;
@@ -33,8 +34,9 @@ public class AuthorSpringJdbc extends AbstractSpringJdbc implements AuthorDAO
     private final AuthorRowMapper rowMapper;
 
     @Autowired
-    public AuthorSpringJdbc(AuthorRowMapper rowMapper)
+    public AuthorSpringJdbc(NamedParameterJdbcOperations jdbcOperations, AuthorRowMapper rowMapper)
     {
+        super(jdbcOperations);
         this.rowMapper = rowMapper;
     }
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import ru.nemodev.project.quotes.dao.AbstractSpringJdbc;
 import ru.nemodev.project.quotes.dao.quote.QuoteDAO;
 import ru.nemodev.project.quotes.entity.Author;
@@ -54,10 +55,11 @@ public class QuoteSpringJdbc extends AbstractSpringJdbc implements QuoteDAO
     private final ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper;
 
     @Autowired
-    public QuoteSpringJdbc(
+    public QuoteSpringJdbc(NamedParameterJdbcOperations jdbcOperations,
             @Qualifier("simpleQuoteRowMapper") SimpleQuoteRowMapper simpleQuoteRowMapper,
             ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper)
     {
+        super(jdbcOperations);
         this.simpleQuoteRowMapper = simpleQuoteRowMapper;
         this.prepareQuoteRowMapper = prepareQuoteRowMapper;
     }

@@ -22,10 +22,10 @@ public class TelegramBotLoader
     private List<BotSession> botSessions;
 
     @Autowired
-    public TelegramBotLoader(List<TelegramLongPollingBot> longPollingBots, TelegramBotsApi telegramBotsApi)
+    public TelegramBotLoader(List<TelegramLongPollingBot> longPollingBots)
     {
         this.longPollingBots = longPollingBots;
-        this.telegramBotsApi = telegramBotsApi;
+        this.telegramBotsApi = new TelegramBotsApi();
     }
 
     public void start()
