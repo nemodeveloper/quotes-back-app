@@ -9,10 +9,11 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import ru.nemodev.project.quotes.bots.telegram.query.handler.AbstractQueryHandler;
+import ru.nemodev.project.quotes.bots.telegram.query.handler.CallbackQueryHandler;
 import ru.nemodev.project.quotes.bots.telegram.query.handler.QueryHandler;
 import ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler;
+import ru.nemodev.project.quotes.bots.telegram.query.info.AbstractQueryInfo;
 import ru.nemodev.project.quotes.bots.telegram.query.info.MessageType;
-import ru.nemodev.project.quotes.bots.telegram.query.info.QueryInfo;
 import ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser;
 
 /**
@@ -27,18 +28,21 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 
     private final QueryParser queryParser;
 
-    private final ObjectFactory<TextMessageHandler> textMessageProcessor;
+    private final ObjectFactory<TextMessageHandler> textMessageHandler;
+    private final ObjectFactory<CallbackQueryHandler> callbackQueryHandler;
 
     @Autowired
     public QuoteTelegramBot(
             String botToken, String botUsername,
             QueryParser queryParser,
-            ObjectFactory<TextMessageHandler> textMessageProcessor)
+            ObjectFactory<TextMessageHandler> textMessageHandler,
+            ObjectFactory<CallbackQueryHandler> callbackQueryHandler)
     {
         this.botToken = botToken;
         this.botUsername = botUsername;
         this.queryParser = queryParser;
-        this.textMessageProcessor = textMessageProcessor;
+        this.textMessageHandler = textMessageHandler;
+        this.callbackQueryHandler = callbackQueryHandler;
     }
 
     @Override
@@ -72,17 +76,17 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 
     private BotApiMethod<?> getResponse(Update update)
     {
-        QueryInfo queryInfo = queryParser.parse(update);
-        if (queryInfo == null)
+        AbstractQueryInfo abstractQueryInfo = queryParser.parse(update);
+        if (abstractQueryInfo == null)
         {
             LOGGER.warn("Бот не поддерживает переданную команду для обработки!");
             return null;
         }
 
-        QueryHandler<? extends BotApiMethod> queryHandler = lookUpHandler(queryInfo);
+        QueryHandler<? extends BotApiMethod> queryHandler = lookUpHandler(abstractQueryInfo);
         if (queryHandler == null)
         {
-            LOGGER.warn("Не найден обработчик запроса с типом - {}", queryInfo.getMessageType());
+            LOGGER.warn("Не найден обработчик запроса с типом - {}", abstractQueryInfo.getMessageType());
             return null;
         }
 
@@ -96,20 +100,19 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
         return botApiMethod;
     }
 
-    private QueryHandler<? extends BotApiMethod> lookUpHandler(QueryInfo queryInfo)
+    private <Q extends AbstractQueryInfo<?>> QueryHandler<? extends BotApiMethod> lookUpHandler(Q queryInfo)
     {
-        AbstractQueryHandler<? extends BotApiMethod> processor = null;
+        AbstractQueryHandler<Q, ? extends BotApiMethod> handler;
 
         if (MessageType.TEXT_MESSAGE == queryInfo.getMessageType())
-        {
-            processor = textMessageProcessor.getObject();
-        }
-
-        if (processor == null)
+            handler = (AbstractQueryHandler<Q, ? extends BotApiMethod>) textMessageHandler.getObject();
+        else if (MessageType.CALLBACK_MESSAGE == queryInfo.getMessageType())
+            handler = (AbstractQueryHandler<Q, ? extends BotApiMethod>) callbackQueryHandler.getObject();
+        else
             return null;
 
-        processor.setQueryInfo(queryInfo);
-        return processor;
+        handler.setQueryInfo(queryInfo);
+        return handler;
     }
 
 }

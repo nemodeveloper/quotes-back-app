@@ -6,5 +6,6 @@ package ru.nemodev.project.quotes.bots.telegram.query.info;
 public enum MessageType
 {
     TEXT_MESSAGE,
-    INLINE_MESSAGE
+    INLINE_MESSAGE,
+    CALLBACK_MESSAGE
 }

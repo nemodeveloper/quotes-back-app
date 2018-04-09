@@ -3,17 +3,16 @@ package ru.nemodev.project.quotes.bots.telegram.query.parser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.telegram.telegrambots.api.interfaces.BotApiObject;
+import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
-import ru.nemodev.project.quotes.bots.telegram.query.info.MessageType;
-import ru.nemodev.project.quotes.bots.telegram.query.info.QueryInfo;
-import ru.nemodev.project.quotes.bots.telegram.query.info.QueryType;
+import org.telegram.telegrambots.api.objects.User;
+import ru.nemodev.project.quotes.bots.telegram.query.info.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 /**
  * created by NemoDev on 13.03.2018 - 22:14
@@ -29,64 +28,86 @@ public class QueryParser
 
     private static final AtomicLong totalQuery = new AtomicLong(0);
 
-    public QueryInfo parse(Update update)
+    public AbstractQueryInfo parse(Update update)
     {
         LOGGER.info("Получено запросов - {}", totalQuery.incrementAndGet());
+
         if (update.hasMessage())
-        {
             return getFromMessage(update.getMessage());
-        }
+
+        if (update.hasCallbackQuery())
+            return getFromCallbackQuery(update.getCallbackQuery());
 
         return null;
     }
 
-    private QueryInfo getFromMessage(Message message)
+    private QueryType getQueryType(String rawQueryText)
     {
-        String rawText = message.getText();
-        if (StringUtils.isBlank(rawText))
+        if (StringUtils.isBlank(rawQueryText))
         {
             LOGGER.info("Не передан текст запроса, обработка запроса завершена!");
             return null;
         }
 
-        List<String> rawParts = Arrays.asList(rawText.trim().split(TEXT_DELIMITER));
+        List<String> rawParts = Arrays.asList(rawQueryText.trim().split(TEXT_DELIMITER));
 
         String queryText = rawParts.get(0).
                 replace(MESSAGE_COMMAND_DELIMITER, EMPTY).
                 split(INLINE_MESSAGE_COMMAND_DELIMITER)[0].
                 toLowerCase();
-        QueryType queryType = QueryType.getByQueryText(queryText);
+
+        return QueryType.getByQueryText(queryText);
+    }
+
+    private AbstractQueryInfo getFromMessage(Message message)
+    {
+        final String queryText = message.getText();
+        final QueryType queryType = getQueryType(queryText);
+
         if (queryType == null)
         {
-            LOGGER.info(String.format(
-                    "Не известный тип запроса - [%s], пользователь - [%s], обработка запроса завершена!",
-                    queryText, message.getFrom()));
+            logUnparseQueryText(queryText, message.getFrom());
             return null;
         }
 
-        List<String> commandArgs = rawParts.size() > 1
-                ? rawParts.subList(1, rawParts.size())
-                    .stream().map(String::toLowerCase).collect(Collectors.toList())
-                : Collections.emptyList();
-
-        QueryInfo queryInfo = new QueryInfo(
-                message.getFrom(),
-                message.getChatId(),
-                queryType,
-                MessageType.TEXT_MESSAGE,
-                commandArgs);
+        MessageQueryInfo queryInfo = new MessageQueryInfo(queryType, MessageType.TEXT_MESSAGE, message);
         logSuccessParse(queryInfo);
 
         return queryInfo;
     }
 
-    private void logSuccessParse(QueryInfo queryInfo)
+    private CallbackQueryInfo getFromCallbackQuery(CallbackQuery callbackQuery)
+    {
+        final String queryText = callbackQuery.getData();
+        final QueryType queryType = getQueryType(queryText);
+
+        if (queryType == null)
+        {
+            logUnparseQueryText(queryText, callbackQuery.getFrom());
+            return null;
+        }
+
+        CallbackQueryInfo queryInfo = new CallbackQueryInfo(queryType, MessageType.CALLBACK_MESSAGE, callbackQuery);
+        logSuccessParse(queryInfo);
+
+        return queryInfo;
+    }
+
+    private void logUnparseQueryText(String queryText, User user)
+    {
+        LOGGER.warn(String.format(
+                "Не известный тип запроса - [%s], пользователь - [%s], обработка запроса завершена!",
+                queryText, user));
+    }
+
+
+    private void logSuccessParse(AbstractQueryInfo<? extends BotApiObject> queryInfo)
     {
         LOGGER.info(String.format(
-                "Пользователь [%s] прислал запрос с типом [%s], аргументы %s",
-                queryInfo.getUser().toString(),
-                queryInfo.getQueryType().name(),
-                queryInfo.getArgs()
+                "Пользователь [%s] прислал запрос с типом [%s], запрос %s",
+                queryInfo.getUser(),
+                queryInfo.getMessageType().name(),
+                queryInfo.getQueryType().name()
         ));
     }
 
