@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * created by NemoDev on 15.03.2018 - 23:51
  */
-public class QuoteSpringJdbc extends AbstractSpringJdbc implements QuoteDAO
+public class QuoteJdbcDAO extends AbstractSpringJdbc implements QuoteDAO
 {
     // TODO Доработать запросы к БД, вынести их в отдельный класс
     private static final String RANDOM_QUOTE_QUERY =
@@ -55,9 +55,9 @@ public class QuoteSpringJdbc extends AbstractSpringJdbc implements QuoteDAO
     private final ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper;
 
     @Autowired
-    public QuoteSpringJdbc(NamedParameterJdbcOperations jdbcOperations,
-            @Qualifier("simpleQuoteRowMapper") SimpleQuoteRowMapper simpleQuoteRowMapper,
-            ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper)
+    public QuoteJdbcDAO(NamedParameterJdbcOperations jdbcOperations,
+                        @Qualifier("simpleQuoteRowMapper") SimpleQuoteRowMapper simpleQuoteRowMapper,
+                        ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper)
     {
         super(jdbcOperations);
         this.simpleQuoteRowMapper = simpleQuoteRowMapper;

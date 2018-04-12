@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * created by NemoDev on 17.03.2018 - 14:16
  */
-public class AuthorSpringJdbc extends AbstractSpringJdbc implements AuthorDAO
+public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorSpringJdbc.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorJdbcDAO.class);
 
     private static final String AUTHOR_NAME_PARAM_KEY = "author_name";
     private static final String AUTHOR_BY_NAME_QUERY =
@@ -34,7 +34,7 @@ public class AuthorSpringJdbc extends AbstractSpringJdbc implements AuthorDAO
     private final AuthorRowMapper rowMapper;
 
     @Autowired
-    public AuthorSpringJdbc(NamedParameterJdbcOperations jdbcOperations, AuthorRowMapper rowMapper)
+    public AuthorJdbcDAO(NamedParameterJdbcOperations jdbcOperations, AuthorRowMapper rowMapper)
     {
         super(jdbcOperations);
         this.rowMapper = rowMapper;

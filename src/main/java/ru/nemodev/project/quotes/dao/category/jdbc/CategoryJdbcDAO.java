@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * created by NemoDev on 25.03.2018 - 21:37
  */
-public class CategorySpringJdbc extends AbstractSpringJdbc implements CategoryDAO
+public class CategoryJdbcDAO extends AbstractSpringJdbc implements CategoryDAO
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CategorySpringJdbc.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryJdbcDAO.class);
 
     private static final String CATEGORY_NAME_PARAM_KEY = "category_name";
     private static final String CATEGORY_BY_NAME_QUERY =
@@ -34,8 +34,7 @@ public class CategorySpringJdbc extends AbstractSpringJdbc implements CategoryDA
     private final CategoryRowMapper rowMapper;
 
     @Autowired
-    public CategorySpringJdbc(NamedParameterJdbcOperations jdbcOperations,
-            CategoryRowMapper rowMapper)
+    public CategoryJdbcDAO(NamedParameterJdbcOperations jdbcOperations, CategoryRowMapper rowMapper)
     {
         super(jdbcOperations);
         this.rowMapper = rowMapper;

@@ -11,14 +11,17 @@
 
     <properties>
 
-        <!-- project -->
+        <!-- base -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <war-name>quotes</war-name>
 
         <jdk.version>1.8</jdk.version>
+        <maven.war.plugin.version>2.5</maven.war.plugin.version>
 
         <!-- project -->
         <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <log4j.extras.version>1.2.17</log4j.extras.version>
 
         <jersey.version>2.26</jersey.version>
         <spring.version>5.0.2.RELEASE</spring.version>
@@ -28,6 +31,8 @@
 
         <commons.dbcp.version>1.4</commons.dbcp.version>
         <postgres.version>9.1-901-1.jdbc4</postgres.version>
+
+        <json.schema.dir>${basedir}/src/main/common/schema/</json.schema.dir>
 
         <!-- test -->
         <mockito.version>1.10.19</mockito.version>
@@ -46,6 +51,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>apache-log4j-extras</artifactId>
+            <version>${log4j.extras.version}</version>
         </dependency>
 
         <!-- API servlet -->
@@ -171,14 +182,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.5</version>
-                    </plugin>
-                </plugins>
-
                 <resources>
                     <resource>
                         <directory>src/main/dev</directory>
@@ -194,14 +197,6 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.5</version>
-                    </plugin>
-                </plugins>
-
                 <resources>
                     <resource>
                         <directory>src/main/prod</directory>
@@ -215,24 +210,24 @@
     <build>
         <plugins>
             <!-- Генерация POJO DTO по json схеме -->
-            <!--<plugin>-->
-                <!--<groupId>org.jsonschema2pojo</groupId>-->
-                <!--<artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
-                <!--<version>0.5.1</version>-->
-                <!--<configuration>-->
-                    <!--<sourceDirectory>${basedir}/resources/json/schema/</sourceDirectory>-->
-                    <!--<targetPackage>ru.nemodev.project.quotes.dto</targetPackage>-->
-                    <!--<includeHashcodeAndEquals>false</includeHashcodeAndEquals>-->
-                    <!--<includeToString>false</includeToString>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.5.1</version>
+                <configuration>
+                    <sourceDirectory>${json.schema.dir}</sourceDirectory>
+                    <targetPackage>ru.nemodev.project.quotes.dto</targetPackage>
+                    <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                    <includeToString>false</includeToString>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -241,6 +236,11 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
