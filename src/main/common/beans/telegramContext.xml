@@ -23,10 +23,11 @@
           init-method="start" destroy-method="stop">
     </bean>
 
+    <!-- Отправка сообщений в канал цитат телеграма -->
     <bean id="quoteChannelPublisher" class="ru.nemodev.project.quotes.telegram.channel.QuoteChannelPublisher"/>
+    <task:scheduler id="quoteChannelScheduler"/>
     <task:scheduled-tasks>
         <task:scheduled ref="quoteChannelPublisher" method="publish" cron="${quote.scheduler.channel.publish.cron}"/>
     </task:scheduled-tasks>
-    <task:scheduler id="quoteChannelScheduler"/>
 
 </beans>

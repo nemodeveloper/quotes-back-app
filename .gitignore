@@ -3,3 +3,5 @@
 /target
 
 platform.iml
+
+/src/main/common/config/telegram.properties
