@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram.query.handler;
+package ru.nemodev.project.quotes.telegram.bot.query.handler;
 
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 

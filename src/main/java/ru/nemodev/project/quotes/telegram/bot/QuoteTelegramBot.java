@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram;
+package ru.nemodev.project.quotes.telegram.bot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,13 +8,14 @@ import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import ru.nemodev.project.quotes.bots.telegram.query.handler.AbstractQueryHandler;
-import ru.nemodev.project.quotes.bots.telegram.query.handler.CallbackQueryHandler;
-import ru.nemodev.project.quotes.bots.telegram.query.handler.QueryHandler;
-import ru.nemodev.project.quotes.bots.telegram.query.handler.TextMessageHandler;
-import ru.nemodev.project.quotes.bots.telegram.query.info.AbstractQueryInfo;
-import ru.nemodev.project.quotes.bots.telegram.query.info.MessageType;
-import ru.nemodev.project.quotes.bots.telegram.query.parser.QueryParser;
+import ru.nemodev.project.quotes.config.ApplicationConfig;
+import ru.nemodev.project.quotes.telegram.bot.query.handler.AbstractQueryHandler;
+import ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler;
+import ru.nemodev.project.quotes.telegram.bot.query.handler.QueryHandler;
+import ru.nemodev.project.quotes.telegram.bot.query.handler.TextMessageHandler;
+import ru.nemodev.project.quotes.telegram.bot.query.info.AbstractQueryInfo;
+import ru.nemodev.project.quotes.telegram.bot.query.info.MessageType;
+import ru.nemodev.project.quotes.telegram.bot.query.parser.QueryParser;
 
 /**
  * created by NemoDev on 04.03.2018 - 19:05
@@ -23,8 +24,7 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(QuoteTelegramBot.class);
 
-    private final String botToken;
-    private final String botUsername;
+    private final ApplicationConfig applicationConfig;
 
     private final QueryParser queryParser;
 
@@ -33,13 +33,12 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 
     @Autowired
     public QuoteTelegramBot(
-            String botToken, String botUsername,
+            ApplicationConfig applicationConfig,
             QueryParser queryParser,
             ObjectFactory<TextMessageHandler> textMessageHandler,
             ObjectFactory<CallbackQueryHandler> callbackQueryHandler)
     {
-        this.botToken = botToken;
-        this.botUsername = botUsername;
+        this.applicationConfig = applicationConfig;
         this.queryParser = queryParser;
         this.textMessageHandler = textMessageHandler;
         this.callbackQueryHandler = callbackQueryHandler;
@@ -48,29 +47,33 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
     @Override
     public String getBotUsername()
     {
-        return this.botUsername;
+        return applicationConfig.getBotUsername();
     }
 
     @Override
     public String getBotToken()
     {
-        return this.botToken;
+        return applicationConfig.getBotToken();
     }
 
     @Override
     public void onUpdateReceived(Update update)
     {
+        sendBotMessage(getResponse(update));
+    }
+
+    public void sendBotMessage(BotApiMethod<?> message)
+    {
         try
         {
-            BotApiMethod<?> response = getResponse(update);
-            if (response == null)
+            if (message == null)
                 return;
 
-            this.sendApiMethod(response);
+            this.sendApiMethod(message);
         }
         catch (TelegramApiException e)
         {
-            LOGGER.error("Не удалось отправить ответ по запросу!", e);
+            LOGGER.error("Не удалось отправить сообщение!", e);
         }
     }
 

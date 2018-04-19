@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram.query.info;
+package ru.nemodev.project.quotes.telegram.bot.query.info;
 
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.User;

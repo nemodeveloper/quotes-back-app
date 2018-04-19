@@ -11,7 +11,7 @@
         <property name="singleton" value="true" />
         <property name="locations">
             <list>
-                <value>classpath*:config/common.properties</value>
+                <value>classpath*:config/telegram.properties</value>
                 <value>classpath*:config/application.properties</value>
             </list>
         </property>
@@ -19,6 +19,10 @@
 
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="properties" ref="appProperties"/>
+    </bean>
+
+    <bean class="ru.nemodev.project.quotes.config.ApplicationConfig">
+        <constructor-arg name="environment" ref="appProperties"/>
     </bean>
 
     <import resource="classpath:beans/dataBaseContext.xml"/>

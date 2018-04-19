@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram.query.parser;
+package ru.nemodev.project.quotes.telegram.bot.query.parser;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -8,7 +8,7 @@ import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
-import ru.nemodev.project.quotes.bots.telegram.query.info.*;
+import ru.nemodev.project.quotes.telegram.bot.query.info.*;
 
 import java.util.Arrays;
 import java.util.List;

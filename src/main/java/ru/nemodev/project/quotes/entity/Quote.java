@@ -96,7 +96,7 @@ public class Quote implements Serializable
         quoteInfo.append("\n").append(category.getName());
 
         if (author != null)
-            quoteInfo.append("\n").append(author.getFullName());
+            quoteInfo.append("\n\n").append(author.getFullName());
         if (StringUtils.isNotBlank(source))
             quoteInfo.append("\n").append(source);
         if (StringUtils.isNotBlank(year))

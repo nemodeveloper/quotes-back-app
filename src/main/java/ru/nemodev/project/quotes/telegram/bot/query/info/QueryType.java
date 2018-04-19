@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram.query.info;
+package ru.nemodev.project.quotes.telegram.bot.query.info;
 
 import org.apache.commons.lang3.StringUtils;
 

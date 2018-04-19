@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram;
+package ru.nemodev.project.quotes.telegram.bot;
 
 
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram.query.handler;
+package ru.nemodev.project.quotes.telegram.bot.query.handler;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -10,12 +10,12 @@ import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
-import ru.nemodev.project.quotes.bots.telegram.query.info.MessageQueryInfo;
-import ru.nemodev.project.quotes.bots.telegram.query.info.QueryType;
 import ru.nemodev.project.quotes.entity.Quote;
 import ru.nemodev.project.quotes.service.author.AuthorService;
 import ru.nemodev.project.quotes.service.category.CategoryService;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
+import ru.nemodev.project.quotes.telegram.bot.query.info.MessageQueryInfo;
+import ru.nemodev.project.quotes.telegram.bot.query.info.QueryType;
 
 import java.util.Collections;
 import java.util.LinkedList;

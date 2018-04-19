@@ -1,11 +1,11 @@
-package ru.nemodev.project.quotes.bots.telegram.query.handler;
+package ru.nemodev.project.quotes.telegram.bot.query.handler;
 
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
-import ru.nemodev.project.quotes.bots.telegram.query.info.AbstractQueryInfo;
 import ru.nemodev.project.quotes.service.author.AuthorService;
 import ru.nemodev.project.quotes.service.category.CategoryService;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
+import ru.nemodev.project.quotes.telegram.bot.query.info.AbstractQueryInfo;
 
 /**
  * created by NemoDev on 14.03.2018 - 23:25

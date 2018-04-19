@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.bots.telegram.query.info;
+package ru.nemodev.project.quotes.telegram.bot.query.info;
 
 /**
  * created by NemoDev on 14.03.2018 - 23:13
