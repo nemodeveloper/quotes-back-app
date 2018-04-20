@@ -24,7 +24,7 @@
         <appender-ref ref="RollingFile-Appender" />
     </appender>
 
-    <root level="info">
+    <root level="info" additivity="false">
         <appender-ref ref="Quote-Async-Appender" />
     </root>
 
