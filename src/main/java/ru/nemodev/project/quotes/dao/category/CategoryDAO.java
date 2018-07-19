@@ -9,18 +9,16 @@ import java.util.List;
  */
 public interface CategoryDAO
 {
+    Category getById(Long categoryId);
+
+    List<Category> getList();
+
     /**
      *
      * @param name
      * @return
      */
-    Category getByTitle(String name);
+    Category getByName(String name);
 
-    /**
-     *
-     * @param count
-     * @return
-     */
-    List<Category> getRandom(Long count);
 
 }

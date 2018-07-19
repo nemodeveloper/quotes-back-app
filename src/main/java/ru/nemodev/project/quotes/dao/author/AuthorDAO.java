@@ -9,6 +9,10 @@ import java.util.List;
  */
 public interface AuthorDAO
 {
+    Author getById(Long authorId);
+
+    List<Author> getList();
+
     /**
      *
      * @param name
@@ -16,10 +20,4 @@ public interface AuthorDAO
      */
     Author getByName(String name);
 
-    /**
-     *
-     * @param count
-     * @return
-     */
-    List<Author> getRandom(Long count);
 }

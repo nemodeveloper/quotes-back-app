@@ -1,7 +1,6 @@
 package ru.nemodev.project.quotes.telegram.bot.query.handler;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import ru.nemodev.project.quotes.entity.Quote;
 import ru.nemodev.project.quotes.service.author.AuthorService;
@@ -18,7 +17,6 @@ import java.util.List;
  */
 public class CallbackQueryHandler extends AbstractQueryHandler<CallbackQueryInfo, SendMessage>
 {
-    @Autowired
     public CallbackQueryHandler(QuoteService quoteService, CategoryService categoryService, AuthorService authorService)
     {
         super(quoteService, categoryService, authorService);

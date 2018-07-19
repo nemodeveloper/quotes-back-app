@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
  */
 public abstract class AbstractSpringJdbc
 {
+    protected static final String ENTITY_ID_PARAM_KEY = "id";
     protected static final String COUNT_ROW_PARAM_KEY = "count_row";
 
     protected final NamedParameterJdbcOperations jdbcOperations;

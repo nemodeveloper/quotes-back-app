@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.nemodev.project.quotes.dao.quote.QuoteDAO;
-import ru.nemodev.project.quotes.entity.Author;
-import ru.nemodev.project.quotes.entity.Category;
 import ru.nemodev.project.quotes.entity.Quote;
 
 import java.util.Collections;
@@ -38,27 +36,27 @@ public class QuoteServiceImpl implements QuoteService
     }
 
     @Override
-    public List<Quote> getRandomByAuthor(Author author, Long count)
+    public List<Quote> getByAuthor(Long authorId)
     {
-        if (author == null || count == null || count < 1)
+        if (authorId == null || authorId < 1)
         {
-            LOGGER.warn("В сервис поиска цитат передали не корректные параметры author={} count={}, поиск остановлен!",
-                    author, count);
+            LOGGER.warn("В сервис поиска цитат передали не корректные параметры authorId={}, поиск остановлен!",
+                    authorId);
             return Collections.emptyList();
         }
-        return quoteDAO.getRandomByAuthor(author, count);
+        return quoteDAO.getByAuthor(authorId);
     }
 
     @Override
-    public List<Quote> getRandomByCategory(Category category, Long count)
+    public List<Quote> getByCategory(Long categoryId)
     {
-        if (category == null || count == null || count < 1)
+        if (categoryId == null || categoryId < 1)
         {
-            LOGGER.warn("В сервис поиска цитат передали не корректные параметры category={} count={}, поиск остановлен!",
-                    category, count);
+            LOGGER.warn("В сервис поиска цитат передали не корректные параметры categoryId={}, поиск остановлен!",
+                    categoryId);
             return Collections.emptyList();
         }
 
-        return quoteDAO.getRandomByCategory(category, count);
+        return quoteDAO.getByCategory(categoryId);
     }
 }

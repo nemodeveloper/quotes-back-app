@@ -26,10 +26,13 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
                     "ORDER BY RANDOM()\n" +
                     "LIMIT 1";
 
-    private static final String AUTHOR_BY_RANDOM_QUERY =
+    private static final String AUTHOR_ALL_LIST_QUERY =
             "SELECT a.id a_id, a.full_name a_full_name FROM author a\n" +
-                    "ORDER BY RANDOM()\n" +
-                    "LIMIT :count_row";
+                    "ORDER BY a.full_name" ;
+
+    private static final String AUTHOR_BY_ID_QUERY =
+            "SELECT a.id a_id, a.full_name a_full_name FROM author a\n" +
+                    "WHERE a.id = :id" ;
 
     private final AuthorRowMapper rowMapper;
 
@@ -38,6 +41,20 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
     {
         super(jdbcOperations);
         this.rowMapper = rowMapper;
+    }
+
+    @Override
+    public Author getById(Long authorId)
+    {
+        return jdbcOperations.queryForObject(AUTHOR_BY_ID_QUERY,
+                new MapSqlParameterSource(ENTITY_ID_PARAM_KEY, authorId),
+                rowMapper);
+    }
+
+    @Override
+    public List<Author> getList()
+    {
+        return jdbcOperations.query(AUTHOR_ALL_LIST_QUERY, rowMapper);
     }
 
     @Override
@@ -60,11 +77,4 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
         return null;
     }
 
-    @Override
-    public List<Author> getRandom(Long count)
-    {
-        return jdbcOperations.query(AUTHOR_BY_RANDOM_QUERY,
-                new MapSqlParameterSource(COUNT_ROW_PARAM_KEY, count),
-                rowMapper);
-    }
 }

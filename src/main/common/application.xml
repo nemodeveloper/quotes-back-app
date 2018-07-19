@@ -26,6 +26,7 @@
     </bean>
 
     <import resource="classpath:beans/dataBaseContext.xml"/>
+    <import resource="classpath:beans/cacheBeanContext.xml"/>
     <import resource="classpath:beans/serviceBeanContext.xml"/>
-    <import resource="classpath:beans/telegramContext.xml"/>
+    <!--<import resource="classpath:beans/telegramContext.xml"/>-->
 </beans>

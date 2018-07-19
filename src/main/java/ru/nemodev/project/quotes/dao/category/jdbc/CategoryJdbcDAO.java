@@ -26,10 +26,14 @@ public class CategoryJdbcDAO extends AbstractSpringJdbc implements CategoryDAO
                     "ORDER BY RANDOM()\n" +
                     "LIMIT 1";
 
-    private static final String CATEGORY_BY_RANDOM_QUERY =
+    private static final String CATEGORY_ALL_LIST_QUERY =
             "SELECT c.id c_id, c.name c_name FROM category c\n" +
-                    "ORDER BY RANDOM()\n" +
-                    "LIMIT :count_row";
+                    "ORDER BY c.name\n";
+
+    private static final String CATEGORY_BY_ID_QUERY =
+            "SELECT c.id c_id, c.name c_name FROM category c\n" +
+                    "WHERE c.id = :id";
+
 
     private final CategoryRowMapper rowMapper;
 
@@ -41,7 +45,21 @@ public class CategoryJdbcDAO extends AbstractSpringJdbc implements CategoryDAO
     }
 
     @Override
-    public Category getByTitle(String name)
+    public Category getById(Long categoryId)
+    {
+        return jdbcOperations.queryForObject(CATEGORY_BY_ID_QUERY,
+                new MapSqlParameterSource(ENTITY_ID_PARAM_KEY, categoryId),
+                rowMapper);
+    }
+
+    @Override
+    public List<Category> getList()
+    {
+        return jdbcOperations.query(CATEGORY_ALL_LIST_QUERY, rowMapper);
+    }
+
+    @Override
+    public Category getByName(String name)
     {
         try
         {
@@ -61,11 +79,4 @@ public class CategoryJdbcDAO extends AbstractSpringJdbc implements CategoryDAO
         return null;
     }
 
-    @Override
-    public List<Category> getRandom(Long count)
-    {
-        return jdbcOperations.query(CATEGORY_BY_RANDOM_QUERY,
-                new MapSqlParameterSource(COUNT_ROW_PARAM_KEY, count),
-                rowMapper);
-    }
 }

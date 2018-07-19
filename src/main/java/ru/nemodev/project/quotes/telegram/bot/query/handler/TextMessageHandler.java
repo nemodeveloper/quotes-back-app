@@ -3,7 +3,6 @@ package ru.nemodev.project.quotes.telegram.bot.query.handler;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -66,7 +65,6 @@ public class TextMessageHandler extends AbstractQueryHandler<MessageQueryInfo, S
         return inlineKeyboardMarkup;
     }
 
-    @Autowired
     public TextMessageHandler(QuoteService quoteService, CategoryService categoryService, AuthorService authorService)
     {
         super(quoteService, categoryService, authorService);

@@ -11,8 +11,16 @@
     </bean>
 
     <bean id="queryParser" class="ru.nemodev.project.quotes.telegram.bot.query.parser.QueryParser"/>
-    <bean id="textMessageHandler" class="ru.nemodev.project.quotes.telegram.bot.query.handler.TextMessageHandler" scope="prototype"/>
-    <bean id="callbackQueryHandler" class="ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler"/>
+    <bean id="textMessageHandler" class="ru.nemodev.project.quotes.telegram.bot.query.handler.TextMessageHandler" scope="prototype">
+        <constructor-arg name="quoteService" ref="quoteServiceImpl"/>
+        <constructor-arg name="categoryService" ref="categoryCacheService"/>
+        <constructor-arg name="authorService" ref="authorCacheService"/>
+    </bean>
+    <bean id="callbackQueryHandler" class="ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler">
+        <constructor-arg name="quoteService" ref="quoteServiceImpl"/>
+        <constructor-arg name="categoryService" ref="categoryCacheService"/>
+        <constructor-arg name="authorService" ref="authorCacheService"/>
+    </bean>
 
     <bean id="quoteTelegramBot" class="ru.nemodev.project.quotes.telegram.bot.QuoteTelegramBot"/>
     <util:list id="longPollingBots" value-type="org.telegram.telegrambots.bots.TelegramLongPollingBot">

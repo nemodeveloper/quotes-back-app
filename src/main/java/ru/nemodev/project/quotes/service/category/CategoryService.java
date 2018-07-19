@@ -9,6 +9,11 @@ import java.util.List;
  */
 public interface CategoryService
 {
+
+    Category getById(Long categoryId);
+
+    List<Category> getList();
+
     /**
      *
      * @param name
@@ -16,10 +21,4 @@ public interface CategoryService
      */
     Category getByName(String name);
 
-    /**
-     *
-     * @param count
-     * @return
-     */
-    List<Category> getRandom(Long count);
 }

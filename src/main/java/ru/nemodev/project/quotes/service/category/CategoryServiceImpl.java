@@ -3,11 +3,9 @@ package ru.nemodev.project.quotes.service.category;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.nemodev.project.quotes.dao.category.CategoryDAO;
 import ru.nemodev.project.quotes.entity.Category;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,10 +17,24 @@ public class CategoryServiceImpl implements CategoryService
 
     private final CategoryDAO categoryDAO;
 
-    @Autowired
     public CategoryServiceImpl(CategoryDAO categoryDAO)
     {
         this.categoryDAO = categoryDAO;
+    }
+
+    @Override
+    public Category getById(Long categoryId)
+    {
+        if (categoryId == null || categoryId < 1L)
+            return null;
+
+        return categoryDAO.getById(categoryId);
+    }
+
+    @Override
+    public List<Category> getList()
+    {
+        return categoryDAO.getList();
     }
 
     @Override
@@ -33,19 +45,7 @@ public class CategoryServiceImpl implements CategoryService
             LOGGER.warn("В сервис поиска категории передали пустое название, поиск остановлен!");
             return null;
         }
-        return categoryDAO.getByTitle(name);
+        return categoryDAO.getByName(name);
     }
 
-    @Override
-    public List<Category> getRandom(Long count)
-    {
-        if (count == null || count < 1)
-        {
-            LOGGER.warn("В сервис поиска категории передали не верный параметр count={}, поиск остановлен!",
-                    count);
-            return Collections.emptyList();
-        }
-
-        return null;
-    }
 }

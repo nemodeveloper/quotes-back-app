@@ -1,7 +1,5 @@
 package ru.nemodev.project.quotes.dao.quote;
 
-import ru.nemodev.project.quotes.entity.Author;
-import ru.nemodev.project.quotes.entity.Category;
 import ru.nemodev.project.quotes.entity.Quote;
 
 import java.util.List;
@@ -20,17 +18,15 @@ public interface QuoteDAO
 
     /**
      *
-     * @param author
-     * @param count
+     * @param authorId
      * @return
      */
-    List<Quote> getRandomByAuthor(Author author, Long count);
+    List<Quote> getByAuthor(Long authorId);
 
     /**
      *
-     * @param category
-     * @param count
+     * @param categoryId
      * @return
      */
-    List<Quote> getRandomByCategory(Category category, Long count);
+    List<Quote> getByCategory(Long categoryId);
 }

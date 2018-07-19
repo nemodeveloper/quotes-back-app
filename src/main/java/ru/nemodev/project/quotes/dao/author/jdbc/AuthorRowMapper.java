@@ -19,6 +19,9 @@ public class AuthorRowMapper implements RowMapper<Author>
     @Override
     public Author mapRow(ResultSet resultSet, int i) throws SQLException
     {
+        if (resultSet.getLong(ID_COLUMN) == 0L)
+            return null;
+
         return new Author(
                 resultSet.getLong(ID_COLUMN),
                 resultSet.getString(FULL_NAME_COLUMN)
