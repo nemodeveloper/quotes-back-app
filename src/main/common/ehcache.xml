@@ -4,23 +4,23 @@
 
     <persistence directory="ehcache.temp"/>
 
-    <cache-template name="baseTemplate">
+    <cache-template name="baseCacheTemplate">
         <key-type>java.lang.String</key-type>
         <expiry>
             <none/>
         </expiry>
     </cache-template>
 
-    <cache alias="categories" uses-template="baseTemplate">
+    <cache alias="categories" uses-template="baseCacheTemplate">
         <resources>
             <heap unit="MB">50</heap>
             <disk unit="MB">100</disk>
         </resources>
     </cache>
 
-    <cache alias="authors" uses-template="baseTemplate">
+    <cache alias="authors" uses-template="baseCacheTemplate">
         <resources>
-            <heap unit="MB">100</heap>
+            <heap unit="MB">75</heap>
             <disk unit="MB">200</disk>
         </resources>
     </cache>

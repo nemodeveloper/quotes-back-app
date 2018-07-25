@@ -9,7 +9,7 @@
     <bean id="authorCacheDao" class="ru.nemodev.project.quotes.dao.author.AuthorCacheDAO">
         <constructor-arg name="authorDAO" ref="authorJdbcDAO"/>
     </bean>
-    <bean class="ru.nemodev.project.quotes.service.author.AuthorServiceImpl">
+    <bean id="authorServiceImpl" class="ru.nemodev.project.quotes.service.author.AuthorServiceImpl">
         <constructor-arg name="authorDAO" ref="authorCacheDao"/>
     </bean>
 
@@ -19,7 +19,7 @@
     <bean id="categoryCacheDAO" class="ru.nemodev.project.quotes.service.category.CategoryCacheDAO">
         <constructor-arg name="categoryDAO" ref="categoryJdbcDAO"/>
     </bean>
-    <bean class="ru.nemodev.project.quotes.service.category.CategoryServiceImpl">
+    <bean id="categoryServiceImpl" class="ru.nemodev.project.quotes.service.category.CategoryServiceImpl">
         <constructor-arg name="categoryDAO" ref="categoryCacheDAO"/>
     </bean>
 
