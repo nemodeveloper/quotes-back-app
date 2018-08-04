@@ -28,11 +28,8 @@ public class QuoteJdbcDAO extends AbstractSpringJdbc implements QuoteDAO
             "a.full_name a_full_name FROM quote q\n" +
             "  LEFT JOIN category c ON q.category_id = c.id\n" +
             "  LEFT JOIN author a ON q.author_id = a.id\n" +
-            "  WHERE q.id = FLOOR((\n" +
-                    "  SELECT reltuples::bigint * random() AS count from pg_class\n" +
-                    "    WHERE oid = 'public.quote'::regclass\n" +
-                    "  ))" +
-            " LIMIT :count_row";
+            "  ORDER BY RANDOM()" +
+            "  LIMIT :count_row";
 
     private static final String AUTHOR_ID_PARAM_KEY = "author_id";
     private static final String QUOTE_BY_AUTHOR_QUERY =
@@ -40,8 +37,7 @@ public class QuoteJdbcDAO extends AbstractSpringJdbc implements QuoteDAO
                     "q.category_id c_id, c.name c_name\n" +
                     "FROM quote q\n" +
                     "  LEFT JOIN category c ON q.category_id = c.id\n" +
-                    "   WHERE q.author_id = :author_id\n" +
-                    "  ORDER BY RANDOM()";
+                    "   WHERE q.author_id = :author_id\n";
 
     private static final String CATEGORY_ID_PARAM_KEY = "category_id";
     private static final String QUOTE_BY_CATEGORY_QUERY =
