@@ -9,6 +9,7 @@
     <bean id="authorCacheDao" class="ru.nemodev.project.quotes.dao.author.AuthorCacheDAO">
         <constructor-arg name="authorDAO" ref="authorJdbcDAO"/>
     </bean>
+
     <bean id="authorServiceImpl" class="ru.nemodev.project.quotes.service.author.AuthorServiceImpl">
         <constructor-arg name="authorDAO" ref="authorCacheDao"/>
     </bean>
@@ -16,9 +17,10 @@
     <!-- Сервисы по получению Категорий цитат -->
     <bean class="ru.nemodev.project.quotes.dao.category.jdbc.CategoryRowMapper"/>
     <bean id="categoryJdbcDAO" class="ru.nemodev.project.quotes.dao.category.jdbc.CategoryJdbcDAO"/>
-    <bean id="categoryCacheDAO" class="ru.nemodev.project.quotes.service.category.CategoryCacheDAO">
+    <bean id="categoryCacheDAO" class="ru.nemodev.project.quotes.dao.category.CategoryCacheDAO">
         <constructor-arg name="categoryDAO" ref="categoryJdbcDAO"/>
     </bean>
+
     <bean id="categoryServiceImpl" class="ru.nemodev.project.quotes.service.category.CategoryServiceImpl">
         <constructor-arg name="categoryDAO" ref="categoryCacheDAO"/>
     </bean>
@@ -26,7 +28,13 @@
     <!-- Сервисы по получению Цитат  -->
     <bean class="ru.nemodev.project.quotes.dao.quote.jdbc.PrepareQuoteRowMapper" scope="prototype"/>
     <bean id="simpleQuoteRowMapper" class="ru.nemodev.project.quotes.dao.quote.jdbc.SimpleQuoteRowMapper"/>
-    <bean class="ru.nemodev.project.quotes.dao.quote.jdbc.QuoteJdbcDAO"/>
-    <bean id="quoteServiceImpl" class="ru.nemodev.project.quotes.service.quote.QuoteServiceImpl"/>
+    <bean id="quoteJdbcDAO" class="ru.nemodev.project.quotes.dao.quote.jdbc.QuoteJdbcDAO"/>
+    <bean id="quoteCacheDAO" class="ru.nemodev.project.quotes.dao.quote.QuoteCacheDAO">
+        <constructor-arg name="quoteDAO" ref="quoteJdbcDAO"/>
+    </bean>
+
+    <bean id="quoteServiceImpl" class="ru.nemodev.project.quotes.service.quote.QuoteServiceImpl">
+        <constructor-arg name="quoteDAO" ref="quoteCacheDAO"/>
+    </bean>
 
 </beans>

@@ -75,7 +75,6 @@ public class QuoteJdbcDAO extends AbstractSpringJdbc implements QuoteDAO
                 simpleQuoteRowMapper);
     }
 
-    // TODO добавить кеширование
     @Override
     public List<Quote> getByAuthor(Long authorId)
     {
@@ -94,7 +93,6 @@ public class QuoteJdbcDAO extends AbstractSpringJdbc implements QuoteDAO
                 rowMapper);
     }
 
-    // TODO добавить кеширование
     @Override
     public List<Quote> getByCategory(Long categoryId)
     {

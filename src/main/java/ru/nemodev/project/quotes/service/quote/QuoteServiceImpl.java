@@ -2,7 +2,6 @@ package ru.nemodev.project.quotes.service.quote;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.nemodev.project.quotes.dao.quote.QuoteDAO;
 import ru.nemodev.project.quotes.entity.Quote;
 
@@ -18,7 +17,6 @@ public class QuoteServiceImpl implements QuoteService
 
     private final QuoteDAO quoteDAO;
 
-    @Autowired
     public QuoteServiceImpl(QuoteDAO quoteDAO)
     {
         this.quoteDAO = quoteDAO;

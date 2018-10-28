@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class QuoteEndpoint
 {
-    private static final Long MAX_LIST_COUNT = 100L;
+    private static final Long MAX_LIST_COUNT = 200L;
 
     private final QuoteService quoteService;
 
@@ -46,5 +46,4 @@ public class QuoteEndpoint
     {
         return Response.ok(quoteService.getByCategory(categoryId)).build();
     }
-
 }

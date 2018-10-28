@@ -13,15 +13,22 @@
 
     <cache alias="categories" uses-template="baseCacheTemplate">
         <resources>
-            <heap unit="MB">50</heap>
-            <disk unit="MB">100</disk>
+            <heap unit="MB">25</heap>
+            <disk unit="MB">50</disk>
         </resources>
     </cache>
 
     <cache alias="authors" uses-template="baseCacheTemplate">
         <resources>
-            <heap unit="MB">75</heap>
-            <disk unit="MB">200</disk>
+            <heap unit="MB">50</heap>
+            <disk unit="MB">100</disk>
+        </resources>
+    </cache>
+
+    <cache alias="quotes" uses-template="baseCacheTemplate">
+        <resources>
+            <heap unit="MB">150</heap>
+            <disk unit="MB">300</disk>
         </resources>
     </cache>
 

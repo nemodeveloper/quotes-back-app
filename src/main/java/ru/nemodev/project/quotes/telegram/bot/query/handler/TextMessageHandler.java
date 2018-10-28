@@ -15,6 +15,7 @@ import ru.nemodev.project.quotes.service.category.CategoryService;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
 import ru.nemodev.project.quotes.telegram.bot.query.info.MessageQueryInfo;
 import ru.nemodev.project.quotes.telegram.bot.query.info.QueryType;
+import ru.nemodev.project.quotes.utils.QuoteUtils;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -86,7 +87,7 @@ public class TextMessageHandler extends AbstractQueryHandler<MessageQueryInfo, S
         if (CollectionUtils.isEmpty(quotes))
             return buildBaseSendMessage(QUOTE_NOT_FOUND);
 
-        return buildBaseSendMessage(quotes.get(0).toString());
+        return buildBaseSendMessage(QuoteUtils.getQuoteTextForShare(quotes.get(0)));
     }
 
     private SendMessage getKeyboard(String text)
@@ -108,5 +109,4 @@ public class TextMessageHandler extends AbstractQueryHandler<MessageQueryInfo, S
 
         return sendMessage;
     }
-
 }

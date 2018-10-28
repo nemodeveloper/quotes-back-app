@@ -76,5 +76,4 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
         }
         return null;
     }
-
 }

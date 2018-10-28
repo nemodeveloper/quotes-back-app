@@ -33,5 +33,4 @@ public class CategoryEndpoint
     {
         return Response.ok(categoryService.getList()).build();
     }
-
 }

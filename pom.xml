@@ -254,6 +254,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.8.v20171121</version>
                 <configuration>
+                    <webApp>
+                        <contextPath>/${war-name}</contextPath>
+                    </webApp>
                     <war>${project.basedir}/target/${war-name}.war</war>
                     <stopKey>stop</stopKey>
                     <stopPort>9099</stopPort>

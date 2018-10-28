@@ -47,5 +47,4 @@ public class CategoryServiceImpl implements CategoryService
         }
         return categoryDAO.getByName(name);
     }
-
 }

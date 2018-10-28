@@ -7,6 +7,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import ru.nemodev.project.quotes.config.ApplicationConfig;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
 import ru.nemodev.project.quotes.telegram.bot.QuoteTelegramBot;
+import ru.nemodev.project.quotes.utils.QuoteUtils;
 
 
 /**
@@ -36,7 +37,7 @@ public class QuoteChannelPublisher
 
         try
         {
-            String text = quoteService.getRandom(1L).get(0).toString();
+            String text = QuoteUtils.getQuoteTextForShare(quoteService.getRandom(1L).get(0));
             quoteTelegramBot.sendBotMessage(buildSendMessage(text));
             LOGGER.info("Отправка цитаты в канал телеграма по расписанию завершена!");
         }

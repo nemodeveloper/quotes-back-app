@@ -1,8 +1,7 @@
-package ru.nemodev.project.quotes.service.category;
+package ru.nemodev.project.quotes.dao.category;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import ru.nemodev.project.quotes.dao.category.CategoryDAO;
 import ru.nemodev.project.quotes.entity.Category;
 
 import java.util.List;
@@ -40,5 +39,4 @@ public class CategoryCacheDAO implements CategoryDAO
     {
         return categoryDAO.getByName(name);
     }
-
 }

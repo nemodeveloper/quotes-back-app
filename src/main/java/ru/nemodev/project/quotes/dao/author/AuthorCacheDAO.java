@@ -39,5 +39,4 @@ public class AuthorCacheDAO implements AuthorDAO
     {
         return authorDAO.getByName(name);
     }
-
 }

@@ -18,7 +18,7 @@
     </bean>
 
     <!-- Обращения к БД идут через Spring-JDBC -->
-    <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="quoteDataSource"/>
     </bean>
 
