@@ -43,7 +43,7 @@ public class QuoteChannelPublisher
         }
         catch (Exception e)
         {
-            LOGGER.error("Ошибка отправки цитаты в канал телеграм по расписанию!");
+            LOGGER.error("Ошибка отправки цитаты в канал телеграм по расписанию!", e);
         }
     }
 
@@ -56,5 +56,4 @@ public class QuoteChannelPublisher
 
         return sendMessage;
     }
-
 }

@@ -34,8 +34,16 @@
     <!-- Отправка сообщений в канал цитат телеграма -->
     <bean id="quoteChannelPublisher" class="ru.nemodev.project.quotes.telegram.channel.QuoteChannelPublisher"/>
     <task:scheduler id="quoteChannelScheduler"/>
+
+    <bean id="timeZone" class="java.util.TimeZone" factory-method="getTimeZone">
+        <constructor-arg name="ID" value="Europe/Moscow"/>
+    </bean>
+    <bean id="quoteCronTrigger" class="org.springframework.scheduling.support.CronTrigger">
+        <constructor-arg name="expression" value="${quote.scheduler.channel.publish.cron}"/>
+        <constructor-arg name="timeZone" ref="timeZone"/>
+    </bean>
     <task:scheduled-tasks>
-        <task:scheduled ref="quoteChannelPublisher" method="publish" cron="${quote.scheduler.channel.publish.cron}"/>
+        <task:scheduled ref="quoteChannelPublisher" method="publish" trigger="quoteCronTrigger"/>
     </task:scheduled-tasks>
 
 </beans>
