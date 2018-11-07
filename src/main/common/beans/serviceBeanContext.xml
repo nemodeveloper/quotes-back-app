@@ -37,4 +37,10 @@
         <constructor-arg name="quoteDAO" ref="quoteCacheDAO"/>
     </bean>
 
+    <bean class="ru.nemodev.project.quotes.service.CacheApplicationListener">
+        <constructor-arg name="quoteService" ref="quoteServiceImpl"/>
+        <constructor-arg name="authorService" ref="authorServiceImpl"/>
+        <constructor-arg name="categoryService" ref="categoryServiceImpl"/>
+    </bean>
+
 </beans>

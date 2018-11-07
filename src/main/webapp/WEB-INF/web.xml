@@ -12,31 +12,27 @@
         <!--<param-value>${beans.profiles.active}</param-value>-->
     <!--</context-param>-->
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:application.xml</param-value>
-    </context-param>
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>classpath:application.xml</param-value>-->
+    <!--</context-param>-->
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--</listener>-->
+    
     <servlet>
-        <servlet-name>rest-servlet</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>ru.nemodev.project.quotes.api</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jersey.config.server.provider.classnames</param-name>
-            <param-value>org.glassfish.jersey.jackson.JacksonFeature</param-value>
-        </init-param>
+        <servlet-name>SpringRestServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:application.xml</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>rest-servlet</servlet-name>
+        <servlet-name>SpringRestServlet</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 

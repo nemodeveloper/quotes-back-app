@@ -1,16 +1,17 @@
 package ru.nemodev.project.quotes.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import ru.nemodev.project.quotes.entity.Quote;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.util.List;
 
 
-@Path("/v1/quote")
-@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+@Controller
+@RequestMapping("/v1/quote")
+@ResponseBody
 public class QuoteEndpoint
 {
     private static final Long MAX_LIST_COUNT = 200L;
@@ -23,27 +24,24 @@ public class QuoteEndpoint
         this.quoteService = quoteService;
     }
 
-    @GET
-    @Path("/random")
-    public Response getRandom(@QueryParam("count") Long count)
+    @RequestMapping(method = RequestMethod.GET, path = "/random")
+    public List<Quote> getRandom(@RequestParam("count") Long count)
     {
         if (count == null || count < 1 || count > MAX_LIST_COUNT)
             count = MAX_LIST_COUNT;
 
-        return Response.ok(quoteService.getRandom(count)).build();
+        return quoteService.getRandom(count);
     }
 
-    @GET
-    @Path("/author/{authorId}")
-    public Response getByAuthor(@PathParam("authorId") Long authorId)
+    @RequestMapping(method = RequestMethod.GET, path = "/author/{authorId}")
+    public List<Quote> getByAuthor(@PathVariable("authorId") Long authorId)
     {
-        return Response.ok(quoteService.getByAuthor(authorId)).build();
+        return quoteService.getByAuthor(authorId);
     }
 
-    @GET
-    @Path("/category/{categoryId}")
-    public Response getByCategory(@PathParam("categoryId") Long categoryId)
+    @RequestMapping(method = RequestMethod.GET, path = "/category/{categoryId}")
+    public List<Quote> getByCategory(@PathVariable("categoryId") Long categoryId)
     {
-        return Response.ok(quoteService.getByCategory(categoryId)).build();
+        return quoteService.getByCategory(categoryId);
     }
 }

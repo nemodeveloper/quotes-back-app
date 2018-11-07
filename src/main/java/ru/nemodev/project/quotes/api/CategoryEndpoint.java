@@ -1,22 +1,22 @@
 package ru.nemodev.project.quotes.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ru.nemodev.project.quotes.entity.Category;
 import ru.nemodev.project.quotes.service.category.CategoryService;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.util.List;
+
 
 /**
  * created by NemoDev on 19.07.2018 - 12:21
  */
-
-@Path("/v1/category")
-@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+@Controller
+@RequestMapping("/v1/category")
+@ResponseBody
 public class CategoryEndpoint
 {
     private final CategoryService categoryService;
@@ -27,10 +27,9 @@ public class CategoryEndpoint
         this.categoryService = categoryService;
     }
 
-    @GET
-    @Path("/list")
-    public Response getList()
+    @RequestMapping(method = RequestMethod.GET, path = "/list")
+    public List<Category> getList()
     {
-        return Response.ok(categoryService.getList()).build();
+        return categoryService.getList();
     }
 }

@@ -20,7 +20,7 @@ public class CategoryCacheDAO implements CategoryDAO
     }
 
     @Override
-    @Cacheable(key = "#root.method.name + #categoryId")
+    @Cacheable(key = "#root.method.name + #categoryId", sync = true)
     public Category getById(Long categoryId)
     {
         return categoryDAO.getById(categoryId);

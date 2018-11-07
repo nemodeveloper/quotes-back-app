@@ -32,7 +32,8 @@ public class AuthorServiceImpl implements AuthorService
     }
 
     @Override
-    public List<Author> getList() {
+    public List<Author> getList()
+    {
         return authorDAO.getList();
     }
 

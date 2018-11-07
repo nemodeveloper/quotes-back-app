@@ -20,7 +20,7 @@ public class AuthorCacheDAO implements AuthorDAO
     }
 
     @Override
-    @Cacheable(key = "#root.method.name + #authorId")
+    @Cacheable(key = "#root.method.name + #authorId", sync = true)
     public Author getById(Long authorId)
     {
         return authorDAO.getById(authorId);

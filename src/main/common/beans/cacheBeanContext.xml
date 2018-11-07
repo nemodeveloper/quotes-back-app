@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-    <cache:annotation-driven/>
+    <cache:annotation-driven proxy-target-class="true"/>
 
     <!-- Фабрика кеша -->
     <bean id="ehcacheFactory" class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
