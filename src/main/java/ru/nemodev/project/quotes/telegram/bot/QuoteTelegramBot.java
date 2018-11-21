@@ -3,12 +3,11 @@ package ru.nemodev.project.quotes.telegram.bot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import ru.nemodev.project.quotes.config.ApplicationConfig;
+import ru.nemodev.project.quotes.config.TelegramProperties;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.AbstractQueryHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.QueryHandler;
@@ -24,16 +23,15 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(QuoteTelegramBot.class);
 
-    private final ApplicationConfig applicationConfig;
+    private final TelegramProperties applicationConfig;
 
     private final QueryParser queryParser;
 
     private final ObjectFactory<TextMessageHandler> textMessageHandler;
     private final ObjectFactory<CallbackQueryHandler> callbackQueryHandler;
 
-    @Autowired
     public QuoteTelegramBot(
-            ApplicationConfig applicationConfig,
+            TelegramProperties applicationConfig,
             QueryParser queryParser,
             ObjectFactory<TextMessageHandler> textMessageHandler,
             ObjectFactory<CallbackQueryHandler> callbackQueryHandler)

@@ -3,7 +3,6 @@ package ru.nemodev.project.quotes.telegram.bot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
@@ -21,7 +20,6 @@ public class TelegramBotLoader
 
     private List<BotSession> botSessions;
 
-    @Autowired
     public TelegramBotLoader(List<TelegramLongPollingBot> longPollingBots)
     {
         this.longPollingBots = longPollingBots;

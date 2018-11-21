@@ -2,7 +2,6 @@ package ru.nemodev.project.quotes.dao.author.jdbc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
@@ -36,7 +35,6 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
 
     private final AuthorRowMapper rowMapper;
 
-    @Autowired
     public AuthorJdbcDAO(NamedParameterJdbcOperations jdbcOperations, AuthorRowMapper rowMapper)
     {
         super(jdbcOperations);
@@ -46,9 +44,18 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
     @Override
     public Author getById(Long authorId)
     {
-        return jdbcOperations.queryForObject(AUTHOR_BY_ID_QUERY,
-                new MapSqlParameterSource(ENTITY_ID_PARAM_KEY, authorId),
-                rowMapper);
+        try
+        {
+            return jdbcOperations.queryForObject(AUTHOR_BY_ID_QUERY,
+                    new MapSqlParameterSource(ENTITY_ID_PARAM_KEY, authorId),
+                    rowMapper);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            LOGGER.warn("Не удалось найти автора цитаты с id - {}", authorId);
+        }
+
+        return null;
     }
 
     @Override
@@ -68,7 +75,7 @@ public class AuthorJdbcDAO extends AbstractSpringJdbc implements AuthorDAO
         }
         catch (EmptyResultDataAccessException e)
         {
-            LOGGER.info("Не удалось найти автора цитаты с именем - {}", name);
+            LOGGER.warn("Не удалось найти автора цитаты с именем - {}", name);
         }
         catch (Exception e)
         {

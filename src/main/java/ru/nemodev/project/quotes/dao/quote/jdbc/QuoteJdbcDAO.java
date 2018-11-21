@@ -1,8 +1,6 @@
 package ru.nemodev.project.quotes.dao.quote.jdbc;
 
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import ru.nemodev.project.quotes.dao.AbstractSpringJdbc;
@@ -53,9 +51,8 @@ public class QuoteJdbcDAO extends AbstractSpringJdbc implements QuoteDAO
     private final CategoryService categoryService;
 
 
-    @Autowired
     public QuoteJdbcDAO(NamedParameterJdbcOperations jdbcOperations,
-                        @Qualifier("simpleQuoteRowMapper") SimpleQuoteRowMapper simpleQuoteRowMapper,
+                        SimpleQuoteRowMapper simpleQuoteRowMapper,
                         ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper,
                         AuthorService authorService,
                         CategoryService categoryService)

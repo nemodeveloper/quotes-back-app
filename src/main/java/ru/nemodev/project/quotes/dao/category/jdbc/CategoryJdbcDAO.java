@@ -47,9 +47,18 @@ public class CategoryJdbcDAO extends AbstractSpringJdbc implements CategoryDAO
     @Override
     public Category getById(Long categoryId)
     {
-        return jdbcOperations.queryForObject(CATEGORY_BY_ID_QUERY,
-                new MapSqlParameterSource(ENTITY_ID_PARAM_KEY, categoryId),
-                rowMapper);
+        try
+        {
+            return jdbcOperations.queryForObject(CATEGORY_BY_ID_QUERY,
+                    new MapSqlParameterSource(ENTITY_ID_PARAM_KEY, categoryId),
+                    rowMapper);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            LOGGER.warn("Не удалось найти категорию цитаты по id - {}", categoryId);
+        }
+
+        return null;
     }
 
     @Override
@@ -69,7 +78,7 @@ public class CategoryJdbcDAO extends AbstractSpringJdbc implements CategoryDAO
         }
         catch (EmptyResultDataAccessException e)
         {
-            LOGGER.info("Не удалось найти категорию цитаты по шаблону - {}", name);
+            LOGGER.warn("Не удалось найти категорию цитаты по шаблону - {}", name);
         }
         catch (Exception e)
         {

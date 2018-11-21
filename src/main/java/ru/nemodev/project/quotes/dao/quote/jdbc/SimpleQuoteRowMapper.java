@@ -1,6 +1,5 @@
 package ru.nemodev.project.quotes.dao.quote.jdbc;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.Nullable;
 import ru.nemodev.project.quotes.dao.author.jdbc.AuthorRowMapper;
@@ -25,7 +24,6 @@ public class SimpleQuoteRowMapper implements RowMapper<Quote>
     private final AuthorRowMapper authorRowMapper;
     private final CategoryRowMapper categoryRowMapper;
 
-    @Autowired
     public SimpleQuoteRowMapper(AuthorRowMapper authorRowMapper, CategoryRowMapper categoryRowMapper)
     {
         this.authorRowMapper = authorRowMapper;
