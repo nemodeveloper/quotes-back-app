@@ -2,7 +2,7 @@
         xmlns='http://www.ehcache.org/v3'
         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
 
-    <persistence directory="ehcache.temp"/>
+    <persistence directory="/opt/tomcat/temp/ehcache"/>
 
     <cache-template name="baseCacheTemplate">
         <key-type>java.lang.String</key-type>

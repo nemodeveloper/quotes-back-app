@@ -35,6 +35,9 @@ public class CacheConfig
     @Bean
     public JCacheCacheManager jCacheCacheManager()
     {
-        return new JCacheCacheManager(jCacheManagerFactoryBean().getObject());
+        JCacheCacheManager manager = new JCacheCacheManager(jCacheManagerFactoryBean().getObject());
+        manager.setTransactionAware(true);
+
+        return manager;
     }
 }

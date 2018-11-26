@@ -1,13 +1,14 @@
 package ru.nemodev.project.quotes.config.spring.database;
 
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 18:11
@@ -31,8 +32,12 @@ public class H2DataBaseConfig implements DataBaseSource
 
     @Override
     @Bean
-    public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate()
+    public Properties hibernateProperties()
     {
-        return new NamedParameterJdbcTemplate(dataSource());
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.H2Dialect");
+        hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
+
+        return hibernateProperties;
     }
 }

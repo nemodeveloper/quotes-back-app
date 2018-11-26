@@ -1,21 +1,15 @@
 package ru.nemodev.project.quotes.config.spring;
 
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import ru.nemodev.project.quotes.config.spring.database.DataBaseSource;
+import ru.nemodev.project.quotes.config.spring.database.HibernateConfig;
 import ru.nemodev.project.quotes.dao.author.AuthorCacheDAO;
-import ru.nemodev.project.quotes.dao.author.jdbc.AuthorJdbcDAO;
-import ru.nemodev.project.quotes.dao.author.jdbc.AuthorRowMapper;
+import ru.nemodev.project.quotes.dao.author.AuthorHibernateDAO;
 import ru.nemodev.project.quotes.dao.category.CategoryCacheDAO;
-import ru.nemodev.project.quotes.dao.category.jdbc.CategoryJdbcDAO;
-import ru.nemodev.project.quotes.dao.category.jdbc.CategoryRowMapper;
+import ru.nemodev.project.quotes.dao.category.CategoryHibernateDAO;
 import ru.nemodev.project.quotes.dao.quote.QuoteCacheDAO;
-import ru.nemodev.project.quotes.dao.quote.jdbc.PrepareQuoteRowMapper;
-import ru.nemodev.project.quotes.dao.quote.jdbc.QuoteJdbcDAO;
-import ru.nemodev.project.quotes.dao.quote.jdbc.SimpleQuoteRowMapper;
+import ru.nemodev.project.quotes.dao.quote.QuoteHibernateDAO;
 import ru.nemodev.project.quotes.service.CacheApplicationListener;
 import ru.nemodev.project.quotes.service.author.AuthorServiceImpl;
 import ru.nemodev.project.quotes.service.category.CategoryServiceImpl;
@@ -28,27 +22,18 @@ import ru.nemodev.project.quotes.service.quote.QuoteServiceImpl;
 public class ServiceConfig
 {
     @Autowired
-    private DataBaseSource dataBaseSource;
-
-    @Autowired
-    private ObjectFactory<PrepareQuoteRowMapper> prepareQuoteRowMapper;
+    private HibernateConfig hibernateConfig;
 
     @Bean
-    public AuthorRowMapper authorRowMapper()
+    public AuthorHibernateDAO authorHibernateDAO()
     {
-        return new AuthorRowMapper();
-    }
-
-    @Bean
-    public AuthorJdbcDAO authorJdbcDAO()
-    {
-        return new AuthorJdbcDAO(dataBaseSource.getNamedParameterJdbcTemplate(), authorRowMapper());
+        return new AuthorHibernateDAO(hibernateConfig.sessionFactory().getObject());
     }
 
     @Bean
     public AuthorCacheDAO authorCacheDAO()
     {
-        return new AuthorCacheDAO(authorJdbcDAO());
+        return new AuthorCacheDAO(authorHibernateDAO());
     }
 
     @Bean
@@ -57,22 +42,17 @@ public class ServiceConfig
         return new AuthorServiceImpl(authorCacheDAO());
     }
 
-    @Bean
-    public CategoryRowMapper categoryRowMapper()
-    {
-        return new CategoryRowMapper();
-    }
 
     @Bean
-    public CategoryJdbcDAO categoryJdbcDAO()
+    public CategoryHibernateDAO categoryHibernateDAO()
     {
-        return new CategoryJdbcDAO(dataBaseSource.getNamedParameterJdbcTemplate(), categoryRowMapper());
+        return new CategoryHibernateDAO(hibernateConfig.sessionFactory().getObject());
     }
 
     @Bean
     public CategoryCacheDAO categoryCacheDAO()
     {
-        return new CategoryCacheDAO(categoryJdbcDAO());
+        return new CategoryCacheDAO(categoryHibernateDAO());
     }
 
     @Bean
@@ -82,33 +62,15 @@ public class ServiceConfig
     }
 
     @Bean
-    public SimpleQuoteRowMapper simpleQuoteRowMapper()
+    public QuoteHibernateDAO quoteHibernateDAO()
     {
-        return new SimpleQuoteRowMapper(authorRowMapper(), categoryRowMapper());
-    }
-
-    @Bean
-    @Scope("prototype")
-    public PrepareQuoteRowMapper prepareQuoteRowMapper()
-    {
-        return new PrepareQuoteRowMapper(authorRowMapper(), categoryRowMapper());
-    }
-
-    @Bean
-    public QuoteJdbcDAO quoteJdbcDAO()
-    {
-        return new QuoteJdbcDAO(
-                dataBaseSource.getNamedParameterJdbcTemplate(),
-                simpleQuoteRowMapper(),
-                prepareQuoteRowMapper,
-                authorServiceImpl(),
-                categoryServiceImpl());
+        return new QuoteHibernateDAO(hibernateConfig.sessionFactory().getObject());
     }
 
     @Bean
     public QuoteCacheDAO quoteCacheDAO()
     {
-        return new QuoteCacheDAO(quoteJdbcDAO());
+        return new QuoteCacheDAO(quoteHibernateDAO());
     }
 
     @Bean

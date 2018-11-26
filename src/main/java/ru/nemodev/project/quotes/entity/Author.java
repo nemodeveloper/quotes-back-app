@@ -1,22 +1,24 @@
 package ru.nemodev.project.quotes.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * created by NemoDev on 13.03.2018 - 21:49
  */
+@Entity
+@Table(name = "AUTHOR")
 public class Author implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quotes_author_id_seq")
+    @Column(name = "ID", updatable = false)
     private Long id;
+
+    @Column(name = "FULL_NAME", nullable = false)
     private String fullName;
 
     public Author() {}
-
-    public Author(Long id, String fullName)
-    {
-        this.id = id;
-        this.fullName = fullName;
-    }
 
     public Long getId()
     {

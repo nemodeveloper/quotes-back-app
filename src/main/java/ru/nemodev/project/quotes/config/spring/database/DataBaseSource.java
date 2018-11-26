@@ -1,6 +1,7 @@
 package ru.nemodev.project.quotes.config.spring.database;
 
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
  */
 public interface DataBaseSource
 {
-    NamedParameterJdbcTemplate getNamedParameterJdbcTemplate();
+    DataSource dataSource();
+    Properties hibernateProperties();
 }

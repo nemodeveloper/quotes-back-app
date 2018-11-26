@@ -9,16 +9,7 @@ import java.util.List;
  */
 public interface AuthorService
 {
-
     Author getById(Long authorId);
 
     List<Author> getList();
-
-    /**
-     *
-     * @param name
-     * @return
-     */
-    Author getByName(String name);
-
 }

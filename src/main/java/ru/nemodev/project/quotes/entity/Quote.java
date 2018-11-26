@@ -2,32 +2,39 @@ package ru.nemodev.project.quotes.entity;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * created by NemoDev on 13.03.2018 - 21:49
  */
+@Entity
+@Table(name = "QUOTE")
 public class Quote implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quotes_quote_id_seq")
+    @Column(name = "ID", updatable = false)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private Category category;
+
+    @Column(name = "TEXT", nullable = false)
     private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "AUTHOR_ID", nullable = false)
     private Author author;
+
+    @Column(name = "SOURCE")
     private String source;
+
+    @Column(name = "YEAR")
     private String year;
 
     public Quote() { }
-
-    public Quote(Long id, Category category, String text,
-                 Author author, String source, String year)
-    {
-        this.id = id;
-        this.category = category;
-        this.text = text;
-        this.author = author;
-        this.source = source;
-        this.year = year;
-    }
 
     public Long getId()
     {

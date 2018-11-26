@@ -9,16 +9,7 @@ import java.util.List;
  */
 public interface CategoryService
 {
-
     Category getById(Long categoryId);
 
     List<Category> getList();
-
-    /**
-     *
-     * @param name
-     * @return
-     */
-    Category getByName(String name);
-
 }

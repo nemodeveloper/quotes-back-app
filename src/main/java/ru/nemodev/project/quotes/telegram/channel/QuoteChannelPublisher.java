@@ -35,7 +35,7 @@ public class QuoteChannelPublisher
 
         try
         {
-            String text = QuoteUtils.getQuoteTextForShare(quoteService.getRandom(1L).get(0));
+            String text = QuoteUtils.getQuoteTextForShare(quoteService.getRandom(1).get(0));
             quoteTelegramBot.sendBotMessage(buildSendMessage(text));
             LOGGER.info("Отправка цитаты в канал телеграма по расписанию завершена!");
         }

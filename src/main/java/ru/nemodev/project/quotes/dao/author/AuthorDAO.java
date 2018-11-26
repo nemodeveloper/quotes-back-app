@@ -12,12 +12,4 @@ public interface AuthorDAO
     Author getById(Long authorId);
 
     List<Author> getList();
-
-    /**
-     *
-     * @param name
-     * @return
-     */
-    Author getByName(String name);
-
 }

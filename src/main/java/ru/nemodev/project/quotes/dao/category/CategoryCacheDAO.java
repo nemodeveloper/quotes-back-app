@@ -32,11 +32,4 @@ public class CategoryCacheDAO implements CategoryDAO
     {
         return categoryDAO.getList();
     }
-
-    @Override
-    @Cacheable(key = "#root.method.name + #name")
-    public Category getByName(String name)
-    {
-        return categoryDAO.getByName(name);
-    }
 }

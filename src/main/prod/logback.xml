@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
-    <property name="LOG_PATH" value="logs" />
-    <property name="LOG_NAME" value="quote" />
+    <property name="LOG_PATH" value="/opt/tomcat/logs" />
+    <property name="LOG_NAME" value="quotes" />
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive" />
     <property name="MESSAGE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%logger{35}:%line] - %msg%n" />
     <timestamp key="timestamp-by-second" datePattern="yyyy-MM-dd'T'HH.mm.ss"/>
@@ -10,7 +10,7 @@
     <appender name="RollingFile-Appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/quote.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_ARCHIVE}/quote.log%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_ARCHIVE}/${LOG_NAME}.log%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>5MB</totalSizeCap>
         </rollingPolicy>

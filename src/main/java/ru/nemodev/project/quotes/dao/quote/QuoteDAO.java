@@ -14,7 +14,7 @@ public interface QuoteDAO
      * @param count
      * @return
      */
-    List<Quote> getRandom(Long count);
+    List<Quote> getRandom(Integer count);
 
     /**
      *

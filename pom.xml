@@ -26,7 +26,8 @@
 
         <jackson.databind.version>2.9.7</jackson.databind.version>
 
-        <org.hibernate.version>6.0.13.Final</org.hibernate.version>
+        <hibernate.version>5.3.7.Final</hibernate.version>
+        <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
 
         <commons.lang.version>3.8.1</commons.lang.version>
         <commons.collection.version>4.2</commons.collection.version>
@@ -83,13 +84,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
         <!-- Spring - Rest -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -98,15 +92,36 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind.version}</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${org.hibernate.version}</version>
+            <version>${hibernate.validator.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>${org.hibernate.version}</version>
+            <version>${hibernate.validator.version}</version>
         </dependency>
 
         <!-- DataBase -->
@@ -131,13 +146,6 @@
             <version>${h2.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.databind.version}</version>
-        </dependency>
-
         <!-- Utils -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
@@ -153,6 +161,7 @@
             <version>${commons.collection.version}</version>
         </dependency>
 
+        <!-- Cache -->
         <!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
         <dependency>
             <groupId>javax.cache</groupId>

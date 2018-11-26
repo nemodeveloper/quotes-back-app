@@ -14,7 +14,7 @@ public interface QuoteService
      * @param count
      * @return
      */
-    List<Quote> getRandom(Long count);
+    List<Quote> getRandom(Integer count);
 
     /**
      *

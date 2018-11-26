@@ -2,6 +2,7 @@ package ru.nemodev.project.quotes.service.quote;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.dao.quote.QuoteDAO;
 import ru.nemodev.project.quotes.entity.Quote;
 
@@ -23,7 +24,8 @@ public class QuoteServiceImpl implements QuoteService
     }
 
     @Override
-    public List<Quote> getRandom(Long count)
+    @Transactional(readOnly = true)
+    public List<Quote> getRandom(Integer count)
     {
         if (count == null || count < 1L)
         {
@@ -34,6 +36,7 @@ public class QuoteServiceImpl implements QuoteService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Quote> getByAuthor(Long authorId)
     {
         if (authorId == null || authorId < 1)
@@ -46,6 +49,7 @@ public class QuoteServiceImpl implements QuoteService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Quote> getByCategory(Long categoryId)
     {
         if (categoryId == null || categoryId < 1)

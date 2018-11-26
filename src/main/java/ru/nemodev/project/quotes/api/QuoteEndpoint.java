@@ -14,7 +14,7 @@ import java.util.List;
 @ResponseBody
 public class QuoteEndpoint
 {
-    private static final Long MAX_LIST_COUNT = 200L;
+    private static final Integer MAX_LIST_COUNT = 200;
 
     private final QuoteService quoteService;
 
@@ -25,7 +25,7 @@ public class QuoteEndpoint
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/random")
-    public List<Quote> getRandom(@RequestParam("count") Long count)
+    public List<Quote> getRandom(@RequestParam("count") Integer count)
     {
         if (count == null || count < 1 || count > MAX_LIST_COUNT)
             count = MAX_LIST_COUNT;

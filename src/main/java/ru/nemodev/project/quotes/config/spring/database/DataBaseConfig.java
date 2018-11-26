@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import({H2DataBaseConfig.class,
-        ProdDataBaseConfig.class})
+        DevDataBaseConfig.class,
+        ProdDataBaseConfig.class,
+        HibernateConfig.class})
 public class DataBaseConfig
 { }

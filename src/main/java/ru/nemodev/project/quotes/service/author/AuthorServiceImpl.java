@@ -1,8 +1,8 @@
 package ru.nemodev.project.quotes.service.author;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.dao.author.AuthorDAO;
 import ru.nemodev.project.quotes.entity.Author;
 
@@ -23,6 +23,7 @@ public class AuthorServiceImpl implements AuthorService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Author getById(Long authorId)
     {
         if (authorId == null || authorId < 1L)
@@ -32,21 +33,9 @@ public class AuthorServiceImpl implements AuthorService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Author> getList()
     {
         return authorDAO.getList();
     }
-
-    @Override
-    public Author getByName(String name)
-    {
-        if (StringUtils.isBlank(name))
-        {
-            LOGGER.warn("В сервис поиска автора передали пустое имя, поиск остановлен!");
-            return null;
-        }
-
-        return authorDAO.getByName(name);
-    }
-
 }

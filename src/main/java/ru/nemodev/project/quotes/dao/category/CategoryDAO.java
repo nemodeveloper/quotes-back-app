@@ -12,13 +12,4 @@ public interface CategoryDAO
     Category getById(Long categoryId);
 
     List<Category> getList();
-
-    /**
-     *
-     * @param name
-     * @return
-     */
-    Category getByName(String name);
-
-
 }

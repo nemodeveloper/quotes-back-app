@@ -17,7 +17,7 @@ public class QuoteCacheDAO implements QuoteDAO
     }
 
     @Override
-    public List<Quote> getRandom(Long count)
+    public List<Quote> getRandom(Integer count)
     {
         return quoteDAO.getRandom(count);
     }

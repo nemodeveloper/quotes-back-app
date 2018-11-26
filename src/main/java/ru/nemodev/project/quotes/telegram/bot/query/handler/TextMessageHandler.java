@@ -78,7 +78,7 @@ public class TextMessageHandler extends AbstractQueryHandler<MessageQueryInfo, S
         QueryType queryType = queryInfo.getQueryType();
 
         if (QueryType.RANDOM == queryType)
-            quotes = quoteService.getRandom(1L);
+            quotes = quoteService.getRandom(1);
         else if (QueryType.START == queryType)
             return getKeyboard(START_MESSAGE_TEXT);
         else

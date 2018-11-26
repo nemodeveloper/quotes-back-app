@@ -32,11 +32,4 @@ public class AuthorCacheDAO implements AuthorDAO
     {
         return authorDAO.getList();
     }
-
-    @Override
-    @Cacheable(key = "#root.method.name + #name", sync = true)
-    public Author getByName(String name)
-    {
-        return authorDAO.getByName(name);
-    }
 }

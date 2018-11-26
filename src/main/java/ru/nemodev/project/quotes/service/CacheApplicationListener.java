@@ -2,13 +2,10 @@ package ru.nemodev.project.quotes.service;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import ru.nemodev.project.quotes.entity.Author;
-import ru.nemodev.project.quotes.entity.Category;
 import ru.nemodev.project.quotes.service.author.AuthorService;
 import ru.nemodev.project.quotes.service.category.CategoryService;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
 
-import java.util.List;
 
 public class CacheApplicationListener implements ApplicationListener<ContextRefreshedEvent>
 {
@@ -37,13 +34,11 @@ public class CacheApplicationListener implements ApplicationListener<ContextRefr
 
     private void doHotAuthors()
     {
-        List<Author> authors = authorService.getList();
-        authors.forEach(author -> quoteService.getByAuthor(author.getId()));
+        authorService.getList();
     }
 
     private void doHotCategory()
     {
-        List<Category> categories = categoryService.getList();
-        categories.forEach(category -> quoteService.getByCategory(category.getId()));
+        categoryService.getList();
     }
 }

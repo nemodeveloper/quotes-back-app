@@ -30,7 +30,7 @@ public class CallbackQueryHandler extends AbstractQueryHandler<CallbackQueryInfo
         QueryType queryType = queryInfo.getQueryType();
 
         if (QueryType.RANDOM == queryType)
-            quotes = quoteService.getRandom(1L);
+            quotes = quoteService.getRandom(1);
         else
             quotes = Collections.emptyList();
 
