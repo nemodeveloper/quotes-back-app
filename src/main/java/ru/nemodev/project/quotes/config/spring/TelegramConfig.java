@@ -24,7 +24,6 @@ import ru.nemodev.project.quotes.telegram.channel.QuoteChannelPublisher;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.TimeZone;
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 12:45
@@ -127,9 +126,7 @@ public class TelegramConfig implements SchedulingConfigurer
     public CronTask quotePublishTask()
     {
         return new CronTask(() -> quoteChannelPublisher().publish(),
-                new CronTrigger(
-                        telegramProperties().getQuotePublishCron(),
-                        TimeZone.getTimeZone("Europe/Moscow")));
+                new CronTrigger(telegramProperties().getQuotePublishCron()));
     }
 
     @Override

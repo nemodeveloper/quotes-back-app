@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import javax.annotation.PreDestroy;
+import javax.cache.CacheManager;
 import java.io.IOException;
 
 /**
@@ -39,5 +41,12 @@ public class CacheConfig
         manager.setTransactionAware(true);
 
         return manager;
+    }
+
+    @PreDestroy
+    public void destroy()
+    {
+        CacheManager cacheManager = jCacheCacheManager().getCacheManager();
+        cacheManager.getCacheNames().forEach(cacheManager::destroyCache);
     }
 }

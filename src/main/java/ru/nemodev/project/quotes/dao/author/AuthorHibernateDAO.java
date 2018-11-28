@@ -22,6 +22,6 @@ public class AuthorHibernateDAO extends AbstractHibernateDAO implements AuthorDA
     @Override
     public List<Author> getList()
     {
-        return sessionFactory.getCurrentSession().createQuery("FROM Author", Author.class).list();
+        return sessionFactory.getCurrentSession().createQuery("FROM Author ORDER BY fullName", Author.class).getResultList();
     }
 }

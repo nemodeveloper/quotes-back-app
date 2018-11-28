@@ -16,19 +16,23 @@ public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
     @Override
     public List<Quote> getRandom(Integer count)
     {
-        return sessionFactory.getCurrentSession().createNativeQuery(
-                "SELECT * FROM QUOTE q " +
-                        "LEFT JOIN AUTHOR a ON q.author_id = a.id " +
-                        "LEFT JOIN CATEGORY c ON q.category_id = c.id " +
-                        "ORDER BY RANDOM()", Quote.class)
+        return sessionFactory.getCurrentSession().createQuery(
+                "FROM Quote q " +
+                        "JOIN FETCH q.category " +
+                        "JOIN FETCH q.author "+
+                        "ORDER BY RAND()", Quote.class)
                 .setMaxResults(count)
-                .list();
+                .getResultList();
     }
 
     @Override
     public List<Quote> getByAuthor(Long authorId)
     {
-        return sessionFactory.getCurrentSession().createQuery("FROM Quote WHERE author.id = :author_id", Quote.class)
+        return sessionFactory.getCurrentSession().createQuery(
+                "FROM Quote q " +
+                        "JOIN FETCH q.category " +
+                        "JOIN FETCH q.author " +
+                            "WHERE q.author.id = :author_id", Quote.class)
                 .setParameter("author_id", authorId)
                 .getResultList();
     }
@@ -36,7 +40,11 @@ public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
     @Override
     public List<Quote> getByCategory(Long categoryId)
     {
-        return sessionFactory.getCurrentSession().createQuery("FROM Quote WHERE category.id = :category_id", Quote.class)
+        return sessionFactory.getCurrentSession().createQuery(
+                "FROM Quote q " +
+                        "JOIN FETCH q.category " +
+                        "JOIN FETCH q.author " +
+                            "WHERE q.category.id = :category_id", Quote.class)
                 .setParameter("category_id", categoryId)
                 .getResultList();
     }

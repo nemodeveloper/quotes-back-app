@@ -2,6 +2,7 @@ package ru.nemodev.project.quotes.service.category;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.dao.category.CategoryDAO;
 import ru.nemodev.project.quotes.entity.Category;
@@ -23,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Category getById(Long categoryId)
     {
         if (categoryId == null || categoryId < 1L)
@@ -33,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Category> getList()
     {
         return categoryDAO.getList();

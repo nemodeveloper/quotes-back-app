@@ -2,6 +2,7 @@ package ru.nemodev.project.quotes.service.author;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.dao.author.AuthorDAO;
 import ru.nemodev.project.quotes.entity.Author;
@@ -23,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Author getById(Long authorId)
     {
         if (authorId == null || authorId < 1L)
@@ -33,7 +34,7 @@ public class AuthorServiceImpl implements AuthorService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Author> getList()
     {
         return authorDAO.getList();
