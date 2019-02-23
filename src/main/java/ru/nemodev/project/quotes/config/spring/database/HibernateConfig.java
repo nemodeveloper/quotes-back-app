@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass = true)
 public class HibernateConfig
 {
+    private static final String ENTITY_PACKAGE = "ru.nemodev.project.quotes.entity";
+
     @Autowired
     private DataBaseSource dataBaseSource;
 
@@ -21,7 +23,7 @@ public class HibernateConfig
     {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataBaseSource.dataSource());
-        sessionFactory.setPackagesToScan("ru.nemodev.project.quotes.entity");
+        sessionFactory.setPackagesToScan(ENTITY_PACKAGE);
         sessionFactory.setHibernateProperties(dataBaseSource.hibernateProperties());
 
         return sessionFactory;
