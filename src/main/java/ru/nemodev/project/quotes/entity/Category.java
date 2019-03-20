@@ -14,8 +14,12 @@ public class Category implements Serializable
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quotes_category_id_seq")
     @Column(name = "ID", updatable = false)
     private Long id;
+
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Column(name = "IMAGE_NAME")
+    private String imageName;
 
     public Category() { }
 
@@ -37,5 +41,15 @@ public class Category implements Serializable
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public String getImageName()
+    {
+        return imageName;
+    }
+
+    public void setImageName(String imageName)
+    {
+        this.imageName = imageName;
     }
 }

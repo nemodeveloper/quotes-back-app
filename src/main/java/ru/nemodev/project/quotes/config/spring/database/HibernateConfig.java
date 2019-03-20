@@ -1,6 +1,5 @@
 package ru.nemodev.project.quotes.config.spring.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -15,8 +14,12 @@ public class HibernateConfig
 {
     private static final String ENTITY_PACKAGE = "ru.nemodev.project.quotes.entity";
 
-    @Autowired
-    private DataBaseSource dataBaseSource;
+    private final DataBaseSource dataBaseSource;
+
+    public HibernateConfig(DataBaseSource dataBaseSource)
+    {
+        this.dataBaseSource = dataBaseSource;
+    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory()

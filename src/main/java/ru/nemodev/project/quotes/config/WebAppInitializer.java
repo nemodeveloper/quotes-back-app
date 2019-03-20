@@ -1,8 +1,10 @@
-package ru.nemodev.project.quotes.config.spring;
+package ru.nemodev.project.quotes.config;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import ru.nemodev.project.quotes.config.spring.ApplicationConfig;
+import ru.nemodev.project.quotes.config.spring.WebConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

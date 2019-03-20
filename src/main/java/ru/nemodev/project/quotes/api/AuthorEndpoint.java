@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.nemodev.project.quotes.entity.Author;
+import ru.nemodev.project.quotes.api.converter.AuthorToDTOConverter;
+import ru.nemodev.project.quotes.api.dto.AuthorDTO;
 import ru.nemodev.project.quotes.service.author.AuthorService;
 
 import java.util.List;
@@ -20,16 +21,19 @@ import java.util.List;
 public class AuthorEndpoint
 {
     private final AuthorService authorService;
+    private final AuthorToDTOConverter authorToDTOConverter;
 
+    // TODO сделать RestRequestProcessor который икапсулирует логику обработку запросов
     @Autowired
-    public AuthorEndpoint(AuthorService authorService)
+    public AuthorEndpoint(AuthorService authorService, AuthorToDTOConverter authorToDTOConverter)
     {
         this.authorService = authorService;
+        this.authorToDTOConverter = authorToDTOConverter;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/list")
-    public List<Author> getList()
+    public List<AuthorDTO> getList()
     {
-        return authorService.getList();
+        return authorToDTOConverter.convertList(authorService.getList());
     }
 }

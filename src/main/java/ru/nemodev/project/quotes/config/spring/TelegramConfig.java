@@ -1,7 +1,6 @@
 package ru.nemodev.project.quotes.config.spring;
 
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,16 +32,18 @@ import java.util.Collections;
 @EnableScheduling
 public class TelegramConfig implements SchedulingConfigurer
 {
-    @Autowired
-    private ServiceConfig serviceConfig;
+    private final ServiceConfig serviceConfig;
+    private final ObjectFactory<TextMessageHandler> textMessageHandler;
+    private final ObjectFactory<CallbackQueryHandler> callbackQueryHandler;
 
-    @Autowired
-    private ObjectFactory<TextMessageHandler> textMessageHandler;
-    @Autowired
-    private ObjectFactory<CallbackQueryHandler> callbackQueryHandler;
-
-    public TelegramConfig()
+    public TelegramConfig(ServiceConfig serviceConfig,
+                          ObjectFactory<TextMessageHandler> textMessageHandler,
+                          ObjectFactory<CallbackQueryHandler> callbackQueryHandler)
     {
+        this.serviceConfig = serviceConfig;
+        this.textMessageHandler = textMessageHandler;
+        this.callbackQueryHandler = callbackQueryHandler;
+
         ApiContextInitializer.init();
     }
 

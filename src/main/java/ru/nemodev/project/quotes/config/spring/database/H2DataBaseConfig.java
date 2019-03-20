@@ -30,6 +30,7 @@ public class H2DataBaseConfig implements DataBaseSource
                 .build();
     }
 
+    // TODO вынести настройки в файл
     @Override
     @Bean
     public Properties hibernateProperties()

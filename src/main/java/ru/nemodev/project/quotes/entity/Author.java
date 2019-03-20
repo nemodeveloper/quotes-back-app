@@ -18,6 +18,9 @@ public class Author implements Serializable
     @Column(name = "FULL_NAME", nullable = false)
     private String fullName;
 
+    @Column(name = "IMAGE_NAME")
+    private String imageName;
+
     public Author() {}
 
     public Long getId()
@@ -38,5 +41,15 @@ public class Author implements Serializable
     public void setFullName(String fullName)
     {
         this.fullName = fullName;
+    }
+
+    public String getImageName()
+    {
+        return imageName;
+    }
+
+    public void setImageName(String imageName)
+    {
+        this.imageName = imageName;
     }
 }

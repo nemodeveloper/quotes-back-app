@@ -1,6 +1,5 @@
 package ru.nemodev.project.quotes.config.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.nemodev.project.quotes.config.spring.database.HibernateConfig;
@@ -21,8 +20,12 @@ import ru.nemodev.project.quotes.service.quote.QuoteServiceImpl;
 @Configuration
 public class ServiceConfig
 {
-    @Autowired
-    private HibernateConfig hibernateConfig;
+    private final HibernateConfig hibernateConfig;
+
+    public ServiceConfig(HibernateConfig hibernateConfig)
+    {
+        this.hibernateConfig = hibernateConfig;
+    }
 
     @Bean
     public AuthorHibernateDAO authorHibernateDAO()
@@ -41,7 +44,6 @@ public class ServiceConfig
     {
         return new AuthorServiceImpl(authorCacheDAO());
     }
-
 
     @Bean
     public CategoryHibernateDAO categoryHibernateDAO()
