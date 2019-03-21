@@ -19,28 +19,26 @@
         <maven.war.plugin.version>2.5</maven.war.plugin.version>
 
         <!-- project -->
-        <slf4j.version>1.7.5</slf4j.version>
+        <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
 
-        <spring.version>5.1.2.RELEASE</spring.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
 
-        <jackson.databind.version>2.9.7</jackson.databind.version>
+        <jackson.databind.version>2.9.8</jackson.databind.version>
 
-        <hibernate.version>5.3.7.Final</hibernate.version>
-        <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
+        <hibernate.version>5.4.1.Final</hibernate.version>
+        <hibernate.validator.version>6.0.15.Final</hibernate.validator.version>
 
         <commons.lang.version>3.8.1</commons.lang.version>
-        <commons.collection.version>4.2</commons.collection.version>
+        <commons.collection.version>4.3</commons.collection.version>
 
         <commons.dbcp.version>1.4</commons.dbcp.version>
         <postgres.version>9.1-901-1.jdbc4</postgres.version>
 
-        <h2.version>1.4.197</h2.version>
+        <h2.version>1.4.199</h2.version>
 
         <cache.api.version>1.1.0</cache.api.version>
-        <encache.version>3.6.1</encache.version>
-
-        <json.schema.dir>${basedir}/src/main/common/schema/</json.schema.dir>
+        <encache.version>3.7.0</encache.version>
 
         <!-- test -->
         <mockito.version>1.10.19</mockito.version>
@@ -238,25 +236,6 @@
 
     <build>
         <plugins>
-            <!-- Генерация POJO DTO по json схеме -->
-            <!--<plugin>-->
-                <!--<groupId>org.jsonschema2pojo</groupId>-->
-                <!--<artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
-                <!--<version>0.5.1</version>-->
-                <!--<configuration>-->
-                    <!--<sourceDirectory>${json.schema.dir}</sourceDirectory>-->
-                    <!--<targetPackage>ru.nemodev.project.quotes.dto</targetPackage>-->
-                    <!--<includeHashcodeAndEquals>false</includeHashcodeAndEquals>-->
-                    <!--<includeToString>false</includeToString>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
