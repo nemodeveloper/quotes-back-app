@@ -1,13 +1,11 @@
 package ru.nemodev.project.quotes.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.nemodev.project.quotes.api.converter.AuthorToDTOConverter;
 import ru.nemodev.project.quotes.api.dto.AuthorDTO;
-import ru.nemodev.project.quotes.service.author.AuthorService;
+import ru.nemodev.project.quotes.api.processor.AuthorRestRequestProcessor;
 
 import java.util.List;
 
@@ -20,20 +18,16 @@ import java.util.List;
 @ResponseBody
 public class AuthorEndpoint
 {
-    private final AuthorService authorService;
-    private final AuthorToDTOConverter authorToDTOConverter;
+    private final AuthorRestRequestProcessor authorRestRequestProcessor;
 
-    // TODO сделать RestRequestProcessor который икапсулирует логику обработку запросов
-    @Autowired
-    public AuthorEndpoint(AuthorService authorService, AuthorToDTOConverter authorToDTOConverter)
+    public AuthorEndpoint(AuthorRestRequestProcessor authorRestRequestProcessor)
     {
-        this.authorService = authorService;
-        this.authorToDTOConverter = authorToDTOConverter;
+        this.authorRestRequestProcessor = authorRestRequestProcessor;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/list")
     public List<AuthorDTO> getList()
     {
-        return authorToDTOConverter.convertList(authorService.getList());
+        return authorRestRequestProcessor.getList();
     }
 }

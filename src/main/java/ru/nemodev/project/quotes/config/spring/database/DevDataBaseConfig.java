@@ -11,7 +11,6 @@ import java.util.Properties;
 @Profile("dev")
 public class DevDataBaseConfig extends AbstractDataBaseConfig
 {
-    // TODO вынести настройки в файл
     @Bean
     @Override
     public Properties hibernateProperties()

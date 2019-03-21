@@ -23,7 +23,6 @@ public class CategoryToDTOConverter implements Converter<Category, CategoryDTO>
         if (fromEntity == null)
             return null;
 
-        // TODO сохранять вычесленный путь в кеш - мапу
         String imageURL = StringUtils.isEmpty(fromEntity.getImageName())
                 ? null
                 : systemProperties.getHostName()

@@ -25,7 +25,6 @@ public class AuthorToDTOConverter implements Converter<Author, AuthorDTO>
         if (fromEntity == null)
             return null;
 
-        // TODO сохранять вычесленный путь в кеш - мапу
         String imageURL = StringUtils.isEmpty(fromEntity.getImageName())
                 ? null
                 : systemProperties.getHostName()
