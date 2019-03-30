@@ -37,6 +37,8 @@
 
         <h2.version>1.4.199</h2.version>
 
+        <liquibase.version>3.6.3</liquibase.version>
+
         <cache.api.version>1.1.0</cache.api.version>
         <encache.version>3.7.0</encache.version>
 
@@ -143,6 +145,19 @@
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
+
+         <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+        <!--<dependency>-->
+            <!--<groupId>org.liquibase</groupId>-->
+            <!--<artifactId>liquibase-core</artifactId>-->
+            <!--<version>${liquibase.version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.liquibase</groupId>-->
+            <!--<artifactId>liquibase-maven-plugin</artifactId>-->
+            <!--<version>${liquibase.version}</version>-->
+        <!--</dependency>-->
 
         <!-- Utils -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -263,6 +278,24 @@
                     <stopPort>9099</stopPort>
                 </configuration>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.liquibase</groupId>-->
+                <!--<artifactId>liquibase-maven-plugin</artifactId>-->
+                <!--<version>${liquibase.version}</version>-->
+                <!--<configuration>-->
+                    <!--<propertyFile>src/main/common/liquibase/liquibase.properties</propertyFile>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>process-resources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>update</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
         </plugins>
 
         <resources>

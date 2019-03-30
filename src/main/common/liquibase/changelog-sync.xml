@@ -1,0 +1,67 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Nemodev (generated)" id="1553952328256-1">
+        <createTable tableName="author">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="quotes_author_pkey"/>
+            </column>
+            <column name="full_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_name" type="VARCHAR(48)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-2">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="quotes_category_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_name" type="VARCHAR(48)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-3">
+        <createTable tableName="quote">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="quotes_quote_pkey"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source" type="VARCHAR(70)"/>
+            <column name="year" type="VARCHAR(30)"/>
+            <column name="author_id" type="INTEGER"/>
+            <column name="category_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-4">
+        <addUniqueConstraint columnNames="name" constraintName="quotes_category_name_key" tableName="category"/>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-5">
+        <createIndex indexName="quotes_author_full_name_4af857f9" tableName="author">
+            <column name="full_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-6">
+        <createIndex indexName="quotes_quote_author_id_201a84c4" tableName="quote">
+            <column name="author_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-7">
+        <createIndex indexName="quotes_quote_category_id_f356a19f" tableName="quote">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-8">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="quote" constraintName="quotes_quote_author_id_201a84c4_fk_quotes_author_id" deferrable="true" initiallyDeferred="true" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="author" validate="true"/>
+    </changeSet>
+    <changeSet author="Nemodev (generated)" id="1553952328256-9">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="quote" constraintName="quotes_quote_category_id_f356a19f_fk_quotes_category_id" deferrable="true" initiallyDeferred="true" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
