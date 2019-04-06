@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <war-name>quotes</war-name>
 
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>11</jdk.version>
         <maven.war.plugin.version>2.5</maven.war.plugin.version>
 
         <!-- project -->
