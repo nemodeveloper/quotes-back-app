@@ -3,7 +3,7 @@ package ru.nemodev.project.quotes.telegram.channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
-import ru.nemodev.project.quotes.config.TelegramProperties;
+import ru.nemodev.project.quotes.config.spring.property.TelegramProperty;
 import ru.nemodev.project.quotes.service.quote.QuoteService;
 import ru.nemodev.project.quotes.telegram.bot.QuoteTelegramBot;
 import ru.nemodev.project.quotes.utils.QuoteUtils;
@@ -16,11 +16,11 @@ public class QuoteChannelPublisher
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuoteChannelPublisher.class);
 
-    private final TelegramProperties applicationConfig;
+    private final TelegramProperty applicationConfig;
     private final QuoteTelegramBot quoteTelegramBot;
     private final QuoteService quoteService;
 
-    public QuoteChannelPublisher(TelegramProperties applicationConfig,
+    public QuoteChannelPublisher(TelegramProperty applicationConfig,
                                  QuoteTelegramBot quoteTelegramBot,
                                  QuoteService quoteService)
     {

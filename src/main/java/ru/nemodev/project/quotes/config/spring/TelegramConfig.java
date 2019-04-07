@@ -1,19 +1,17 @@
 package ru.nemodev.project.quotes.config.spring;
 
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.CronTask;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 import org.telegram.telegrambots.ApiContextInitializer;
-import ru.nemodev.project.quotes.config.TelegramProperties;
+import ru.nemodev.project.quotes.config.spring.property.TelegramProperty;
 import ru.nemodev.project.quotes.telegram.bot.QuoteTelegramBot;
 import ru.nemodev.project.quotes.telegram.bot.TelegramBotLoader;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler;
@@ -21,8 +19,8 @@ import ru.nemodev.project.quotes.telegram.bot.query.handler.TextMessageHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.parser.QueryParser;
 import ru.nemodev.project.quotes.telegram.channel.QuoteChannelPublisher;
 
-import java.io.IOException;
 import java.util.Collections;
+
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 12:45
@@ -32,41 +30,22 @@ import java.util.Collections;
 @EnableScheduling
 public class TelegramConfig implements SchedulingConfigurer
 {
+    private final TelegramProperty telegramProperty;
     private final ServiceConfig serviceConfig;
     private final ObjectFactory<TextMessageHandler> textMessageHandler;
     private final ObjectFactory<CallbackQueryHandler> callbackQueryHandler;
 
-    public TelegramConfig(ServiceConfig serviceConfig,
+    public TelegramConfig(TelegramProperty telegramProperty,
+                          ServiceConfig serviceConfig,
                           ObjectFactory<TextMessageHandler> textMessageHandler,
                           ObjectFactory<CallbackQueryHandler> callbackQueryHandler)
     {
+        this.telegramProperty = telegramProperty;
         this.serviceConfig = serviceConfig;
         this.textMessageHandler = textMessageHandler;
         this.callbackQueryHandler = callbackQueryHandler;
 
         ApiContextInitializer.init();
-    }
-
-    @Bean
-    public PropertiesFactoryBean telegramPropertiesFactory()
-    {
-        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setLocations(new ClassPathResource("config/telegram.properties"));
-
-        return propertiesFactoryBean;
-    }
-
-    @Bean
-    public TelegramProperties telegramProperties()
-    {
-        try
-        {
-            return new TelegramProperties(telegramPropertiesFactory().getObject());
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
     }
 
     @Bean
@@ -99,7 +78,7 @@ public class TelegramConfig implements SchedulingConfigurer
     public QuoteTelegramBot quoteTelegramBot()
     {
         return new QuoteTelegramBot(
-                telegramProperties(),
+                telegramProperty,
                 queryParser(),
                 textMessageHandler,
                 callbackQueryHandler);
@@ -115,7 +94,7 @@ public class TelegramConfig implements SchedulingConfigurer
     public QuoteChannelPublisher quoteChannelPublisher()
     {
         return new QuoteChannelPublisher(
-                telegramProperties(),
+                telegramProperty,
                 quoteTelegramBot(),
                 serviceConfig.quoteServiceImpl()
         );
@@ -125,7 +104,7 @@ public class TelegramConfig implements SchedulingConfigurer
     public CronTask quotePublishTask()
     {
         return new CronTask(() -> quoteChannelPublisher().publish(),
-                new CronTrigger(telegramProperties().getQuotePublishCron()));
+                new CronTrigger(telegramProperty.getQuotePublishCron()));
     }
 
     @Override

@@ -3,7 +3,7 @@ package ru.nemodev.project.quotes.api.converter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import ru.nemodev.project.quotes.api.dto.AuthorDTO;
-import ru.nemodev.project.quotes.config.SystemProperties;
+import ru.nemodev.project.quotes.config.spring.property.SystemProperty;
 import ru.nemodev.project.quotes.entity.Author;
 
 import java.util.Collections;
@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 
 public class AuthorToDTOConverter implements Converter<Author, AuthorDTO>
 {
-    private final SystemProperties systemProperties;
+    private final SystemProperty systemProperty;
 
-    public AuthorToDTOConverter(SystemProperties systemProperties)
+    public AuthorToDTOConverter(SystemProperty systemProperty)
     {
-        this.systemProperties = systemProperties;
+        this.systemProperty = systemProperty;
     }
 
     @Override
@@ -27,9 +27,9 @@ public class AuthorToDTOConverter implements Converter<Author, AuthorDTO>
 
         String imageURL = StringUtils.isEmpty(fromEntity.getImageName())
                 ? null
-                : systemProperties.getHostName()
-                    + systemProperties.getStaticPathBase()
-                    + systemProperties.getStaticPathAuthor()
+                : systemProperty.getHostName()
+                    + systemProperty.getStaticPathBase()
+                    + systemProperty.getStaticPathAuthor()
                     + fromEntity.getImageName();
 
         return new AuthorDTO(fromEntity.getId(), fromEntity.getFullName(), imageURL);

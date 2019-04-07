@@ -2,7 +2,7 @@ package ru.nemodev.project.quotes.api.converter;
 
 import org.apache.commons.lang3.StringUtils;
 import ru.nemodev.project.quotes.api.dto.CategoryDTO;
-import ru.nemodev.project.quotes.config.SystemProperties;
+import ru.nemodev.project.quotes.config.spring.property.SystemProperty;
 import ru.nemodev.project.quotes.entity.Category;
 
 import java.util.List;
@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class CategoryToDTOConverter implements Converter<Category, CategoryDTO>
 {
-    private final SystemProperties systemProperties;
+    private final SystemProperty systemProperty;
 
-    public CategoryToDTOConverter(SystemProperties systemProperties)
+    public CategoryToDTOConverter(SystemProperty systemProperty)
     {
-        this.systemProperties = systemProperties;
+        this.systemProperty = systemProperty;
     }
 
     @Override
@@ -25,9 +25,9 @@ public class CategoryToDTOConverter implements Converter<Category, CategoryDTO>
 
         String imageURL = StringUtils.isEmpty(fromEntity.getImageName())
                 ? null
-                : systemProperties.getHostName()
-                    + systemProperties.getStaticPathBase()
-                    + systemProperties.getStaticPathAuthor()
+                : systemProperty.getHostName()
+                    + systemProperty.getStaticPathBase()
+                    + systemProperty.getStaticPathAuthor()
                     + fromEntity.getImageName();
 
         return new CategoryDTO(fromEntity.getId(), fromEntity.getName(), imageURL);

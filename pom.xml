@@ -23,7 +23,7 @@
         <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
 
-        <spring.version>5.1.5.RELEASE</spring.version>
+        <spring.version>5.1.6.RELEASE</spring.version>
 
         <jackson.databind.version>2.9.8</jackson.databind.version>
 
@@ -227,7 +227,22 @@
             <build>
                 <resources>
                     <resource>
-                        <directory>src/main/dev</directory>
+                        <directory>src/main/resources/dev</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>stage</id>
+            <properties></properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/stage</directory>
                         <filtering>true</filtering>
                     </resource>
                 </resources>
@@ -242,7 +257,7 @@
             <build>
                 <resources>
                     <resource>
-                        <directory>src/main/prod</directory>
+                        <directory>src/main/resources/prod</directory>
                         <filtering>true</filtering>
                     </resource>
                 </resources>
@@ -301,7 +316,7 @@
 
         <resources>
             <resource>
-                <directory>src/main/common</directory>
+                <directory>src/main/resources/common</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>

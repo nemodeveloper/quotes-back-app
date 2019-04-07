@@ -7,7 +7,7 @@ import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import ru.nemodev.project.quotes.config.TelegramProperties;
+import ru.nemodev.project.quotes.config.spring.property.TelegramProperty;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.AbstractQueryHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.QueryHandler;
@@ -23,7 +23,7 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(QuoteTelegramBot.class);
 
-    private final TelegramProperties applicationConfig;
+    private final TelegramProperty applicationConfig;
 
     private final QueryParser queryParser;
 
@@ -31,7 +31,7 @@ public class QuoteTelegramBot extends TelegramLongPollingBot
     private final ObjectFactory<CallbackQueryHandler> callbackQueryHandler;
 
     public QuoteTelegramBot(
-            TelegramProperties applicationConfig,
+            TelegramProperty applicationConfig,
             QueryParser queryParser,
             ObjectFactory<TextMessageHandler> textMessageHandler,
             ObjectFactory<CallbackQueryHandler> callbackQueryHandler)

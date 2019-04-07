@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Import;
  * created by sbrf-simanov-an on 21.11.2018 - 18:21
  */
 @Configuration
-@Import({H2DataBaseConfig.class,
-        DevDataBaseConfig.class,
+@Import({DevDataBaseConfig.class,
+        StageDataBaseConfig.class,
         ProdDataBaseConfig.class,
         HibernateConfig.class})
 public class DataBaseConfig

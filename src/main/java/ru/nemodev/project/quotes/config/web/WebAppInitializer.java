@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config;
+package ru.nemodev.project.quotes.config.web;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.core.io.ClassPathResource;
