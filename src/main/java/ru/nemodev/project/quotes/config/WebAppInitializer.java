@@ -19,12 +19,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     private static String getActiveProfiles()
     {
-        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setSingleton(false);
-        propertiesFactoryBean.setLocations(new ClassPathResource("config/application.properties"));
-
         try
         {
+            PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
+            propertiesFactoryBean.setLocations(new ClassPathResource("config/application.properties"));
+            propertiesFactoryBean.afterPropertiesSet();
+
             return propertiesFactoryBean.getObject().getProperty(SPRING_PROFILES_ACTIVE_KEY);
         }
         catch (IOException e)

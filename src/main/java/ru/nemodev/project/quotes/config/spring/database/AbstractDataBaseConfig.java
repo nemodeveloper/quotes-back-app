@@ -14,7 +14,6 @@ public abstract class AbstractDataBaseConfig implements DataBaseSource
     public PropertiesFactoryBean dataBasePropertiesFactory()
     {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setSingleton(true);
         propertiesFactoryBean.setLocations(new ClassPathResource("config/database.properties"));
 
         return propertiesFactoryBean;

@@ -51,9 +51,7 @@ public class TelegramConfig implements SchedulingConfigurer
     public PropertiesFactoryBean telegramPropertiesFactory()
     {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setSingleton(true);
-        propertiesFactoryBean.setLocations(
-                new ClassPathResource("config/telegram.properties"));
+        propertiesFactoryBean.setLocations(new ClassPathResource("config/telegram.properties"));
 
         return propertiesFactoryBean;
     }

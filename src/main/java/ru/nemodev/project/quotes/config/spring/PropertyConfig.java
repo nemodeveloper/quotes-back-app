@@ -15,7 +15,6 @@ public class PropertyConfig
     public PropertiesFactoryBean systemPropertiesFactory()
     {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setSingleton(true);
         propertiesFactoryBean.setLocations(new ClassPathResource("config/system.properties"));
 
         return propertiesFactoryBean;

@@ -16,7 +16,8 @@
         <war-name>quotes</war-name>
 
         <jdk.version>11</jdk.version>
-        <maven.war.plugin.version>2.5</maven.war.plugin.version>
+        <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
+        <jetty.plugin.version>9.4.15.v20190215</jetty.plugin.version>
 
         <!-- project -->
         <slf4j.version>1.7.26</slf4j.version>
@@ -268,7 +269,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.8.v20171121</version>
+                <version>${jetty.plugin.version}</version>
                 <configuration>
                     <webApp>
                         <contextPath>/${war-name}</contextPath>
