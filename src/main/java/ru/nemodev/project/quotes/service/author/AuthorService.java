@@ -12,4 +12,6 @@ public interface AuthorService
     Author getById(Long authorId);
 
     List<Author> getList();
+
+    Author addOrUpdate(Author author);
 }

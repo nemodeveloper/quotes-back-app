@@ -32,4 +32,10 @@ public class AuthorCacheDAO implements AuthorDAO
     {
         return authorDAO.getList();
     }
+
+    @Override
+    public Author addOrUpdate(Author author)
+    {
+        return authorDAO.addOrUpdate(author);
+    }
 }

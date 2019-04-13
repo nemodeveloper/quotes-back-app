@@ -39,4 +39,11 @@ public class CategoryServiceImpl implements CategoryService
     {
         return categoryDAO.getList();
     }
+
+    @Override
+    @Transactional
+    public Category addOrUpdate(Category category)
+    {
+        return categoryDAO.addOrUpdate(category);
+    }
 }

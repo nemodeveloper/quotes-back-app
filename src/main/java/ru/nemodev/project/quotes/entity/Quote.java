@@ -31,6 +31,9 @@ public class Quote implements Serializable
     @Column(name = "SOURCE")
     private String source;
 
+    @Column(name = "SOURCE_TYPE")
+    private String sourceType;
+
     @Column(name = "YEAR")
     private String year;
 
@@ -84,6 +87,16 @@ public class Quote implements Serializable
     public void setSource(String source)
     {
         this.source = source;
+    }
+
+    public String getSourceType()
+    {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType)
+    {
+        this.sourceType = sourceType;
     }
 
     public String getYear()

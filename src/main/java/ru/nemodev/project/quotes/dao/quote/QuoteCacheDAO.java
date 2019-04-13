@@ -35,4 +35,10 @@ public class QuoteCacheDAO implements QuoteDAO
     {
         return quoteDAO.getByCategory(categoryId);
     }
+
+    @Override
+    public Quote addOrUpdate(Quote quote)
+    {
+        return quoteDAO.addOrUpdate(quote);
+    }
 }

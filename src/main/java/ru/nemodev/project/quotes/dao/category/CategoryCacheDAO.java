@@ -32,4 +32,10 @@ public class CategoryCacheDAO implements CategoryDAO
     {
         return categoryDAO.getList();
     }
+
+    @Override
+    public Category addOrUpdate(Category category)
+    {
+        return categoryDAO.addOrUpdate(category);
+    }
 }

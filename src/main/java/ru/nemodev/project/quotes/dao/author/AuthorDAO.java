@@ -12,4 +12,6 @@ public interface AuthorDAO
     Author getById(Long authorId);
 
     List<Author> getList();
+
+    Author addOrUpdate(Author author);
 }

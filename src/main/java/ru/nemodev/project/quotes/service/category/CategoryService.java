@@ -12,4 +12,6 @@ public interface CategoryService
     Category getById(Long categoryId);
 
     List<Category> getList();
+
+    Category addOrUpdate(Category category);
 }

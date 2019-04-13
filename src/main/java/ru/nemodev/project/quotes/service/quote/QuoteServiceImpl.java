@@ -62,4 +62,11 @@ public class QuoteServiceImpl implements QuoteService
 
         return quoteDAO.getByCategory(categoryId);
     }
+
+    @Override
+    @Transactional
+    public Quote addOrUpdate(Quote quote)
+    {
+        return quoteDAO.addOrUpdate(quote);
+    }
 }

@@ -24,4 +24,11 @@ public class CategoryHibernateDAO extends AbstractHibernateDAO implements Catego
     {
         return sessionFactory.getCurrentSession().createQuery("FROM Category ORDER BY name", Category.class).getResultList();
     }
+
+    @Override
+    public Category addOrUpdate(Category category)
+    {
+        sessionFactory.getCurrentSession().saveOrUpdate(category);
+        return category;
+    }
 }

@@ -29,4 +29,6 @@ public interface QuoteDAO
      * @return
      */
     List<Quote> getByCategory(Long categoryId);
+
+    Quote addOrUpdate(Quote quote);
 }

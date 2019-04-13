@@ -48,4 +48,11 @@ public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
                 .setParameter("category_id", categoryId)
                 .getResultList();
     }
+
+    @Override
+    public Quote addOrUpdate(Quote quote)
+    {
+        sessionFactory.getCurrentSession().saveOrUpdate(quote);
+        return quote;
+    }
 }

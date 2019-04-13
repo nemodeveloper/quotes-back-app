@@ -30,4 +30,5 @@ public interface QuoteService
      */
     List<Quote> getByCategory(Long categoryId);
 
+    Quote addOrUpdate(Quote quote);
 }

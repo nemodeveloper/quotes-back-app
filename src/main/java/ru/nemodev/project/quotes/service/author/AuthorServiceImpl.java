@@ -39,4 +39,11 @@ public class AuthorServiceImpl implements AuthorService
     {
         return authorDAO.getList();
     }
+
+    @Override
+    @Transactional
+    public Author addOrUpdate(Author author)
+    {
+        return authorDAO.addOrUpdate(author);
+    }
 }
