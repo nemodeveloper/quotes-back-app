@@ -9,26 +9,11 @@ import java.util.List;
  */
 public interface QuoteService
 {
-    /**
-     *
-     * @param count
-     * @return
-     */
     List<Quote> getRandom(Integer count);
 
-    /**
-     *
-     * @param authorId
-     * @return
-     */
     List<Quote> getByAuthor(Long authorId);
-
-    /**
-     *
-     * @param categoryId
-     * @return
-     */
     List<Quote> getByCategory(Long categoryId);
 
     Quote addOrUpdate(Quote quote);
+    List<Quote> addOrUpdate(List<Quote> quoteList);
 }

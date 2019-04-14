@@ -10,8 +10,10 @@ import java.util.List;
 public interface CategoryService
 {
     Category getById(Long categoryId);
+    Category getByName(String name);
 
     List<Category> getList();
 
     Category addOrUpdate(Category category);
+    List<Category> addOrUpdate(List<Category> categoryList);
 }

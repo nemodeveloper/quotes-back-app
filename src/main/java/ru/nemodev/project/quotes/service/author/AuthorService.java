@@ -10,8 +10,10 @@ import java.util.List;
 public interface AuthorService
 {
     Author getById(Long authorId);
+    Author getByFullName(String fullName);
 
     List<Author> getList();
 
     Author addOrUpdate(Author author);
+    List<Author> addOrUpdate(List<Author> authorList);
 }

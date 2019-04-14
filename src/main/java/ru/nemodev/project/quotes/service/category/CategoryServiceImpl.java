@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nemodev.project.quotes.dao.category.CategoryDAO;
 import ru.nemodev.project.quotes.entity.Category;
+import ru.nemodev.project.quotes.repository.category.CategoryRepository;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public class CategoryServiceImpl implements CategoryService
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
-    private final CategoryDAO categoryDAO;
+    private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl(CategoryDAO categoryDAO)
+    public CategoryServiceImpl(CategoryRepository categoryRepository)
     {
-        this.categoryDAO = categoryDAO;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -30,20 +30,34 @@ public class CategoryServiceImpl implements CategoryService
         if (categoryId == null || categoryId < 1L)
             return null;
 
-        return categoryDAO.getById(categoryId);
+        return categoryRepository.getById(categoryId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Category getByName(String name)
+    {
+        return categoryRepository.getByName(name);
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Category> getList()
     {
-        return categoryDAO.getList();
+        return categoryRepository.getList();
     }
 
     @Override
     @Transactional
     public Category addOrUpdate(Category category)
     {
-        return categoryDAO.addOrUpdate(category);
+        return categoryRepository.addOrUpdate(category);
+    }
+
+    @Override
+    @Transactional
+    public List<Category> addOrUpdate(List<Category> categoryList)
+    {
+        return categoryRepository.addOrUpdate(categoryList);
     }
 }

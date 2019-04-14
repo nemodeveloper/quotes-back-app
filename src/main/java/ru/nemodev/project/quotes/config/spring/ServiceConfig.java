@@ -3,12 +3,12 @@ package ru.nemodev.project.quotes.config.spring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.nemodev.project.quotes.config.spring.database.HibernateConfig;
-import ru.nemodev.project.quotes.dao.author.AuthorCacheDAO;
-import ru.nemodev.project.quotes.dao.author.AuthorHibernateDAO;
-import ru.nemodev.project.quotes.dao.category.CategoryCacheDAO;
-import ru.nemodev.project.quotes.dao.category.CategoryHibernateDAO;
-import ru.nemodev.project.quotes.dao.quote.QuoteCacheDAO;
-import ru.nemodev.project.quotes.dao.quote.QuoteHibernateDAO;
+import ru.nemodev.project.quotes.repository.author.AuthorCacheRepository;
+import ru.nemodev.project.quotes.repository.author.AuthorRepositoryImpl;
+import ru.nemodev.project.quotes.repository.category.CategoryCacheRepository;
+import ru.nemodev.project.quotes.repository.category.CategoryRepositoryImpl;
+import ru.nemodev.project.quotes.repository.quote.QuoteCacheRepository;
+import ru.nemodev.project.quotes.repository.quote.QuoteRepositoryImpl;
 import ru.nemodev.project.quotes.service.CacheApplicationListener;
 import ru.nemodev.project.quotes.service.author.AuthorServiceImpl;
 import ru.nemodev.project.quotes.service.category.CategoryServiceImpl;
@@ -28,15 +28,15 @@ public class ServiceConfig
     }
 
     @Bean
-    public AuthorHibernateDAO authorHibernateDAO()
+    public AuthorRepositoryImpl authorHibernateDAO()
     {
-        return new AuthorHibernateDAO(hibernateConfig.sessionFactory().getObject());
+        return new AuthorRepositoryImpl(hibernateConfig.sessionFactory().getObject());
     }
 
     @Bean
-    public AuthorCacheDAO authorCacheDAO()
+    public AuthorCacheRepository authorCacheDAO()
     {
-        return new AuthorCacheDAO(authorHibernateDAO());
+        return new AuthorCacheRepository(authorHibernateDAO());
     }
 
     @Bean
@@ -46,15 +46,15 @@ public class ServiceConfig
     }
 
     @Bean
-    public CategoryHibernateDAO categoryHibernateDAO()
+    public CategoryRepositoryImpl categoryHibernateDAO()
     {
-        return new CategoryHibernateDAO(hibernateConfig.sessionFactory().getObject());
+        return new CategoryRepositoryImpl(hibernateConfig.sessionFactory().getObject());
     }
 
     @Bean
-    public CategoryCacheDAO categoryCacheDAO()
+    public CategoryCacheRepository categoryCacheDAO()
     {
-        return new CategoryCacheDAO(categoryHibernateDAO());
+        return new CategoryCacheRepository(categoryHibernateDAO());
     }
 
     @Bean
@@ -64,15 +64,15 @@ public class ServiceConfig
     }
 
     @Bean
-    public QuoteHibernateDAO quoteHibernateDAO()
+    public QuoteRepositoryImpl quoteHibernateDAO()
     {
-        return new QuoteHibernateDAO(hibernateConfig.sessionFactory().getObject());
+        return new QuoteRepositoryImpl(hibernateConfig.sessionFactory().getObject());
     }
 
     @Bean
-    public QuoteCacheDAO quoteCacheDAO()
+    public QuoteCacheRepository quoteCacheDAO()
     {
-        return new QuoteCacheDAO(quoteHibernateDAO());
+        return new QuoteCacheRepository(quoteHibernateDAO());
     }
 
     @Bean

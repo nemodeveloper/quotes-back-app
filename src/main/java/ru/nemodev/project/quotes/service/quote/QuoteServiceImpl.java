@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nemodev.project.quotes.dao.quote.QuoteDAO;
 import ru.nemodev.project.quotes.entity.Quote;
+import ru.nemodev.project.quotes.repository.quote.QuoteRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +17,11 @@ public class QuoteServiceImpl implements QuoteService
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuoteServiceImpl.class);
 
-    private final QuoteDAO quoteDAO;
+    private final QuoteRepository quoteRepository;
 
-    public QuoteServiceImpl(QuoteDAO quoteDAO)
+    public QuoteServiceImpl(QuoteRepository quoteRepository)
     {
-        this.quoteDAO = quoteDAO;
+        this.quoteRepository = quoteRepository;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class QuoteServiceImpl implements QuoteService
             LOGGER.warn("В сервис поиска случайных цитат передали параметр count={}, поиск остановлен!", count);
             return Collections.emptyList();
         }
-        return quoteDAO.getRandom(count);
+        return quoteRepository.getRandom(count);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class QuoteServiceImpl implements QuoteService
                     authorId);
             return Collections.emptyList();
         }
-        return quoteDAO.getByAuthor(authorId);
+        return quoteRepository.getByAuthor(authorId);
     }
 
     @Override
@@ -60,13 +60,20 @@ public class QuoteServiceImpl implements QuoteService
             return Collections.emptyList();
         }
 
-        return quoteDAO.getByCategory(categoryId);
+        return quoteRepository.getByCategory(categoryId);
     }
 
     @Override
     @Transactional
     public Quote addOrUpdate(Quote quote)
     {
-        return quoteDAO.addOrUpdate(quote);
+        return quoteRepository.addOrUpdate(quote);
+    }
+
+    @Override
+    @Transactional
+    public List<Quote> addOrUpdate(List<Quote> quoteList)
+    {
+        return quoteRepository.addOrUpdate(quoteList);
     }
 }

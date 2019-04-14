@@ -1,16 +1,22 @@
-package ru.nemodev.project.quotes.dao.quote;
+package ru.nemodev.project.quotes.repository.quote;
 
 import org.hibernate.SessionFactory;
-import ru.nemodev.project.quotes.dao.AbstractHibernateDAO;
 import ru.nemodev.project.quotes.entity.Quote;
+import ru.nemodev.project.quotes.repository.AbstractJpaRepository;
 
 import java.util.List;
 
-public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
+public class QuoteRepositoryImpl extends AbstractJpaRepository<Quote, Long> implements QuoteRepository
 {
-    public QuoteHibernateDAO(SessionFactory sessionFactory)
+    public QuoteRepositoryImpl(SessionFactory sessionFactory)
     {
         super(sessionFactory);
+    }
+
+    @Override
+    protected Class<Quote> getEntityClass()
+    {
+        return Quote.class;
     }
 
     @Override
@@ -20,7 +26,7 @@ public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
                 "FROM Quote q " +
                         "JOIN FETCH q.category " +
                         "JOIN FETCH q.author "+
-                        "ORDER BY RAND()", Quote.class)
+                        "ORDER BY RAND()", getEntityClass())
                 .setMaxResults(count)
                 .getResultList();
     }
@@ -32,8 +38,8 @@ public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
                 "FROM Quote q " +
                         "JOIN FETCH q.category " +
                         "JOIN FETCH q.author " +
-                            "WHERE q.author.id = :author_id", Quote.class)
-                .setParameter("author_id", authorId)
+                            "WHERE q.author.id = :authorId", getEntityClass())
+                .setParameter("authorId", authorId)
                 .getResultList();
     }
 
@@ -44,15 +50,8 @@ public class QuoteHibernateDAO extends AbstractHibernateDAO implements QuoteDAO
                 "FROM Quote q " +
                         "JOIN FETCH q.category " +
                         "JOIN FETCH q.author " +
-                            "WHERE q.category.id = :category_id", Quote.class)
-                .setParameter("category_id", categoryId)
+                            "WHERE q.category.id = :categoryId", getEntityClass())
+                .setParameter("categoryId", categoryId)
                 .getResultList();
-    }
-
-    @Override
-    public Quote addOrUpdate(Quote quote)
-    {
-        sessionFactory.getCurrentSession().saveOrUpdate(quote);
-        return quote;
     }
 }
