@@ -27,7 +27,7 @@ public class CategoryToDTOConverter implements Converter<Category, CategoryDTO>
                 ? null
                 : systemProperty.getHostName()
                     + systemProperty.getStaticPathBase()
-                    + systemProperty.getStaticPathAuthor()
+                    + systemProperty.getStaticPathCategory()
                     + fromEntity.getImageName();
 
         return new CategoryDTO(fromEntity.getId(), fromEntity.getName(), imageURL);
