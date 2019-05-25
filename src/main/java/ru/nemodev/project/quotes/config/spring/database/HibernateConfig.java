@@ -6,6 +6,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ru.nemodev.project.quotes.config.spring.property.PropertyConfig;
 
 
 @Configuration
@@ -14,20 +15,22 @@ public class HibernateConfig
 {
     private static final String ENTITY_PACKAGE = "ru.nemodev.project.quotes.entity";
 
-    private final DataBaseSource dataBaseSource;
+    private final PropertyConfig propertyConfig;
+    private final DataSourceHolder dataSourceHolder;
 
-    public HibernateConfig(DataBaseSource dataBaseSource)
+    public HibernateConfig(PropertyConfig propertyConfig, DataSourceHolder dataSourceHolder)
     {
-        this.dataBaseSource = dataBaseSource;
+        this.propertyConfig = propertyConfig;
+        this.dataSourceHolder = dataSourceHolder;
     }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory()
     {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataBaseSource.dataSource());
+        sessionFactory.setDataSource(dataSourceHolder.dataSource());
         sessionFactory.setPackagesToScan(ENTITY_PACKAGE);
-        sessionFactory.setHibernateProperties(dataBaseSource.hibernateProperties());
+        sessionFactory.setHibernateProperties(propertyConfig.hibernateProperties());
 
         return sessionFactory;
     }

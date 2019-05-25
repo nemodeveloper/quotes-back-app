@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
 
 
-public abstract class AbstractDataBaseConfig implements DataBaseSource
+public abstract class AbstractDataConfigHolder implements DataSourceHolder
 {
     @Autowired
     private DataBaseProperty dataBaseProperty;
