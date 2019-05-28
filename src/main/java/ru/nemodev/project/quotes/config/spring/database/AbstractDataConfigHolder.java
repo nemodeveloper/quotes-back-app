@@ -9,7 +9,7 @@ import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
 public abstract class AbstractDataConfigHolder implements DataSourceHolder
 {
     @Autowired
-    private DataBaseProperty dataBaseProperty;
+    protected DataBaseProperty dataBaseProperty;
 
     @Bean(destroyMethod = "close")
     public BasicDataSource dataSource()
