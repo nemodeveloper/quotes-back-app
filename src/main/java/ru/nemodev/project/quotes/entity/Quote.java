@@ -32,8 +32,9 @@ public class Quote implements Serializable
     @Column(name = "SOURCE")
     private String source;
 
-    @Column(name = "SOURCE_TYPE")
-    private String sourceType;
+//    TODO с новыми цитатами
+//    @Column(name = "SOURCE_TYPE")
+//    private String sourceType;
 
     @Column(name = "YEAR")
     private String year;
@@ -90,15 +91,15 @@ public class Quote implements Serializable
         this.source = source;
     }
 
-    public String getSourceType()
-    {
-        return sourceType;
-    }
-
-    public void setSourceType(String sourceType)
-    {
-        this.sourceType = sourceType;
-    }
+//    public String getSourceType()
+//    {
+//        return sourceType;
+//    }
+//
+//    public void setSourceType(String sourceType)
+//    {
+//        this.sourceType = sourceType;
+//    }
 
     public String getYear()
     {
