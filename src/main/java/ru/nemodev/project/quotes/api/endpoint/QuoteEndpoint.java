@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.api;
+package ru.nemodev.project.quotes.api.endpoint;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

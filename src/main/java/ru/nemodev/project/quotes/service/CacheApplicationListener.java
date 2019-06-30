@@ -64,6 +64,13 @@ public class CacheApplicationListener implements ApplicationListener<ContextRefr
             String jsonData = Files.readString(Path.of(new ClassPathResource("new_quotes.json").getURI()));
             ObjectMapper objectMapper = new ObjectMapper();
             List<Quote> quoteList = objectMapper.readValue(jsonData, new TypeReference<List<Quote>>(){});
+            quoteList = quoteList.stream()
+                    .filter(quote -> {
+                        String authorName = quote.getAuthor().getFullName();
+                        return authorName.length() > 2
+                                && authorName.matches("[\\s\\p{L}\\p{M}&&[^\\p{Alpha}]]+");
+                    })
+                    .collect(Collectors.toList());
 
             Map<String, Author> authorMap = quoteList.stream()
                     .collect(Collectors.toMap(
