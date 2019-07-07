@@ -18,7 +18,7 @@
 
         <!-- build -->
         <project.source.encoding>UTF-8</project.source.encoding>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <jar-name>quotes</jar-name>
 
         <!-- project -->
