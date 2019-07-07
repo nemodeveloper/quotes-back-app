@@ -17,12 +17,13 @@
     <properties>
 
         <!-- build -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>11</jdk.version>
+        <project.source.encoding>UTF-8</project.source.encoding>
+        <java.version>1.8</java.version>
         <jar-name>quotes</jar-name>
 
         <!-- project -->
         <spring.version>5.1.6.RELEASE</spring.version>
+        <spring.boot.admin.version>2.1.6</spring.boot.admin.version>
 
         <hibernate.version>5.4.1.Final</hibernate.version>
         <hibernate.validator.version>6.0.15.Final</hibernate.validator.version>
@@ -53,10 +54,39 @@
 
         <!-- Project -->
 
+        <!-- spring boot -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- spring boot admin-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server</artifactId>
+            <version>${spring.boot.admin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <version>${spring.boot.admin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring.boot.admin.version}</version>
+        </dependency>
+
+        <!-- spring -->
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -90,6 +120,7 @@
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
@@ -97,6 +128,7 @@
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>${commons.dbcp.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
@@ -104,6 +136,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Utils -->
@@ -178,6 +211,15 @@
                     </resource>
                 </resources>
             </build>
+            <dependencies>
+                <!-- DataBase -->
+                <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>${h2.version}</version>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>stage</id>
@@ -185,6 +227,22 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+            <dependencies>
+                <!-- DataBase -->
+                <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+                <dependency>
+                    <groupId>postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${postgres.version}</version>
+                </dependency>
+
+                <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+                <dependency>
+                    <groupId>commons-dbcp</groupId>
+                    <artifactId>commons-dbcp</artifactId>
+                    <version>${commons.dbcp.version}</version>
+                </dependency>
+            </dependencies>
             <build>
                 <resources>
                     <resource>
@@ -200,6 +258,22 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+            <dependencies>
+                <!-- DataBase -->
+                <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+                <dependency>
+                    <groupId>postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${postgres.version}</version>
+                </dependency>
+
+                <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+                <dependency>
+                    <groupId>commons-dbcp</groupId>
+                    <artifactId>commons-dbcp</artifactId>
+                    <version>${commons.dbcp.version}</version>
+                </dependency>
+            </dependencies>
             <build>
                 <resources>
                     <resource>
@@ -220,17 +294,32 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
+<!--                <configuration>-->
+<!--                    <executable>true</executable>-->
+<!--                </configuration>-->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <encoding.source>${project.source.encoding}</encoding.source>
+                                <encoding.reporting>${project.source.encoding}</encoding.reporting>
+                                <java.source>${maven.compiler.source}</java.source>
+                                <java.target>${maven.compiler.target}</java.target>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

@@ -2,8 +2,10 @@ package ru.nemodev.project.quotes.config.spring.property;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
+@PropertySource("classpath:config/system.properties")
 public class SystemProperty
 {
     @Value("${system.host.name}")

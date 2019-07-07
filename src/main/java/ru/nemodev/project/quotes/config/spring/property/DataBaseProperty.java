@@ -2,12 +2,14 @@ package ru.nemodev.project.quotes.config.spring.property;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 13:48
  */
 @Configuration
+@PropertySource("classpath:config/database.properties")
 public class DataBaseProperty
 {
     @Value("${db.driver}")

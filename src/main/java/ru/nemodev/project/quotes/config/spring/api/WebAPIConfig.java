@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring;
+package ru.nemodev.project.quotes.config.spring.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.nemodev.project.quotes.api.processor.AuthorRestRequestProcessor;
 import ru.nemodev.project.quotes.api.processor.CategoryRestRequestProcessor;
 import ru.nemodev.project.quotes.api.processor.QuoteRestRequestProcessor;
+import ru.nemodev.project.quotes.config.spring.ServiceConfig;
 
 /**
  * created by sbrf-simanov-an on 20.11.2018 - 15:35
@@ -15,32 +16,32 @@ import ru.nemodev.project.quotes.api.processor.QuoteRestRequestProcessor;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "ru.nemodev.project.quotes.api" })
-public class WebConfig implements WebMvcConfigurer
+public class WebAPIConfig implements WebMvcConfigurer
 {
     private final ServiceConfig serviceConfig;
-    private final EntityConverterAPIConfig entityConverterAPIConfig;
+    private final EntityConverterDTOConfig entityConverterDTOConfig;
 
-    public WebConfig(ServiceConfig serviceConfig, EntityConverterAPIConfig entityConverterAPIConfig)
+    public WebAPIConfig(ServiceConfig serviceConfig, EntityConverterDTOConfig entityConverterDTOConfig)
     {
         this.serviceConfig = serviceConfig;
-        this.entityConverterAPIConfig = entityConverterAPIConfig;
+        this.entityConverterDTOConfig = entityConverterDTOConfig;
     }
 
     @Bean
     public AuthorRestRequestProcessor authorRestRequestProcessor()
     {
-        return new AuthorRestRequestProcessor(serviceConfig.authorServiceImpl(), entityConverterAPIConfig.authorToDTOConverter());
+        return new AuthorRestRequestProcessor(serviceConfig.authorServiceImpl(), entityConverterDTOConfig.authorToDTOConverter());
     }
 
     @Bean
     public CategoryRestRequestProcessor categoryRestRequestProcessor()
     {
-        return new CategoryRestRequestProcessor(serviceConfig.categoryServiceImpl(), entityConverterAPIConfig.categoryToDTOConverter());
+        return new CategoryRestRequestProcessor(serviceConfig.categoryServiceImpl(), entityConverterDTOConfig.categoryToDTOConverter());
     }
 
     @Bean
     public QuoteRestRequestProcessor quoteRestRequestProcessor()
     {
-        return new QuoteRestRequestProcessor(serviceConfig.quoteServiceImpl(), entityConverterAPIConfig.quoteToDTOConverter());
+        return new QuoteRestRequestProcessor(serviceConfig.quoteServiceImpl(), entityConverterDTOConfig.quoteToDTOConverter());
     }
 }
