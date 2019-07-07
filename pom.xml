@@ -32,7 +32,7 @@
         <commons.collection.version>4.3</commons.collection.version>
 
         <commons.dbcp.version>1.4</commons.dbcp.version>
-        <postgres.version>9.1-901-1.jdbc4</postgres.version>
+        <postgres.version>42.2.5</postgres.version>
 
         <h2.version>1.4.199</h2.version>
 
@@ -59,6 +59,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <!-- spring boot admin-->
@@ -94,42 +106,7 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <!-- Hibernate -->
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-
         <!-- DataBase -->
-        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgres.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>${commons.dbcp.version}</version>
-            <scope>compile</scope>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
@@ -231,16 +208,9 @@
                 <!-- DataBase -->
                 <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
                 <dependency>
-                    <groupId>postgresql</groupId>
+                    <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                     <version>${postgres.version}</version>
-                </dependency>
-
-                <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-                <dependency>
-                    <groupId>commons-dbcp</groupId>
-                    <artifactId>commons-dbcp</artifactId>
-                    <version>${commons.dbcp.version}</version>
                 </dependency>
             </dependencies>
             <build>
@@ -262,16 +232,9 @@
                 <!-- DataBase -->
                 <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
                 <dependency>
-                    <groupId>postgresql</groupId>
+                    <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                     <version>${postgres.version}</version>
-                </dependency>
-
-                <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-                <dependency>
-                    <groupId>commons-dbcp</groupId>
-                    <artifactId>commons-dbcp</artifactId>
-                    <version>${commons.dbcp.version}</version>
                 </dependency>
             </dependencies>
             <build>
