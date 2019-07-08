@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.nemodev.project.quotes.api.processor.AuthorRestRequestProcessor;
 import ru.nemodev.project.quotes.api.processor.CategoryRestRequestProcessor;
 import ru.nemodev.project.quotes.api.processor.QuoteRestRequestProcessor;
@@ -16,7 +15,7 @@ import ru.nemodev.project.quotes.config.spring.ServiceConfig;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "ru.nemodev.project.quotes.api" })
-public class WebAPIConfig implements WebMvcConfigurer
+public class WebAPIConfig
 {
     private final ServiceConfig serviceConfig;
     private final EntityConverterDTOConfig entityConverterDTOConfig;
