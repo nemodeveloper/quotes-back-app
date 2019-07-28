@@ -25,7 +25,7 @@ public abstract class AbstractDataConfigHolder implements DataSourceHolder
     {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(dataBaseProperty.getDriver());
-        config.setJdbcUrl(dataBaseProperty.getURL());
+        config.setJdbcUrl(dataBaseProperty.getUrl());
         config.setUsername(dataBaseProperty.getUsername());
         config.setPassword(dataBaseProperty.getPassword());
         config.setConnectionTimeout(TimeUnit.SECONDS.toMillis(dataBaseProperty.getSocketTimeout()));

@@ -13,13 +13,13 @@
 
     <cache alias="categories" uses-template="baseCacheTemplate">
         <resources>
-            <heap unit="entries">2000</heap>
+            <heap unit="entries">1</heap>
         </resources>
     </cache>
 
     <cache alias="authors" uses-template="baseCacheTemplate">
         <resources>
-            <heap unit="entries">2000</heap>
+            <heap unit="entries">1</heap>
         </resources>
     </cache>
 

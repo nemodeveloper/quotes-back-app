@@ -4,7 +4,9 @@ import org.hibernate.SessionFactory;
 import ru.nemodev.project.quotes.entity.Author;
 import ru.nemodev.project.quotes.repository.AbstractJpaRepository;
 
+import java.text.Collator;
 import java.util.List;
+import java.util.Locale;
 
 public class AuthorRepositoryImpl extends AbstractJpaRepository<Author, Long> implements AuthorRepository
 {
@@ -22,7 +24,14 @@ public class AuthorRepositoryImpl extends AbstractJpaRepository<Author, Long> im
     @Override
     public List<Author> getList()
     {
-        return sessionFactory.getCurrentSession().createQuery("FROM Author ORDER BY fullName", Author.class).getResultList();
+        List<Author> result = sessionFactory.getCurrentSession().createQuery("FROM Author", Author.class).getResultList();
+
+        // в БД не корректная сортировка буквы ё
+        Collator collator = Collator.getInstance(Locale.forLanguageTag("RU"));
+        collator.setStrength(Collator.PRIMARY);
+        result.sort((o1, o2) -> collator.compare(o1.getFullName(), o2.getFullName()));
+
+        return result;
     }
 
     @Override

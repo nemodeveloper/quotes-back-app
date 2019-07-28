@@ -15,7 +15,7 @@ public class DataBaseProperty
     @Value("${db.driver}")
     private String driver;
     @Value("${db.url}")
-    private String URL;
+    private String url;
     @Value("${db.username}")
     private String username;
     @Value("${db.password}")
@@ -28,9 +28,9 @@ public class DataBaseProperty
         return driver;
     }
 
-    public String getURL()
+    public String getUrl()
     {
-        return URL;
+        return url;
     }
 
     public String getUsername()

@@ -32,7 +32,7 @@ public class DevRemoteDataConfigHolder implements DataSourceHolder
         {
             final DriverManagerDataSource dataSource = new DriverManagerDataSource();
             dataSource.setDriverClassName(dataBaseProperty.getDriver());
-            dataSource.setUrl(dataBaseProperty.getURL());
+            dataSource.setUrl(dataBaseProperty.getUrl());
             dataSource.setUsername(dataBaseProperty.getUsername());
             dataSource.setPassword(dataBaseProperty.getPassword());
 

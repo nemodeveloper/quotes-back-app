@@ -1,0 +1,8 @@
+# Server config
+server:
+  port: 8081
+
+# Application monitor info
+info:
+  app:
+    environment: production
