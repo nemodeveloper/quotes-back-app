@@ -34,7 +34,7 @@ public class AuthorServiceImpl implements AuthorService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Author getByFullName(String fullName)
     {
         return authorRepository.getByFullName(fullName);

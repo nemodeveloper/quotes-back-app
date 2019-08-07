@@ -12,7 +12,7 @@ public class Category implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quotes_category_id_seq")
-    @SequenceGenerator(name = "quotes_category_id_seq", sequenceName = "quotes_category_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "quotes_category_id_seq", sequenceName = "quotes_category_id_seq", allocationSize = 100)
     @Column(name = "ID", updatable = false)
     private Long id;
 

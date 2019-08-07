@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Category getByName(String name)
     {
         return categoryRepository.getByName(name);

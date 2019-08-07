@@ -14,7 +14,7 @@ public class Quote implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quotes_quote_id_seq")
-    @SequenceGenerator(name = "quotes_quote_id_seq", sequenceName = "quotes_quote_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "quotes_quote_id_seq", sequenceName = "quotes_quote_id_seq", allocationSize = 1000)
     @Column(name = "ID", updatable = false)
     private Long id;
 
@@ -31,10 +31,6 @@ public class Quote implements Serializable
 
     @Column(name = "SOURCE")
     private String source;
-
-//    TODO с новыми цитатами
-//    @Column(name = "SOURCE_TYPE")
-//    private String sourceType;
 
     @Column(name = "YEAR")
     private String year;
