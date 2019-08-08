@@ -1,7 +1,6 @@
 package ru.nemodev.project.quotes.config.spring.database;
 
 import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
@@ -13,12 +12,6 @@ public abstract class AbstractDataConfigHolder implements DataSourceHolder
 {
     @Autowired
     protected DataBaseProperty dataBaseProperty;
-
-    @Bean(destroyMethod = "close")
-    public HikariDataSource dataSource()
-    {
-        return new HikariDataSource(hikariConfig());
-    }
 
     @Bean
     public HikariConfig hikariConfig()

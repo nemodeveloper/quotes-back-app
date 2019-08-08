@@ -1,5 +1,7 @@
 package ru.nemodev.project.quotes.config.spring.database;
 
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
@@ -8,4 +10,12 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("prod")
-public class ProdDataConfigHolder extends AbstractDataConfigHolder { }
+public class ProdDataConfigHolder extends AbstractDataConfigHolder
+{
+    @Override
+    @Bean(destroyMethod = "close")
+    public HikariDataSource dataSource()
+    {
+        return new HikariDataSource(hikariConfig());
+    }
+}

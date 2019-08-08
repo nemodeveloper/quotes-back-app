@@ -17,7 +17,7 @@ public class Quote implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quotes_quote_id_seq")
-    @SequenceGenerator(name = "quotes_quote_id_seq", sequenceName = "quotes_quote_id_seq", allocationSize = 1000)
+    @SequenceGenerator(name = "quotes_quote_id_seq", sequenceName = "quotes_quote_id_seq", allocationSize = 1)
     @Column(name = "ID", updatable = false)
     private Long id;
 

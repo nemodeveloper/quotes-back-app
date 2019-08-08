@@ -2,3 +2,22 @@
 info:
   app:
     environment: develop
+
+# Register ProxyDataSource to log JDBC events
+decorator:
+  datasource:
+    enabled: true
+    datasource-proxy:
+      logging: slf4j
+      multiline: true
+      json-format: false
+      count-query: false
+      query:
+        enable-logging: true
+        log-level: debug
+        logger-name: DataBaseQueryProxyLogger
+      slow-query:
+        enable-logging: true
+        threshold: 300
+        log-level: warn
+        logger-name: DataBaseQueryProxyLogger

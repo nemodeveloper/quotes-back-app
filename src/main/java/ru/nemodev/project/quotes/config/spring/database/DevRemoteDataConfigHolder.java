@@ -1,40 +1,30 @@
 package ru.nemodev.project.quotes.config.spring.database;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.h2.tools.Server;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
-
-import javax.sql.DataSource;
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 18:11
  */
 @Configuration
 @Profile("dev-db-remote")
-public class DevRemoteDataConfigHolder implements DataSourceHolder
+public class DevRemoteDataConfigHolder extends AbstractDataConfigHolder
 {
-    @Autowired
-    private DataBaseProperty dataBaseProperty;
-
-    @Bean
+    @Bean(destroyMethod = "close")
     @DependsOn("h2EmbeddedServer")
-    public DataSource dataSource()
+    @Override
+    public HikariDataSource dataSource()
     {
         try
         {
-            final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-            dataSource.setDriverClassName(dataBaseProperty.getDriver());
-            dataSource.setUrl(dataBaseProperty.getUrl());
-            dataSource.setUsername(dataBaseProperty.getUsername());
-            dataSource.setPassword(dataBaseProperty.getPassword());
+            final HikariDataSource dataSource = new HikariDataSource(hikariConfig());
 
             final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
             populator.addScript(new ClassPathResource("config/schema.sql"));

@@ -5,7 +5,8 @@
     <property name="LOG_NAME" value="quotes" />
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive" />
     <property name="MESSAGE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) [%logger{35}:%line] - %msg%n" />
-    <property name="FILE_NAME_PATTERN" value="${LOG_ARCHIVE}/${LOG_NAME}.%d{yyyy-MM-dd}.%i.log"/>
+    <property name="ROOT_FILE_NAME_PATTERN" value="${LOG_ARCHIVE}/${LOG_NAME}.%d{yyyy-MM-dd}.%i.log"/>
+    <property name="DB_QUERY_FILE_NAME_PATTERN" value="${LOG_ARCHIVE}/db/query/${LOG_NAME}.%d{yyyy-MM-dd}.%i.log"/>
     <timestamp key="timestamp-by-second" datePattern="yyyy-MM-dd'T'HH.mm.ss"/>
 
     <appender name="Console-Appender" class="ch.qos.logback.core.ConsoleAppender">
@@ -14,10 +15,55 @@
         </layout>
     </appender>
 
-    <appender name="RollingFile-Appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--  DataBase Query -->
+    <appender name="DB-Query-RollingFile-Appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_NAME}-db-query}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${DB_QUERY_FILE_NAME_PATTERN}</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${MESSAGE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="DataBaseQueryProxyLogger" level="debug" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+
+    <logger name="org.hibernate" level="debug" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+    <logger name="org.hibernate.SQL" level="debug" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql" level="debug" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+    <logger name="org.hibernate.pretty" level="trace" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+    <logger name="org.hibernate.hql.internal.ast.AST" level="trace" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+    <logger name="org.hibernate.stat" level="trace" additivity="false">
+        <appender-ref ref="Console-Appender" />
+        <appender-ref ref="DB-Query-RollingFile-Appender"/>
+    </logger>
+
+    <!--  ROOT  -->
+    <appender name="Root-RollingFile-Appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${LOG_NAME}}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${FILE_NAME_PATTERN}</fileNamePattern>
+            <fileNamePattern>${ROOT_FILE_NAME_PATTERN}</fileNamePattern>
             <maxHistory>30</maxHistory>
             <maxFileSize>30MB</maxFileSize>
             <totalSizeCap>1GB</totalSizeCap>
@@ -27,12 +73,12 @@
         </encoder>
     </appender>
 
-    <appender name="Quote-Async-Appender" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="RollingFile-Appender" />
+    <appender name="Root-Quote-Async-Appender" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="Root-RollingFile-Appender" />
     </appender>
 
     <root level="debug" additivity="false">
         <appender-ref ref="Console-Appender" />
-        <appender-ref ref="Quote-Async-Appender" />
+        <appender-ref ref="Root-Quote-Async-Appender" />
     </root>
 </configuration>

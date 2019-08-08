@@ -35,6 +35,7 @@
         <postgres.version>42.2.5</postgres.version>
 
         <h2.version>1.4.199</h2.version>
+        <datasource-proxy.version>1.5.6</datasource-proxy.version>
 
         <liquibase.version>3.6.3</liquibase.version>
 
@@ -77,6 +78,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.gavlyukovskiy</groupId>
+            <artifactId>datasource-proxy-spring-boot-starter</artifactId>
+            <version>${datasource-proxy.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- spring boot admin -->
@@ -195,6 +203,11 @@
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                     <version>${h2.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.github.gavlyukovskiy</groupId>
+                    <artifactId>datasource-proxy-spring-boot-starter</artifactId>
+                    <version>${datasource-proxy.version}</version>
                 </dependency>
             </dependencies>
         </profile>
