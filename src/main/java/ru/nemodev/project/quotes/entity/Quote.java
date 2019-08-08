@@ -1,5 +1,7 @@
 package ru.nemodev.project.quotes.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import java.io.Serializable;
 /**
  * created by NemoDev on 13.03.2018 - 21:49
  */
+@Getter @Setter
 @Entity
 @Table(name = "QUOTE")
 public class Quote implements Serializable
@@ -34,78 +37,6 @@ public class Quote implements Serializable
 
     @Column(name = "YEAR")
     private String year;
-
-    public Quote() { }
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public Category getCategory()
-    {
-        return category;
-    }
-
-    public void setCategory(Category category)
-    {
-        this.category = category;
-    }
-
-    public String getText()
-    {
-        return text;
-    }
-
-    public void setText(String text)
-    {
-        this.text = text;
-    }
-
-    public Author getAuthor()
-    {
-        return author;
-    }
-
-    public void setAuthor(Author author)
-    {
-        this.author = author;
-    }
-
-    public String getSource()
-    {
-        return source;
-    }
-
-    public void setSource(String source)
-    {
-        this.source = source;
-    }
-
-//    public String getSourceType()
-//    {
-//        return sourceType;
-//    }
-//
-//    public void setSourceType(String sourceType)
-//    {
-//        this.sourceType = sourceType;
-//    }
-
-    public String getYear()
-    {
-        return year;
-    }
-
-    public void setYear(String year)
-    {
-        this.year = year;
-    }
 
     @Override
     public String toString()
