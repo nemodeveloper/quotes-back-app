@@ -2,6 +2,7 @@ package ru.nemodev.project.quotes.config.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import ru.nemodev.project.quotes.config.spring.database.HibernateConfig;
 import ru.nemodev.project.quotes.repository.author.AuthorCacheRepository;
 import ru.nemodev.project.quotes.repository.author.AuthorRepositoryImpl;
@@ -13,6 +14,7 @@ import ru.nemodev.project.quotes.service.CacheApplicationListener;
 import ru.nemodev.project.quotes.service.author.AuthorServiceImpl;
 import ru.nemodev.project.quotes.service.category.CategoryServiceImpl;
 import ru.nemodev.project.quotes.service.quote.QuoteServiceImpl;
+import ru.nemodev.project.quotes.utils.DataBasePopulator;
 
 /**
  * created by sbrf-simanov-an on 20.11.2018 - 19:35
@@ -79,6 +81,13 @@ public class ServiceConfig
     public QuoteServiceImpl quoteServiceImpl()
     {
         return new QuoteServiceImpl(quoteCacheDAO());
+    }
+
+    @Bean(initMethod = "populate")
+    @Profile("dev-db-embedded | dev-db-remote")
+    public DataBasePopulator dataBasePopulator()
+    {
+        return new DataBasePopulator(quoteServiceImpl(), authorServiceImpl(), categoryServiceImpl());
     }
 
     @Bean
