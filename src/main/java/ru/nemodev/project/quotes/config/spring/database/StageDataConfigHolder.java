@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("stage")
-public class StageDataConfigHolder extends AbstractDataConfigHolder {
+public class StageDataConfigHolder extends AbstractDataSourceHolder {
 
     @Override
     @Bean(destroyMethod = "close")

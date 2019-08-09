@@ -8,7 +8,7 @@ import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
 import java.util.concurrent.TimeUnit;
 
 
-public abstract class AbstractDataConfigHolder implements DataSourceHolder
+public abstract class AbstractDataSourceHolder implements DataSourceHolder
 {
     @Autowired
     protected DataBaseProperty dataBaseProperty;

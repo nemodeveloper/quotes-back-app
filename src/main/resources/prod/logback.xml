@@ -26,6 +26,9 @@
         <appender-ref ref="RollingFile-Appender" />
     </appender>
 
+    <!--  Костыль чтобы не сыпались ошибки от swagger по парсингу defaultValue  -->
+    <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="error" additivity="false"/>
+
     <root level="info" additivity="false">
         <appender-ref ref="Quote-Async-Appender" />
     </root>

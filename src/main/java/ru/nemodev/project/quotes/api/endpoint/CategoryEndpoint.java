@@ -1,7 +1,10 @@
 package ru.nemodev.project.quotes.api.endpoint;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nemodev.project.quotes.api.dto.CategoryDTO;
 import ru.nemodev.project.quotes.api.processor.CategoryRestRequestProcessor;
@@ -14,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/v1/category")
+@Api("Quote category information")
 public class CategoryEndpoint
 {
     private final CategoryRestRequestProcessor categoryRestRequestProcessor;
@@ -23,9 +27,10 @@ public class CategoryEndpoint
         this.categoryRestRequestProcessor = categoryRestRequestProcessor;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/list")
-    public List<CategoryDTO> getList()
+    @GetMapping("/list")
+    @ApiOperation(value = "View list category")
+    public ResponseEntity<List<CategoryDTO>> getList()
     {
-        return categoryRestRequestProcessor.getList();
+        return ResponseEntity.ok(categoryRestRequestProcessor.getList());
     }
 }

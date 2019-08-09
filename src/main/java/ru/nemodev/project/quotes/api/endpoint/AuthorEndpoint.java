@@ -1,7 +1,10 @@
 package ru.nemodev.project.quotes.api.endpoint;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nemodev.project.quotes.api.dto.AuthorDTO;
 import ru.nemodev.project.quotes.api.processor.AuthorRestRequestProcessor;
@@ -14,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/v1/author")
+@Api("Quote author information")
 public class AuthorEndpoint
 {
     private final AuthorRestRequestProcessor authorRestRequestProcessor;
@@ -23,9 +27,10 @@ public class AuthorEndpoint
         this.authorRestRequestProcessor = authorRestRequestProcessor;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/list")
-    public List<AuthorDTO> getList()
+    @GetMapping("/list")
+    @ApiOperation(value = "View list author")
+    public ResponseEntity<List<AuthorDTO>> getList()
     {
-        return authorRestRequestProcessor.getList();
+        return ResponseEntity.ok(authorRestRequestProcessor.getList());
     }
 }

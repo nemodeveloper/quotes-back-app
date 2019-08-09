@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
  */
 @Configuration
 @Profile("dev-db-remote")
-public class DevRemoteDataConfigHolder extends AbstractDataConfigHolder
+public class DevRemoteDataConfigHolder extends AbstractDataSourceHolder
 {
     @Bean(destroyMethod = "close")
     @DependsOn("h2EmbeddedServer")

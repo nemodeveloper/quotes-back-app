@@ -2,29 +2,23 @@ package ru.nemodev.project.quotes.repository.author;
 
 import org.hibernate.SessionFactory;
 import ru.nemodev.project.quotes.entity.Author;
-import ru.nemodev.project.quotes.repository.AbstractJpaRepository;
+import ru.nemodev.project.quotes.repository.AbstractHibernateRepository;
 
 import java.text.Collator;
 import java.util.List;
 import java.util.Locale;
 
-public class AuthorRepositoryImpl extends AbstractJpaRepository<Author, Long> implements AuthorRepository
+public class AuthorRepositoryImpl extends AbstractHibernateRepository<Author, Long> implements AuthorRepository
 {
     public AuthorRepositoryImpl(SessionFactory sessionFactory)
     {
-        super(sessionFactory);
-    }
-
-    @Override
-    protected Class<Author> getEntityClass()
-    {
-        return Author.class;
+        super(sessionFactory, Author.class);
     }
 
     @Override
     public List<Author> getList()
     {
-        List<Author> result = sessionFactory.getCurrentSession().createQuery("FROM Author", Author.class).getResultList();
+        List<Author> result = sessionFactory.getCurrentSession().createQuery("FROM Author", entityClass).getResultList();
 
         // в БД не корректная сортировка буквы ё
         Collator collator = Collator.getInstance(Locale.forLanguageTag("RU"));
@@ -37,7 +31,7 @@ public class AuthorRepositoryImpl extends AbstractJpaRepository<Author, Long> im
     @Override
     public Author getByFullName(String fullName)
     {
-        return sessionFactory.getCurrentSession().createQuery("FROM Author WHERE fullName = :fullName", getEntityClass())
+        return sessionFactory.getCurrentSession().createQuery("FROM Author WHERE fullName = :fullName", entityClass)
                 .setParameter("fullName", fullName)
                 .getResultList().stream().findFirst().orElse(null);
     }

@@ -15,32 +15,32 @@ import ru.nemodev.project.quotes.config.spring.ServiceConfig;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "ru.nemodev.project.quotes.api" })
-public class WebAPIConfig
+public class EndpointConfig
 {
     private final ServiceConfig serviceConfig;
-    private final EntityConverterDTOConfig entityConverterDTOConfig;
+    private final ConverterDtoConfig converterDtoConfig;
 
-    public WebAPIConfig(ServiceConfig serviceConfig, EntityConverterDTOConfig entityConverterDTOConfig)
+    public EndpointConfig(ServiceConfig serviceConfig, ConverterDtoConfig converterDtoConfig)
     {
         this.serviceConfig = serviceConfig;
-        this.entityConverterDTOConfig = entityConverterDTOConfig;
+        this.converterDtoConfig = converterDtoConfig;
     }
 
     @Bean
     public AuthorRestRequestProcessor authorRestRequestProcessor()
     {
-        return new AuthorRestRequestProcessor(serviceConfig.authorServiceImpl(), entityConverterDTOConfig.authorToDTOConverter());
+        return new AuthorRestRequestProcessor(serviceConfig.authorServiceImpl(), converterDtoConfig.authorToDTOConverter());
     }
 
     @Bean
     public CategoryRestRequestProcessor categoryRestRequestProcessor()
     {
-        return new CategoryRestRequestProcessor(serviceConfig.categoryServiceImpl(), entityConverterDTOConfig.categoryToDTOConverter());
+        return new CategoryRestRequestProcessor(serviceConfig.categoryServiceImpl(), converterDtoConfig.categoryToDTOConverter());
     }
 
     @Bean
     public QuoteRestRequestProcessor quoteRestRequestProcessor()
     {
-        return new QuoteRestRequestProcessor(serviceConfig.quoteServiceImpl(), entityConverterDTOConfig.quoteToDTOConverter());
+        return new QuoteRestRequestProcessor(serviceConfig.quoteServiceImpl(), converterDtoConfig.quoteToDTOConverter());
     }
 }

@@ -59,6 +59,9 @@
         <appender-ref ref="DB-Query-RollingFile-Appender"/>
     </logger>
 
+    <!--  Костыль чтобы не сыпались ошибки от swagger по парсингу defaultValue  -->
+    <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="error" additivity="false"/>
+
     <!--  ROOT  -->
     <appender name="Root-RollingFile-Appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${LOG_NAME}}.log</file>

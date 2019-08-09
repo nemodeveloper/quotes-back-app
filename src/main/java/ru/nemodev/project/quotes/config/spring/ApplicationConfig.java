@@ -2,8 +2,9 @@ package ru.nemodev.project.quotes.config.spring;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import ru.nemodev.project.quotes.config.spring.api.EntityConverterDTOConfig;
-import ru.nemodev.project.quotes.config.spring.api.WebAPIConfig;
+import ru.nemodev.project.quotes.config.spring.api.ConverterDtoConfig;
+import ru.nemodev.project.quotes.config.spring.api.EndpointConfig;
+import ru.nemodev.project.quotes.config.spring.api.SwaggerConfig;
 import ru.nemodev.project.quotes.config.spring.database.DataBaseConfig;
 import ru.nemodev.project.quotes.config.spring.property.PropertyConfig;
 
@@ -17,7 +18,8 @@ import ru.nemodev.project.quotes.config.spring.property.PropertyConfig;
         CacheConfig.class,
         ServiceConfig.class,
         TelegramConfig.class,
-        EntityConverterDTOConfig.class,
-        WebAPIConfig.class})
+        ConverterDtoConfig.class,
+        EndpointConfig.class,
+        SwaggerConfig.class})
 public class ApplicationConfig
 { }

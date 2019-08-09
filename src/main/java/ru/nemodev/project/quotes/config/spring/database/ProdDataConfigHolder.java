@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("prod")
-public class ProdDataConfigHolder extends AbstractDataConfigHolder
+public class ProdDataConfigHolder extends AbstractDataSourceHolder
 {
     @Override
     @Bean(destroyMethod = "close")

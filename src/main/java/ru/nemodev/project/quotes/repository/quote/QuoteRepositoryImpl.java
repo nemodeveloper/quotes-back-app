@@ -2,21 +2,15 @@ package ru.nemodev.project.quotes.repository.quote;
 
 import org.hibernate.SessionFactory;
 import ru.nemodev.project.quotes.entity.Quote;
-import ru.nemodev.project.quotes.repository.AbstractJpaRepository;
+import ru.nemodev.project.quotes.repository.AbstractHibernateRepository;
 
 import java.util.List;
 
-public class QuoteRepositoryImpl extends AbstractJpaRepository<Quote, Long> implements QuoteRepository
+public class QuoteRepositoryImpl extends AbstractHibernateRepository<Quote, Long> implements QuoteRepository
 {
     public QuoteRepositoryImpl(SessionFactory sessionFactory)
     {
-        super(sessionFactory);
-    }
-
-    @Override
-    protected Class<Quote> getEntityClass()
-    {
-        return Quote.class;
+        super(sessionFactory, Quote.class);
     }
 
     @Override
@@ -26,7 +20,7 @@ public class QuoteRepositoryImpl extends AbstractJpaRepository<Quote, Long> impl
                 "FROM Quote q " +
                         "JOIN FETCH q.category " +
                         "JOIN FETCH q.author "+
-                        "ORDER BY RAND()", getEntityClass())
+                        "ORDER BY RAND()", entityClass)
                 .setMaxResults(count)
                 .getResultList();
     }
@@ -38,7 +32,7 @@ public class QuoteRepositoryImpl extends AbstractJpaRepository<Quote, Long> impl
                 "FROM Quote q " +
                         "JOIN FETCH q.category " +
                         "JOIN FETCH q.author " +
-                            "WHERE q.author.id = :authorId", getEntityClass())
+                            "WHERE q.author.id = :authorId", entityClass)
                 .setParameter("authorId", authorId)
                 .getResultList();
     }
@@ -50,7 +44,7 @@ public class QuoteRepositoryImpl extends AbstractJpaRepository<Quote, Long> impl
                 "FROM Quote q " +
                         "JOIN FETCH q.category " +
                         "JOIN FETCH q.author " +
-                            "WHERE q.category.id = :categoryId", getEntityClass())
+                            "WHERE q.category.id = :categoryId", entityClass)
                 .setParameter("categoryId", categoryId)
                 .getResultList();
     }

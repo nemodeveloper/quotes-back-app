@@ -9,21 +9,21 @@ import java.util.List;
 /**
  * created by NemoDev on 17.03.2018 - 14:18
  */
-public abstract class AbstractJpaRepository<T, K extends Serializable> implements CrudRepository<T, K>
+public abstract class AbstractHibernateRepository<T, K extends Serializable> implements CrudRepository<T, K>
 {
     protected final SessionFactory sessionFactory;
+    protected final Class<T> entityClass;
 
-    public AbstractJpaRepository(SessionFactory sessionFactory)
+    public AbstractHibernateRepository(SessionFactory sessionFactory, Class<T> entityClass)
     {
         this.sessionFactory = sessionFactory;
+        this.entityClass = entityClass;
     }
-
-    protected abstract Class<T> getEntityClass();
 
     @Override
     public T getById(K id)
     {
-        return sessionFactory.getCurrentSession().get(getEntityClass(), id);
+        return sessionFactory.getCurrentSession().get(entityClass, id);
     }
 
     @Override

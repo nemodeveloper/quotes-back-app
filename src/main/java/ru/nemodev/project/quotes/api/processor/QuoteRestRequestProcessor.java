@@ -8,6 +8,7 @@ import java.util.List;
 
 public class QuoteRestRequestProcessor
 {
+    private static final Integer DEFAULT_LIST_COUNT = 100;
     private static final Integer MAX_LIST_COUNT = 200;
 
     private final QuoteService quoteService;
@@ -21,7 +22,9 @@ public class QuoteRestRequestProcessor
 
     public List<QuoteDTO> getRandom(Integer count)
     {
-        if (count == null || count < 1 || count > MAX_LIST_COUNT)
+        if (count == null || count < 1)
+            count = DEFAULT_LIST_COUNT;
+        else if (count > MAX_LIST_COUNT)
             count = MAX_LIST_COUNT;
 
         return quoteToDTOConverter.convertList(quoteService.getRandom(count));

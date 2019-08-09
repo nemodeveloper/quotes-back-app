@@ -8,11 +8,11 @@ import ru.nemodev.project.quotes.api.converter.QuoteToDTOConverter;
 import ru.nemodev.project.quotes.config.spring.property.SystemProperty;
 
 @Configuration
-public class EntityConverterDTOConfig
+public class ConverterDtoConfig
 {
     private final SystemProperty systemProperty;
 
-    public EntityConverterDTOConfig(SystemProperty systemProperty)
+    public ConverterDtoConfig(SystemProperty systemProperty)
     {
         this.systemProperty = systemProperty;
     }
