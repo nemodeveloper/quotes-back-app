@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
-    <property name="LOG_PATH" value="/logs" />
+    <property name="LOG_PATH" value="logs" />
     <property name="LOG_NAME" value="quotes" />
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive" />
     <property name="MESSAGE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%logger{35}:%line] - %msg%n" />
@@ -13,8 +13,8 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${FILE_NAME_PATTERN}</fileNamePattern>
             <maxHistory>30</maxHistory>
-            <maxFileSize>30MB</maxFileSize>
-            <totalSizeCap>1GB</totalSizeCap>
+            <maxFileSize>15MB</maxFileSize>
+            <totalSizeCap>500MB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>${MESSAGE_PATTERN}</pattern>
@@ -32,5 +32,4 @@
     <root level="info" additivity="false">
         <appender-ref ref="Quote-Async-Appender" />
     </root>
-
 </configuration>

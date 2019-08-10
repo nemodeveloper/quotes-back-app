@@ -19,8 +19,8 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${FILE_NAME_PATTERN}</fileNamePattern>
             <maxHistory>30</maxHistory>
-            <maxFileSize>30MB</maxFileSize>
-            <totalSizeCap>1GB</totalSizeCap>
+            <maxFileSize>15MB</maxFileSize>
+            <totalSizeCap>500MB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>${MESSAGE_PATTERN}</pattern>
@@ -28,6 +28,7 @@
     </appender>
 
     <appender name="Quote-Async-Appender" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>50</queueSize>
         <appender-ref ref="RollingFile-Appender" />
     </appender>
 
