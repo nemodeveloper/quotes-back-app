@@ -2,6 +2,7 @@ package ru.nemodev.project.quotes.api.endpoint;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import java.util.List;
  * created by NemoDev on 19.07.2018 - 12:21
  */
 @RestController
-@RequestMapping("/v1/category")
+@RequestMapping(value = "/v1/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api("Quote category information")
 public class CategoryEndpoint
 {

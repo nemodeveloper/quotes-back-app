@@ -3,6 +3,7 @@ package ru.nemodev.project.quotes.api.endpoint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nemodev.project.quotes.api.dto.QuoteDTO;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/v1/quote")
+@RequestMapping(value = "/v1/quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api("Quote information")
 public class QuoteEndpoint
 {
