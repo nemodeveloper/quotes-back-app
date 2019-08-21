@@ -8,6 +8,8 @@ spring:
       client:
         enabled: true
         url: http://localhost:8060
+        username: "admin"
+        password: "1234"
         period: 600000
         auto-registration: true
         register-once: false
