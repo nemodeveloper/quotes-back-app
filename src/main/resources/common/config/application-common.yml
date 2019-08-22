@@ -7,7 +7,7 @@ spring:
     admin:
       client:
         enabled: true
-        url: http://localhost:8060
+        url: http://localhost:8060/admin
         username: "admin"
         password: "1234"
         period: 600000
@@ -19,7 +19,7 @@ server:
   http2:
     enabled: true
   servlet:
-    contextPath: /quotes/rest
+    context-path: /quotes/rest
   port: 8080
   use-forward-headers: true
 
@@ -40,6 +40,22 @@ management:
   metrics:
     cache:
       instrument-cache: true
+
+# eureka
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    hostname: localhost:${server.port}
+    home-page-url: http://${eureka.instance.hostname}${server.servlet.context-path}/swagger-ui.html
+    status-page-url-path: ${server.servlet.context-path}/monitor
+    health-check-url-path: ${server.servlet.context-path}/monitor/health
+    preferIpAddress: true
 
 # Application monitor info
 info:
