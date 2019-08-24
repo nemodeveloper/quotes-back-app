@@ -1,7 +1,7 @@
 # Spring config
 spring:
   application:
-    name: SpringBoot-Quotes-App
+    name: quote-service
   # Spring boot admin config
   boot:
     admin:
@@ -10,7 +10,7 @@ spring:
         url: http://localhost:8060/admin
         username: "admin"
         password: "1234"
-        period: 600000
+        period: 60000
         auto-registration: true
         auto-deregistration: true
         register-once: false
@@ -21,8 +21,15 @@ server:
     enabled: true
   servlet:
     context-path: /quotes/rest
-  port: 8080
+  port: 8081
   use-forward-headers: true
+
+# Application monitor info
+info:
+  app:
+    name: Quote Service
+    description: Rest service for read quotes
+    environment: unknown
 
 # Application monitor
 management:
@@ -42,7 +49,7 @@ management:
     cache:
       instrument-cache: true
 
-# eureka
+# Eureka
 eureka:
   client:
     healthcheck:
@@ -59,10 +66,3 @@ eureka:
     status-page-url-path: ${server.servlet.context-path}/monitor
     health-check-url-path: ${server.servlet.context-path}/monitor/health
     preferIpAddress: true
-
-# Application monitor info
-info:
-  app:
-    name: Quotes
-    description: Rest service for read quotes
-    environment: unknown
