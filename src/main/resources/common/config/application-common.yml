@@ -6,7 +6,7 @@ spring:
   boot:
     admin:
       client:
-        enabled: true
+        enabled: false
         url: http://localhost:8060/admin
         username: "admin"
         password: "1234"
@@ -14,6 +14,9 @@ spring:
         auto-registration: true
         auto-deregistration: true
         register-once: false
+  cloud:
+    discovery:
+      enabled: false
 
 # Server config
 server:
