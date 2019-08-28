@@ -2,12 +2,14 @@ package ru.nemodev.project.quotes.service.author;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.entity.Author;
 import ru.nemodev.project.quotes.repository.author.AuthorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * created by NemoDev on 17.03.2018 - 14:14
@@ -25,39 +27,39 @@ public class AuthorServiceImpl implements AuthorService
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Author getById(Long authorId)
+    public Optional<Author> findById(Long authorId)
     {
         if (authorId == null || authorId < 1L)
-            return null;
+            return Optional.empty();
 
-        return authorRepository.getById(authorId);
+        return authorRepository.findById(authorId);
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Author getByFullName(String fullName)
+    public Optional<Author> findByFullName(String fullName)
     {
-        return authorRepository.getByFullName(fullName);
+        return authorRepository.findByFullName(fullName);
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<Author> getList()
+    public List<Author> findAll()
     {
-        return authorRepository.getList();
+        return authorRepository.findAll(Sort.by(Sort.Order.by("fullName")));
     }
 
     @Override
     @Transactional
-    public Author addOrUpdate(Author author)
+    public Author save(Author author)
     {
-        return authorRepository.addOrUpdate(author);
+        return authorRepository.save(author);
     }
 
     @Override
     @Transactional
-    public List<Author> addOrUpdate(List<Author> authorList)
+    public List<Author> saveAll(Iterable<Author> authorList)
     {
-        return authorRepository.addOrUpdate(authorList);
+        return authorRepository.saveAll(authorList);
     }
 }

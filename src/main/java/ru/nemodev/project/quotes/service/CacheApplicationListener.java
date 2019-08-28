@@ -34,11 +34,11 @@ public class CacheApplicationListener implements ApplicationListener<ContextRefr
 
     private void doHotAuthors()
     {
-        authorService.getList();
+        authorService.findAll();
     }
 
     private void doHotCategory()
     {
-        categoryService.getList();
+        categoryService.findAll();
     }
 }

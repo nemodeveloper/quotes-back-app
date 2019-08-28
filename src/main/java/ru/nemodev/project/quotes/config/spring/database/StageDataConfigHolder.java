@@ -4,10 +4,17 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
 
 @Configuration
 @Profile("stage")
-public class StageDataConfigHolder extends AbstractDataSourceHolder {
+public class StageDataConfigHolder extends AbstractDataSourceHolder
+{
+
+    public StageDataConfigHolder(DataBaseProperty dataBaseProperty)
+    {
+        super(dataBaseProperty);
+    }
 
     @Override
     @Bean(destroyMethod = "close")

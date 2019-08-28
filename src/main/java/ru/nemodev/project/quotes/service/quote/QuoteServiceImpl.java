@@ -30,7 +30,7 @@ public class QuoteServiceImpl implements QuoteService
     {
         if (count == null || count < 1L)
         {
-            LOGGER.warn("В сервис поиска случайных цитат передали параметр count={}, поиск остановлен!", count);
+            LOGGER.warn("В сервис поиска случайных цитат передали не корректный параметр count={}, поиск остановлен!", count);
             return Collections.emptyList();
         }
         return quoteRepository.getRandom(count);
@@ -38,42 +38,40 @@ public class QuoteServiceImpl implements QuoteService
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<Quote> getByAuthor(Long authorId)
+    public List<Quote> findByAuthor(Long authorId)
     {
-        if (authorId == null || authorId < 1)
+        if (authorId == null)
         {
-            LOGGER.warn("В сервис поиска цитат передали не корректные параметры authorId={}, поиск остановлен!",
-                    authorId);
+            LOGGER.warn("В сервис поиска цитат передали не корректные параметры authorId={}, поиск остановлен!", authorId);
             return Collections.emptyList();
         }
-        return quoteRepository.getByAuthor(authorId);
+        return quoteRepository.findByAuthor(authorId);
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<Quote> getByCategory(Long categoryId)
+    public List<Quote> findByCategory(Long categoryId)
     {
-        if (categoryId == null || categoryId < 1)
+        if (categoryId == null)
         {
-            LOGGER.warn("В сервис поиска цитат передали не корректные параметры categoryId={}, поиск остановлен!",
-                    categoryId);
+            LOGGER.warn("В сервис поиска цитат передали не корректные параметры categoryId={}, поиск остановлен!", categoryId);
             return Collections.emptyList();
         }
 
-        return quoteRepository.getByCategory(categoryId);
+        return quoteRepository.findByCategory(categoryId);
     }
 
     @Override
     @Transactional
-    public Quote addOrUpdate(Quote quote)
+    public Quote save(Quote quote)
     {
-        return quoteRepository.addOrUpdate(quote);
+        return quoteRepository.save(quote);
     }
 
     @Override
     @Transactional
-    public List<Quote> addOrUpdate(List<Quote> quoteList)
+    public List<Quote> saveAll(Iterable<Quote> quoteList)
     {
-        return quoteRepository.addOrUpdate(quoteList);
+        return quoteRepository.saveAll(quoteList);
     }
 }

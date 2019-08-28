@@ -3,18 +3,20 @@ package ru.nemodev.project.quotes.config.spring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import ru.nemodev.project.quotes.config.spring.database.HibernateConfig;
 import ru.nemodev.project.quotes.repository.author.AuthorCacheRepository;
-import ru.nemodev.project.quotes.repository.author.AuthorRepositoryImpl;
+import ru.nemodev.project.quotes.repository.author.AuthorRepository;
 import ru.nemodev.project.quotes.repository.category.CategoryCacheRepository;
-import ru.nemodev.project.quotes.repository.category.CategoryRepositoryImpl;
+import ru.nemodev.project.quotes.repository.category.CategoryRepository;
 import ru.nemodev.project.quotes.repository.quote.QuoteCacheRepository;
-import ru.nemodev.project.quotes.repository.quote.QuoteRepositoryImpl;
+import ru.nemodev.project.quotes.repository.quote.QuoteOptionalRepositoryImpl;
+import ru.nemodev.project.quotes.repository.quote.QuoteRepository;
 import ru.nemodev.project.quotes.service.CacheApplicationListener;
 import ru.nemodev.project.quotes.service.author.AuthorServiceImpl;
 import ru.nemodev.project.quotes.service.category.CategoryServiceImpl;
 import ru.nemodev.project.quotes.service.quote.QuoteServiceImpl;
 import ru.nemodev.project.quotes.utils.DataBasePopulator;
+
+import javax.persistence.EntityManager;
 
 /**
  * created by sbrf-simanov-an on 20.11.2018 - 19:35
@@ -22,65 +24,59 @@ import ru.nemodev.project.quotes.utils.DataBasePopulator;
 @Configuration
 public class ServiceConfig
 {
-    private final HibernateConfig hibernateConfig;
+    private final EntityManager entityManager;
+    private final QuoteRepository quoteRepository;
+    private final AuthorRepository authorRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ServiceConfig(HibernateConfig hibernateConfig)
+    public ServiceConfig(EntityManager entityManager, QuoteRepository quoteRepository, AuthorRepository authorRepository, CategoryRepository categoryRepository)
     {
-        this.hibernateConfig = hibernateConfig;
+        this.entityManager = entityManager;
+        this.quoteRepository = quoteRepository;
+        this.authorRepository = authorRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Bean
-    public AuthorRepositoryImpl authorHibernateDAO()
+    public AuthorCacheRepository authorCacheRepository()
     {
-        return new AuthorRepositoryImpl(hibernateConfig.sessionFactory().getObject());
-    }
-
-    @Bean
-    public AuthorCacheRepository authorCacheDAO()
-    {
-        return new AuthorCacheRepository(authorHibernateDAO());
+        return new AuthorCacheRepository(authorRepository, entityManager);
     }
 
     @Bean
     public AuthorServiceImpl authorServiceImpl()
     {
-        return new AuthorServiceImpl(authorCacheDAO());
+        return new AuthorServiceImpl(authorCacheRepository());
     }
 
     @Bean
-    public CategoryRepositoryImpl categoryHibernateDAO()
+    public CategoryCacheRepository categoryCacheRepository()
     {
-        return new CategoryRepositoryImpl(hibernateConfig.sessionFactory().getObject());
-    }
-
-    @Bean
-    public CategoryCacheRepository categoryCacheDAO()
-    {
-        return new CategoryCacheRepository(categoryHibernateDAO());
+        return new CategoryCacheRepository(categoryRepository, entityManager);
     }
 
     @Bean
     public CategoryServiceImpl categoryServiceImpl()
     {
-        return new CategoryServiceImpl(categoryCacheDAO());
+        return new CategoryServiceImpl(categoryCacheRepository());
     }
 
     @Bean
-    public QuoteRepositoryImpl quoteHibernateDAO()
+    public QuoteOptionalRepositoryImpl quoteOptionalRepository()
     {
-        return new QuoteRepositoryImpl(hibernateConfig.sessionFactory().getObject());
+        return new QuoteOptionalRepositoryImpl(entityManager);
     }
 
     @Bean
-    public QuoteCacheRepository quoteCacheDAO()
+    public QuoteCacheRepository quoteCacheRepository()
     {
-        return new QuoteCacheRepository(quoteHibernateDAO());
+        return new QuoteCacheRepository(quoteRepository, entityManager);
     }
 
     @Bean
     public QuoteServiceImpl quoteServiceImpl()
     {
-        return new QuoteServiceImpl(quoteCacheDAO());
+        return new QuoteServiceImpl(quoteCacheRepository());
     }
 
     @Bean(initMethod = "populate")

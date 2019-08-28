@@ -2,53 +2,44 @@ package ru.nemodev.project.quotes.repository.category;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import ru.nemodev.project.quotes.entity.Category;
 
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * created by NemoDev on 19.07.2018 - 13:08
  */
-// TODO КЕШ методов
 @CacheConfig(cacheNames = {"categories"})
-public class CategoryCacheRepository implements CategoryRepository
+public class CategoryCacheRepository extends SimpleJpaRepository<Category, Long> implements CategoryRepository
 {
-    private final CategoryRepository categoryRepository;
+    private final CategoryRepository delegate;
 
-    public CategoryCacheRepository(CategoryRepository categoryRepository)
+    public CategoryCacheRepository(CategoryRepository delegate, EntityManager entityManager)
     {
-        this.categoryRepository = categoryRepository;
+        super(Category.class, entityManager);
+        this.delegate = delegate;
     }
 
     @Override
     @Cacheable(key = "#root.method.name + #categoryId", sync = true)
-    public Category getById(Long categoryId)
+    public Optional<Category> findById(Long categoryId)
     {
-        return categoryRepository.getById(categoryId);
+        return super.findById(categoryId);
     }
 
     @Override
     @Cacheable(key = "#root.method.name", sync = true)
-    public List<Category> getList()
+    public List<Category> findAll()
     {
-        return categoryRepository.getList();
+        return super.findAll();
     }
 
     @Override
-    public Category addOrUpdate(Category category)
+    public Optional<Category> findByName(String name)
     {
-        return categoryRepository.addOrUpdate(category);
-    }
-
-    @Override
-    public List<Category> addOrUpdate(List<Category> entityList)
-    {
-        return categoryRepository.addOrUpdate(entityList);
-    }
-
-    @Override
-    public Category getByName(String name)
-    {
-        return categoryRepository.getByName(name);
+        return delegate.findByName(name);
     }
 }

@@ -2,8 +2,10 @@ package ru.nemodev.project.quotes.config.spring.database;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.nemodev.project.quotes.config.spring.property.PropertyConfig;
@@ -25,21 +27,24 @@ public class HibernateConfig
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory()
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory()
     {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSourceHolder.dataSource());
-        sessionFactory.setPackagesToScan(ENTITY_PACKAGE);
-        sessionFactory.setHibernateProperties(propertyConfig.hibernateProperties());
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSourceHolder.dataSource());
+        em.setPackagesToScan(ENTITY_PACKAGE);
 
-        return sessionFactory;
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(propertyConfig.hibernateProperties());
+
+        return em;
     }
 
     @Bean
     public PlatformTransactionManager hibernateTransactionManager()
     {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory().getObject());
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
     }

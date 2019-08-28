@@ -11,7 +11,12 @@ import java.util.concurrent.TimeUnit;
 public abstract class AbstractDataSourceHolder implements DataSourceHolder
 {
     @Autowired
-    protected DataBaseProperty dataBaseProperty;
+    protected final DataBaseProperty dataBaseProperty;
+
+    protected AbstractDataSourceHolder(DataBaseProperty dataBaseProperty)
+    {
+        this.dataBaseProperty = dataBaseProperty;
+    }
 
     @Bean
     public HikariConfig hikariConfig()

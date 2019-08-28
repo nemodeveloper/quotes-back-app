@@ -32,11 +32,11 @@ public class QuoteRestRequestProcessor
 
     public List<QuoteDTO> getByAuthor(Long authorId)
     {
-        return quoteToDTOConverter.convertList(quoteService.getByAuthor(authorId));
+        return quoteToDTOConverter.convertList(quoteService.findByAuthor(authorId));
     }
 
     public List<QuoteDTO> getByCategory(Long categoryId)
     {
-        return quoteToDTOConverter.convertList(quoteService.getByCategory(categoryId));
+        return quoteToDTOConverter.convertList(quoteService.findByCategory(categoryId));
     }
 }

@@ -2,53 +2,44 @@ package ru.nemodev.project.quotes.repository.author;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import ru.nemodev.project.quotes.entity.Author;
 
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * created by NemoDev on 19.07.2018 - 13:08
  */
-// TODO КЕШ методов
 @CacheConfig(cacheNames = {"authors"})
-public class AuthorCacheRepository implements AuthorRepository
+public class AuthorCacheRepository extends SimpleJpaRepository<Author, Long> implements AuthorRepository
 {
-    private final AuthorRepository authorRepository;
+    private final AuthorRepository delegate;
 
-    public AuthorCacheRepository(AuthorRepository authorRepository)
+    public AuthorCacheRepository(AuthorRepository delegate, EntityManager entityManager)
     {
-        this.authorRepository = authorRepository;
+        super(Author.class, entityManager);
+        this.delegate = delegate;
     }
 
     @Override
     @Cacheable(key = "#root.method.name + #authorId", sync = true)
-    public Author getById(Long authorId)
+    public Optional<Author> findById(Long authorId)
     {
-        return authorRepository.getById(authorId);
+        return super.findById(authorId);
     }
 
     @Override
     @Cacheable(key = "#root.method.name", sync = true)
-    public List<Author> getList()
+    public List<Author> findAll()
     {
-        return authorRepository.getList();
+        return super.findAll();
     }
 
     @Override
-    public Author addOrUpdate(Author author)
+    public Optional<Author> findByFullName(String fullName)
     {
-        return authorRepository.addOrUpdate(author);
-    }
-
-    @Override
-    public List<Author> addOrUpdate(List<Author> entityList)
-    {
-        return authorRepository.addOrUpdate(entityList);
-    }
-
-    @Override
-    public Author getByFullName(String fullName)
-    {
-        return authorRepository.getByFullName(fullName);
+        return delegate.findByFullName(fullName);
     }
 }

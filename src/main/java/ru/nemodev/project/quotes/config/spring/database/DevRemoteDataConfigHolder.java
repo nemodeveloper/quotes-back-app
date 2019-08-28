@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 18:11
@@ -17,6 +18,11 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 @Profile("dev-db-remote")
 public class DevRemoteDataConfigHolder extends AbstractDataSourceHolder
 {
+    public DevRemoteDataConfigHolder(DataBaseProperty dataBaseProperty)
+    {
+        super(dataBaseProperty);
+    }
+
     @Bean(destroyMethod = "close")
     @DependsOn("h2EmbeddedServer")
     @Override

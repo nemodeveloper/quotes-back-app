@@ -70,7 +70,7 @@ public class DataBasePopulator
                                 if (author != null)
                                     return author;
 
-                                author = authorService.getByFullName(authorName);
+                                author = authorService.findByFullName(authorName).orElse(null);
                                 if (author != null)
                                 {
                                     existAuthorMap.put(authorName, author);
@@ -96,7 +96,7 @@ public class DataBasePopulator
                                 if (category != null)
                                     return category;
 
-                                category = categoryService.getByName(categoryName);
+                                category = categoryService.findByName(categoryName).orElse(null);
                                 if (category != null)
                                 {
                                     existCategoryMap.put(categoryName, category);
@@ -108,15 +108,15 @@ public class DataBasePopulator
                             },
                             (oldValue, newValue) -> oldValue, HashMap::new));
 
-            authorService.addOrUpdate(new LinkedList<>(authorMap.values()));
-            categoryService.addOrUpdate(new LinkedList<>(categoryMap.values()));
+            authorService.saveAll(authorMap.values());
+            categoryService.saveAll(categoryMap.values());
 
             quoteList.forEach(quote -> {
                 quote.setAuthor(authorMap.get(quote.getAuthor().getFullName()));
                 quote.setCategory(categoryMap.get(quote.getCategory().getName()));
             });
 
-            quoteService.addOrUpdate(quoteList);
+            quoteService.saveAll(quoteList);
 
         }
         catch (Exception e)

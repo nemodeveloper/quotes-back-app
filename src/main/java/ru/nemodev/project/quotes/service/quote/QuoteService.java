@@ -11,9 +11,9 @@ public interface QuoteService
 {
     List<Quote> getRandom(Integer count);
 
-    List<Quote> getByAuthor(Long authorId);
-    List<Quote> getByCategory(Long categoryId);
+    List<Quote> findByAuthor(Long authorId);
+    List<Quote> findByCategory(Long categoryId);
 
-    Quote addOrUpdate(Quote quote);
-    List<Quote> addOrUpdate(List<Quote> quoteList);
+    Quote save(Quote quote);
+    List<Quote> saveAll(Iterable<Quote> quoteList);
 }

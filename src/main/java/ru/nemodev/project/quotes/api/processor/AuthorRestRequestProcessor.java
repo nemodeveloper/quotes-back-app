@@ -19,6 +19,6 @@ public class AuthorRestRequestProcessor
 
     public List<AuthorDTO> getList()
     {
-        return authorToDTOConverter.convertList(authorService.getList());
+        return authorToDTOConverter.convertList(authorService.findAll());
     }
 }

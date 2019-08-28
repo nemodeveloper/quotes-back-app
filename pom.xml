@@ -32,15 +32,10 @@
         <commons.lang.version>3.8.1</commons.lang.version>
         <commons.collection.version>4.3</commons.collection.version>
 
-        <commons.dbcp.version>1.4</commons.dbcp.version>
-        <postgres.version>42.2.5</postgres.version>
-
-        <h2.version>1.4.199</h2.version>
         <datasource-proxy.version>1.5.6</datasource-proxy.version>
 
         <liquibase.version>3.6.3</liquibase.version>
 
-        <cache.api.version>1.1.0</cache.api.version>
         <encache.version>3.7.0</encache.version>
 
         <swagger.version>2.9.2</swagger.version>
@@ -80,7 +75,6 @@
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring.boot.admin.version}</version>
         </dependency>
 
         <!-- eureka -->
@@ -129,12 +123,9 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- spring -->
-
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
         <!-- DataBase -->
@@ -143,7 +134,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
             <scope>compile</scope>
         </dependency>
 
@@ -173,7 +163,6 @@
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>${cache.api.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
@@ -244,7 +233,6 @@
                 <dependency>
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
-                    <version>${h2.version}</version>
                 </dependency>
                 <dependency>
                     <groupId>com.github.gavlyukovskiy</groupId>
@@ -265,7 +253,6 @@
                 <dependency>
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
-                    <version>${postgres.version}</version>
                 </dependency>
             </dependencies>
             <build>
@@ -289,7 +276,6 @@
                 <dependency>
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
-                    <version>${postgres.version}</version>
                 </dependency>
             </dependencies>
             <build>

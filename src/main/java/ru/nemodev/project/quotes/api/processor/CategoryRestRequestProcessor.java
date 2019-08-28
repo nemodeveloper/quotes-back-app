@@ -19,6 +19,6 @@ public class CategoryRestRequestProcessor
 
     public List<CategoryDTO> getList()
     {
-        return categoryToDTOConverter.convertList(categoryService.getList());
+        return categoryToDTOConverter.convertList(categoryService.findAll());
     }
 }
