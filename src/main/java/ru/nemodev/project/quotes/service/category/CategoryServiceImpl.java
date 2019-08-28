@@ -2,7 +2,6 @@ package ru.nemodev.project.quotes.service.category;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.entity.Category;
@@ -46,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Category> findAll()
     {
-        return categoryRepository.findAll(Sort.by(Sort.Order.by("name")));
+        return categoryRepository.findAll();
     }
 
     @Override

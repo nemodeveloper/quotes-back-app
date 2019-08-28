@@ -2,7 +2,6 @@ package ru.nemodev.project.quotes.service.author;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nemodev.project.quotes.entity.Author;
@@ -46,7 +45,7 @@ public class AuthorServiceImpl implements AuthorService
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Author> findAll()
     {
-        return authorRepository.findAll(Sort.by(Sort.Order.by("fullName")));
+        return authorRepository.findAll();
     }
 
     @Override

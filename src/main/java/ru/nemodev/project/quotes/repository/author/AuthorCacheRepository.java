@@ -4,6 +4,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import ru.nemodev.project.quotes.entity.Author;
+import ru.nemodev.project.quotes.utils.SortUtils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -34,10 +35,13 @@ public class AuthorCacheRepository extends SimpleJpaRepository<Author, Long> imp
     @Cacheable(key = "#root.method.name", sync = true)
     public List<Author> findAll()
     {
-        return super.findAll();
+        List<Author> result = super.findAll();
+        SortUtils.sortRusString(result, Author::getFullName);
+        return result;
     }
 
     @Override
+    @Cacheable(key = "#root.method.name + #fullName", sync = true)
     public Optional<Author> findByFullName(String fullName)
     {
         return delegate.findByFullName(fullName);

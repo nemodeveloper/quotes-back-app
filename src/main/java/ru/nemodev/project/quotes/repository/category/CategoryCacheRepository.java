@@ -4,6 +4,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import ru.nemodev.project.quotes.entity.Category;
+import ru.nemodev.project.quotes.utils.SortUtils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -34,10 +35,13 @@ public class CategoryCacheRepository extends SimpleJpaRepository<Category, Long>
     @Cacheable(key = "#root.method.name", sync = true)
     public List<Category> findAll()
     {
-        return super.findAll();
+        List<Category> result = super.findAll();
+        SortUtils.sortRusString(result, Category::getName);
+        return result;
     }
 
     @Override
+    @Cacheable(key = "#root.method.name + #name", sync = true)
     public Optional<Category> findByName(String name)
     {
         return delegate.findByName(name);
