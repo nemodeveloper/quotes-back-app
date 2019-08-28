@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
  * created by sbrf-simanov-an on 21.11.2018 - 13:48
  */
 @Configuration
-@PropertySource("classpath:config/database.properties")
+@PropertySource(value = "classpath:config/database.yml", factory = YamlPropertyLoaderFactory.class)
 public class DataBaseProperty
 {
     @Value("${db.driver}")

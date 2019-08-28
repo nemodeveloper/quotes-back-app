@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:config/system.properties")
+@PropertySource(value = "classpath:config/system.yml", factory = YamlPropertyLoaderFactory.class)
 public class SystemProperty
 {
     @Value("${system.host.name}")

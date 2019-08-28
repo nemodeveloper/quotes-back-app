@@ -1,0 +1,8 @@
+system:
+  host:
+    name: https://quoteformuse.ru
+  static:
+    path:
+      base: /static
+      author: /author/
+      category: /category/

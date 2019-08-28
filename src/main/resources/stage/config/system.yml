@@ -1,0 +1,8 @@
+system:
+  host:
+    name: localhost:8081
+  static:
+    path:
+      base: /static
+      author: /author/
+      category: /category/

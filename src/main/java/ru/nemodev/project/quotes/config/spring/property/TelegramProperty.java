@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @Profile("prod")
-@PropertySource("classpath:config/telegram.properties")
+@PropertySource(value = "classpath:config/telegram.yml", factory = YamlPropertyLoaderFactory.class)
 public class TelegramProperty
 {
     @Value("${tg.quote.bot.token}")

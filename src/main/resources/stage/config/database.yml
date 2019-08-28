@@ -1,0 +1,7 @@
+db:
+  driver: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/dev_quote_db
+  username: dev_quote
+  password: 1234
+  socket:
+    timeout: 15
