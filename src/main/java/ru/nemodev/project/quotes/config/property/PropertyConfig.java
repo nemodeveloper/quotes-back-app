@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.property;
+package ru.nemodev.project.quotes.config.property;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;

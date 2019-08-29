@@ -2,7 +2,7 @@ package ru.nemodev.project.quotes.api.converter;
 
 import org.apache.commons.lang3.StringUtils;
 import ru.nemodev.project.quotes.api.dto.CategoryDTO;
-import ru.nemodev.project.quotes.config.spring.property.SystemProperty;
+import ru.nemodev.project.quotes.config.property.SystemProperty;
 import ru.nemodev.project.quotes.entity.Category;
 
 import java.util.List;

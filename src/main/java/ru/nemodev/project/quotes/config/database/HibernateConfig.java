@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.database;
+package ru.nemodev.project.quotes.config.database;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ru.nemodev.project.quotes.config.spring.property.PropertyConfig;
+import ru.nemodev.project.quotes.config.property.PropertyConfig;
 
 
 @Configuration

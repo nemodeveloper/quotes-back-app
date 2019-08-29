@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring;
+package ru.nemodev.project.quotes.config.telegram;
 
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,8 @@ import org.springframework.scheduling.config.CronTask;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 import org.telegram.telegrambots.ApiContextInitializer;
-import ru.nemodev.project.quotes.config.spring.property.TelegramProperty;
+import ru.nemodev.project.quotes.config.property.TelegramProperty;
+import ru.nemodev.project.quotes.config.service.ServiceConfig;
 import ru.nemodev.project.quotes.telegram.bot.QuoteTelegramBot;
 import ru.nemodev.project.quotes.telegram.bot.TelegramBotLoader;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler;

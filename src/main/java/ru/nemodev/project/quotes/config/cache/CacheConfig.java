@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring;
+package ru.nemodev.project.quotes.config.cache;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.jcache.JCacheCacheManager;

@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.property;
+package ru.nemodev.project.quotes.config.property;
 
 import org.springframework.boot.env.YamlPropertySourceLoader;
 import org.springframework.core.env.PropertySource;

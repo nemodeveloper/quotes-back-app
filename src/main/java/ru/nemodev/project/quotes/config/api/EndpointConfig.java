@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.api;
+package ru.nemodev.project.quotes.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.nemodev.project.quotes.api.processor.AuthorRestRequestProcessor;
 import ru.nemodev.project.quotes.api.processor.CategoryRestRequestProcessor;
 import ru.nemodev.project.quotes.api.processor.QuoteRestRequestProcessor;
-import ru.nemodev.project.quotes.config.spring.ServiceConfig;
+import ru.nemodev.project.quotes.config.service.ServiceConfig;
 
 /**
  * created by sbrf-simanov-an on 20.11.2018 - 15:35

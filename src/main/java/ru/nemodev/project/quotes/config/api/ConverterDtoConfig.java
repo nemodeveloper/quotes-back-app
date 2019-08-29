@@ -1,11 +1,11 @@
-package ru.nemodev.project.quotes.config.spring.api;
+package ru.nemodev.project.quotes.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.nemodev.project.quotes.api.converter.AuthorToDTOConverter;
 import ru.nemodev.project.quotes.api.converter.CategoryToDTOConverter;
 import ru.nemodev.project.quotes.api.converter.QuoteToDTOConverter;
-import ru.nemodev.project.quotes.config.spring.property.SystemProperty;
+import ru.nemodev.project.quotes.config.property.SystemProperty;
 
 @Configuration
 public class ConverterDtoConfig

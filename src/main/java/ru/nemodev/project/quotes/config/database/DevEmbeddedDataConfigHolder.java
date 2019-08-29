@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.database;
+package ru.nemodev.project.quotes.config.database;
 
 
 import org.springframework.context.annotation.Bean;

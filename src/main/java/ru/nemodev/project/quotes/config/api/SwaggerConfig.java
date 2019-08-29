@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.api;
+package ru.nemodev.project.quotes.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -7,7 +7,7 @@ import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import ru.nemodev.project.quotes.config.spring.property.TelegramProperty;
+import ru.nemodev.project.quotes.config.property.TelegramProperty;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.AbstractQueryHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.CallbackQueryHandler;
 import ru.nemodev.project.quotes.telegram.bot.query.handler.QueryHandler;

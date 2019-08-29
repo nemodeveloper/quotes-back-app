@@ -1,4 +1,4 @@
-package ru.nemodev.project.quotes.config.spring.database;
+package ru.nemodev.project.quotes.config.database;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.h2.tools.Server;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
+import ru.nemodev.project.quotes.config.property.DataBaseProperty;
 
 /**
  * created by sbrf-simanov-an on 21.11.2018 - 18:11

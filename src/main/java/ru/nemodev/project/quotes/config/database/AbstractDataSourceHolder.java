@@ -1,9 +1,9 @@
-package ru.nemodev.project.quotes.config.spring.database;
+package ru.nemodev.project.quotes.config.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import ru.nemodev.project.quotes.config.spring.property.DataBaseProperty;
+import ru.nemodev.project.quotes.config.property.DataBaseProperty;
 
 import java.util.concurrent.TimeUnit;
 

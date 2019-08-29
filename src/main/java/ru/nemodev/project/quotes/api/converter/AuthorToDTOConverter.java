@@ -3,7 +3,7 @@ package ru.nemodev.project.quotes.api.converter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import ru.nemodev.project.quotes.api.dto.AuthorDTO;
-import ru.nemodev.project.quotes.config.spring.property.SystemProperty;
+import ru.nemodev.project.quotes.config.property.SystemProperty;
 import ru.nemodev.project.quotes.entity.Author;
 
 import java.util.Collections;
