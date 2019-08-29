@@ -22,12 +22,8 @@
         <jar-name>quotes</jar-name>
 
         <!-- project -->
-        <spring.version>5.1.6.RELEASE</spring.version>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <spring.boot.admin.version>2.1.5</spring.boot.admin.version>
-
-        <hibernate.version>5.4.1.Final</hibernate.version>
-        <hibernate.validator.version>6.0.15.Final</hibernate.validator.version>
 
         <commons.lang.version>3.8.1</commons.lang.version>
         <commons.collection.version>4.3</commons.collection.version>
