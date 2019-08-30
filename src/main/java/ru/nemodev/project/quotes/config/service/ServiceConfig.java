@@ -80,7 +80,7 @@ public class ServiceConfig
     }
 
     @Bean(initMethod = "populate")
-    @Profile("dev-db-embedded | dev-db-remote")
+    @Profile("db-h2")
     public DataBasePopulator dataBasePopulator()
     {
         return new DataBasePopulator(quoteServiceImpl(), authorServiceImpl(), categoryServiceImpl());
