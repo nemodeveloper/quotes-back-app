@@ -3,16 +3,19 @@ package ru.nemodev.project.quotes.config.service;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import ru.nemodev.project.quotes.repository.author.AuthorCacheRepository;
 import ru.nemodev.project.quotes.repository.author.AuthorRepository;
-import ru.nemodev.project.quotes.repository.category.CategoryCacheRepository;
 import ru.nemodev.project.quotes.repository.category.CategoryRepository;
-import ru.nemodev.project.quotes.repository.quote.QuoteCacheRepository;
 import ru.nemodev.project.quotes.repository.quote.QuoteOptionalRepositoryImpl;
 import ru.nemodev.project.quotes.repository.quote.QuoteRepository;
 import ru.nemodev.project.quotes.service.CacheApplicationListener;
+import ru.nemodev.project.quotes.service.author.AuthorCacheService;
+import ru.nemodev.project.quotes.service.author.AuthorService;
 import ru.nemodev.project.quotes.service.author.AuthorServiceImpl;
+import ru.nemodev.project.quotes.service.category.CategoryCacheService;
+import ru.nemodev.project.quotes.service.category.CategoryService;
 import ru.nemodev.project.quotes.service.category.CategoryServiceImpl;
+import ru.nemodev.project.quotes.service.quote.QuoteCacheService;
+import ru.nemodev.project.quotes.service.quote.QuoteService;
 import ru.nemodev.project.quotes.service.quote.QuoteServiceImpl;
 import ru.nemodev.project.quotes.utils.DataBasePopulator;
 
@@ -38,27 +41,15 @@ public class ServiceConfig
     }
 
     @Bean
-    public AuthorCacheRepository authorCacheRepository()
+    public AuthorService authorServiceImpl()
     {
-        return new AuthorCacheRepository(authorRepository, entityManager);
+        return new AuthorCacheService(new AuthorServiceImpl(authorRepository));
     }
 
     @Bean
-    public AuthorServiceImpl authorServiceImpl()
+    public CategoryService categoryServiceImpl()
     {
-        return new AuthorServiceImpl(authorCacheRepository());
-    }
-
-    @Bean
-    public CategoryCacheRepository categoryCacheRepository()
-    {
-        return new CategoryCacheRepository(categoryRepository, entityManager);
-    }
-
-    @Bean
-    public CategoryServiceImpl categoryServiceImpl()
-    {
-        return new CategoryServiceImpl(categoryCacheRepository());
+        return new CategoryCacheService(new CategoryServiceImpl(categoryRepository));
     }
 
     @Bean
@@ -68,15 +59,9 @@ public class ServiceConfig
     }
 
     @Bean
-    public QuoteCacheRepository quoteCacheRepository()
+    public QuoteService quoteServiceImpl()
     {
-        return new QuoteCacheRepository(quoteRepository, entityManager);
-    }
-
-    @Bean
-    public QuoteServiceImpl quoteServiceImpl()
-    {
-        return new QuoteServiceImpl(quoteCacheRepository());
+        return new QuoteCacheService(new QuoteServiceImpl(quoteRepository));
     }
 
     @Bean(initMethod = "populate")

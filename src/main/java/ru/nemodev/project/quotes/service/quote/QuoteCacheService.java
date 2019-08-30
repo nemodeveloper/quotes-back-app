@@ -1,21 +1,18 @@
-package ru.nemodev.project.quotes.repository.quote;
+package ru.nemodev.project.quotes.service.quote;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import ru.nemodev.project.quotes.entity.Quote;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @CacheConfig(cacheNames = {"quotes"})
-public class QuoteCacheRepository extends SimpleJpaRepository<Quote, Long> implements QuoteRepository
+public class QuoteCacheService implements QuoteService
 {
-    private final QuoteRepository delegate;
+    private final QuoteService delegate;
 
-    public QuoteCacheRepository(QuoteRepository delegate, EntityManager entityManager)
+    public QuoteCacheService(QuoteService delegate)
     {
-        super(Quote.class, entityManager);
         this.delegate = delegate;
     }
 
@@ -37,5 +34,17 @@ public class QuoteCacheRepository extends SimpleJpaRepository<Quote, Long> imple
     public List<Quote> findByCategory(Long categoryId)
     {
         return delegate.findByCategory(categoryId);
+    }
+
+    @Override
+    public Quote save(Quote quote)
+    {
+        return delegate.save(quote);
+    }
+
+    @Override
+    public List<Quote> saveAll(Iterable<Quote> quoteList)
+    {
+        return delegate.saveAll(quoteList);
     }
 }
