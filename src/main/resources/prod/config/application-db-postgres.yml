@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/muse_db
+    driverClassName: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    username: muse
+    password: 1234
+    hikari:
+      connectionTimeout: 30000
+      idle-timeout: 60000
+      max-lifetime: 120000
+      auto-commit: false
+      minimum-idle: 2
+      maximum-pool-size: 5
+      pool-name: HikariDataSourcePool
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect

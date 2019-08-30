@@ -1,7 +1,0 @@
-db:
-  driver: org.postgresql.Driver
-  url: jdbc:postgresql://localhost:5432/muse_db
-  username: muse
-  password: 1234
-  socket:
-    timeout: 15

@@ -210,8 +210,53 @@
 
     <profiles>
         <profile>
+            <id>db-h2</id>
+            <properties>
+                <spring-profile-db>db-h2</spring-profile-db>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/db-h2</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>db-postgres</id>
+            <properties>
+                <spring-profile-db>db-postgres</spring-profile-db>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/db-postgres</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>dev</id>
-            <properties></properties>
+            <properties>
+                <spring-profile-active>dev</spring-profile-active>
+            </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -224,12 +269,6 @@
                 </resources>
             </build>
             <dependencies>
-                <!-- DataBase -->
-                <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
                 <dependency>
                     <groupId>com.github.gavlyukovskiy</groupId>
                     <artifactId>datasource-proxy-spring-boot-starter</artifactId>
@@ -239,18 +278,9 @@
         </profile>
         <profile>
             <id>stage</id>
-            <properties></properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <!-- DataBase -->
-                <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                </dependency>
-            </dependencies>
+            <properties>
+                <spring-profile-active>stage</spring-profile-active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -262,18 +292,9 @@
         </profile>
         <profile>
             <id>prod</id>
-            <properties></properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <!-- DataBase -->
-                <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                </dependency>
-            </dependencies>
+            <properties>
+                <spring-profile-active>prod</spring-profile-active>
+            </properties>
             <build>
                 <resources>
                     <resource>

@@ -6,7 +6,7 @@ spring:
   boot:
     admin:
       client:
-        enabled: true
+        enabled: false
         url: http://localhost:8060/admin
         username: "admin"
         password: "1234"
@@ -16,7 +16,7 @@ spring:
         register-once: false
   cloud:
     discovery:
-      enabled: true
+      enabled: false
 
 # Server config
 server:
@@ -32,7 +32,7 @@ info:
   app:
     name: Quote Service
     description: Rest service for read quotes
-    environment: unknown
+    environment: @spring-profile-active@
 
 # Application monitor
 management:
