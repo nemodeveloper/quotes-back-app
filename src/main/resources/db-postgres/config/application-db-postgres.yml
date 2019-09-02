@@ -11,7 +11,8 @@ spring:
       max-lifetime: 120000
       auto-commit: false
       minimum-idle: 2
-      maximum-pool-size: 2
+      maximum-pool-size: 5
       pool-name: HikariDataSourcePool
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: false
