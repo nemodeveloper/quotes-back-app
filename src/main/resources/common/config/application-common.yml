@@ -6,10 +6,10 @@ spring:
   boot:
     admin:
       client:
-        enabled: false
+        enabled: true
         url: http://localhost:8060/admin
         username: "admin"
-        password: "1234"
+        password: "adminpwd"
         period: 60000
         auto-registration: true
         auto-deregistration: true
