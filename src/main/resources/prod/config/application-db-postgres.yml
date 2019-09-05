@@ -15,3 +15,4 @@ spring:
       pool-name: HikariDataSourcePool
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: false
