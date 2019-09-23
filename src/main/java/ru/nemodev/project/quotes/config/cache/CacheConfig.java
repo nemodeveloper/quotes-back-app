@@ -22,7 +22,7 @@ public class CacheConfig
         JCacheManagerFactoryBean cacheFactory = new JCacheManagerFactoryBean();
         try
         {
-            cacheFactory.setCacheManagerUri(new ClassPathResource("ehcache.xml").getURI());
+            cacheFactory.setCacheManagerUri(new ClassPathResource("config/ehcache.xml").getURI());
         }
         catch (IOException e)
         {
